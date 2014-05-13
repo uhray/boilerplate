@@ -1,0 +1,17 @@
+html
+  head
+    block css
+      link(rel="stylesheet"
+           href="/public/bower_components/normalize.css/normalize.css")
+    block topjs
+      script.
+        _locals = !{JSON.stringify(locals)};
+  body
+    h1 test
+
+    block bottomjs
+      script(type='text/javascript',
+             src='/public/bower_components/modernizr/modernizr.js')
+      script(type='text/javascript',
+             src='/public/bower_components/requirejs/require.js',
+             data-main='/public/js/configure.js')
