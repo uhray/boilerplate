@@ -1,0 +1,15 @@
+{
+  "name": "sample_webapp",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "utools": "utools@git+ssh://git@github.com:uhray/utools.git",
+    "cbax": "utools@git+ssh://git@github.com:uhray/cbax.git",
+    "crud": "utools@git+ssh://git@github.com:uhray/crud.git",
+    "bower": "^1.3.3",
+    "jade": "^1.3.1"
+  },
+  "scripts": {
+    "postinstall": "./node_modules/bower/bin/bower install"
+  }
+}
