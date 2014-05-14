@@ -32,6 +32,7 @@ app.listen(process.env.PORT || 3000, function() {
   // Configure web
   app.get('/*', function(req, res, next) {
     res.render('main', {
+      production : process.env.ENV == 'PRODUCTION',
       locals : {
         user: req.user || {}
       }

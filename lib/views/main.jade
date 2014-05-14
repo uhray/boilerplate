@@ -10,8 +10,7 @@ html
     h1 test
 
     block bottomjs
-      script(type='text/javascript',
-             src='/public/bower_components/modernizr/modernizr.js')
-      script(type='text/javascript',
-             src='/public/bower_components/requirejs/require.js',
-             data-main='/public/js/configure.js')
+      - if (production)
+        script(type='text/javascript', src='/public/js/main-built.js')
+      - else
+        script(type='text/javascript', src='/public/bower_components/requirejs/require.js', data-main='/public/js/configure.js')
