@@ -13,4 +13,6 @@ html
       - if (production)
         script(type='text/javascript', src='/public/js/main-built.js')
       - else
-        script(type='text/javascript', src='/public/bower_components/requirejs/require.js', data-main='/public/js/configure.js')
+        script(type='text/javascript',
+               src='/public/bower_components/requirejs/require.js',
+               data-main='/public/js/configure.js')
