@@ -1,5 +1,4 @@
-var requirejs = require('requirejs'),
-    express = require('express'),
+var express = require('express'),
     api = require('./lib/api'),
     app = express();
 
