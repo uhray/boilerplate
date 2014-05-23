@@ -20,14 +20,14 @@ To host the optimized site: `foreman start`. See [foreman](http://foreman.io)
 
 ## Features
 
-* Uses [Require.js](https://requirejs.org) for frontend javascript organization.
+* Uses [Require.js](http://requirejs.org) for frontend javascript organization.
 * Uses [r.js](https://github.com/jrburke/r.js) for frontend optimization in production.
 * Hosted using [expressjs](http://expressjs.com), configured with some [middleware](http://expressjs.com/4x/api.html#middleware).
 * API ready to be built on [crud](https://github.com/uhray/utools.git).
 * Ready for [jade](https://github.com/visionmedia/jade) for the backend rendering and frontend rendering using [require-jade](https://github.com/rocketlabsdev/require-jade).
 * Includes Normalize.css(http://necolas.github.com/normalize.css/) for CSS normalizations and common bug fixes.
 * The latest [Modernizr](http://modernizr.com/) build for feature detection.
-* Built in (but removable) CSS element reset. (see [main.css](#lib/public/css/main.css)).
+* Built in (but removable) CSS element reset. (see [main.css](lib/public/css/main.css)).
 * Build ready to use the frontend js ([bower](http://bower.io)) modules [page.js](https://github.com/visionmedia/page.js.git), [async.js](), [lodown](), [utools](https://github.com/uhray/utools.git), and [jquery](https://github.com/jquery/jquery). (Note: you can choose not to use these).
 * Build ready to use the server-side js ([npm](http://npmjs.ord)) modules 
 [utools](https://github.com/uhray/utools.git), [cbax](https://github.com/uhray/cbax.git), 
