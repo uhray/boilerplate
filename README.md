@@ -32,7 +32,7 @@ To host the optimized site: `foreman start`. See [foreman](http://foreman.io)
 * Build ready to use the server-side js ([npm](http://npmjs.org)) modules
 [utools](https://github.com/uhray/utools.git), and [cbax](https://github.com/uhray/cbax.git), [mongoose](http://mongoosejs.com/), and others.
 * Built ready for [heroku](https://heroku.com) deployment.
-* Easily extendable to new modules [npm](npmjs.org) and [bower](bower.io).
+* Easily extendable to new modules [npm](http://npmjs.org) and [bower](http://bower.io).
 
 ## Usage
 
