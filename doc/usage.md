@@ -3,7 +3,7 @@ Usage
 
 Once you have downloaded and installed the boilerplate, using it usually involved the following:
 
-1. Understanding the basic structure of the site. [here](#basic-structure)
+1. Understanding the basic structure of the site. [see here](#basic-structure)
 2. Creating a static design.
 3. Server-side API development.
 4. Client-side API connectivity.
@@ -65,11 +65,11 @@ This directory should contain all your app-specific css files. [About the CSS](c
 
 ### lib/public/img/
 
-Place any images used for the site here. They will be statically accessible one site at `/public/img/<filename>`.
+Place any images used for the site here. They will be statically accessible one site at <i>/public/img/filename.extension</i>.
 
 ### lib/public/js
 
-This directory contains all app-specific javascript. (About the JS](js.md)
+This directory contains all app-specific javascript. [About the JS](js.md)
 
 ### lib/public/partials/
 
@@ -115,7 +115,7 @@ Defines [npm](http://npmjs.org) dependencies. See [Building](building.md).
 
 This establishes the install path for when you run `bower install` (or when `bower install` is called as the post-install command for `npm install`).
 
-The install path is set to <i>lib/public/bower_components/</i>, which is also [git ignored](#gitignore)
+The install path is set to <i>lib/public/bower_components/</i>, which is also [git ignored](#gitignore).
 
 ### .env
 
