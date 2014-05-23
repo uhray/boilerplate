@@ -3,7 +3,7 @@ Usage
 
 Once you have downloaded and installed the boilerplate, using it usually involved the following:
 
-1. Understanding the basic structure of the site. [here](#Basic-Structure)
+1. Understanding the basic structure of the site. [here](#basic-structure)
 2. Creating a static design.
 3. Server-side API development.
 4. Client-side API connectivity.
