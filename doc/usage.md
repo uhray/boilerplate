@@ -119,7 +119,7 @@ The install path is set to <i>lib/public/bower_components/</i>, which is also [g
 
 ### .env
 
-The [foreman](http://foreman.io) enviroment is established here. These environments will be set when you run `foreman start`, which is what [Heroku](http://heroku.com) will do. The important environment variable sets `ENV=PRODUCTION`, which will tell the server to statically host and use the public js file created by the [build.js](#build.js) file so the page loads are significantly faster.
+The [foreman](https://github.com/ddollar/foreman) enviroment is established here. These environments will be set when you run `foreman start`, which is what [Heroku](http://heroku.com) will do. The important environment variable sets `ENV=PRODUCTION`, which will tell the server to statically host and use the public js file created by the [build.js](#build.js) file so the page loads are significantly faster.
 
 ### gitignore
 
