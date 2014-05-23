@@ -28,7 +28,6 @@ Once you have downloaded and installed the boilerplate, using it usually involve
 |       ├── img/
 |       ├── js/
 |           ├── configure.js
-|           ├── main-built.js
 |           ├── main.js
 |        ├── partials/
 |            ├── header.jade

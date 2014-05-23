@@ -29,9 +29,8 @@ To host the optimized site: `foreman start`. See [foreman](http://foreman.io)
 * The latest [Modernizr](http://modernizr.com/) build for feature detection.
 * Built in (but removable) CSS element reset. (see [main.css](lib/public/css/main.css)).
 * Build ready to use the frontend js ([bower](http://bower.io)) modules [page.js](https://github.com/visionmedia/page.js.git), [async.js](https://github.com/caolan/async), [lodash](http://lodash.com/), [utools](https://github.com/uhray/utools.git), and [jquery](https://github.com/jquery/jquery). (Note: you can choose not to use these).
-* Build ready to use the server-side js ([npm](http://npmjs.ord)) modules 
-[utools](https://github.com/uhray/utools.git), [cbax](https://github.com/uhray/cbax.git), 
-
+* Build ready to use the server-side js ([npm](http://npmjs.org)) modules
+[utools](https://github.com/uhray/utools.git), and [cbax](https://github.com/uhray/cbax.git), [mongoose](http://mongoosejs.com/), and others.
 * Built ready for [heroku](https://heroku.com) deployment.
 * Easily extendable to new modules [npm](npmjs.org) and [bower](bower.io).
 
