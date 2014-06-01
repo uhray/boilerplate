@@ -27,7 +27,7 @@ To host the optimized site: `foreman start`. See [foreman](http://foreman.io)
 * API ready to be built on [crud](https://github.com/uhray/utools.git).
 * Ready for [jade](https://github.com/visionmedia/jade) for the backend rendering.
 * Uses [ripplejs](https://github.com/ripplejs/ripple) for frontend view rendering (by way of [waves](https://github.com/ripplejs/waves)).
-* Includes Normalize.css(http://necolas.github.com/normalize.css/) for CSS normalizations and common bug fixes.
+* Includes [normalize.css](http://necolas.github.com/normalize.css/) for CSS normalizations and common bug fixes.
 * The latest [Modernizr](http://modernizr.com/) build for feature detection.
 * Built in (but removable) CSS element reset. (see [main.css](lib/public/css/main.css)).
 * Build ready to use the frontend js ([bower](http://bower.io)) modules [page.js](https://github.com/visionmedia/page.js.git), [async.js](https://github.com/caolan/async), [lodash](http://lodash.com/), [utools](https://github.com/uhray/utools.git), and [jquery](https://github.com/jquery/jquery). (Note: you can choose not to use these).
