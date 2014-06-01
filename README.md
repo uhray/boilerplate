@@ -1,6 +1,6 @@
 ## Uhray Node JS Boilerplate
 
-We have created a simple boilerplate to get projects up and running quickly and to g set teh stage for easy development without restricting freedom.
+We have created a simple boilerplate to get projects up and running quickly and to set the stage for easy development without restricting freedom.
 
 ## Quick Start
 
@@ -16,6 +16,7 @@ node server.js  # fire up server
 Then go go <a>http://localhost:3000</a>.
 
 To host the static site: `node static.js`.
+
 To host the optimized site: `foreman start`. See [foreman](http://foreman.io)
 
 ## Features
