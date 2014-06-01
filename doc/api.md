@@ -40,7 +40,7 @@ The CRUD interface is defined in `crud.js`. Using [crud](https://github.com/uhra
 
 Controllers, defined in `controllers.js`, are the functions that CRUD calls when a route is requested.
 
-For example, if you have an entity '/users', and there is a create crud route, you would want a controller method that creates a use (say, `controllers.users.create`).
+For example, if you have an entity `'/users'`, and there is a create crud route, you would want a controller method that creates a use (say, `controllers.users.create`).
 
 ## Client-side API connectivity
 
