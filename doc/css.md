@@ -8,19 +8,19 @@ The boilerplate comes with the following:
 * Built in (but removable) CSS element reset. (see [main.css](../lib/public/css/main.css)).
 Built in (but removable) CSS element reset. (see main.css).
 
-# Normalize.css
+## Normalize.css
 
 Normalize.css is a modern, HTML5-ready alternative to CSS resets. It contains extensive inline documentation. Please refer to the Normalize.css project for more information.
 
-# Modernizr
+## Modernizr
 
 Modernizr puts a number of classed on the `html` parent element to indicate browser capabilities. Your style sheet can use these for browser-specific styling.
 
-# CSS Element Reset
+## CSS Element Reset
 
 The reset starts the page with a number of reset elements. Feel free to remove this, but for the most part we expect you to want to customize your own styles without these defaults in the way.
 
-# Customizing your own styles
+## Customizing your own styles
 
 Add your own styles to the [main.css](../lib/public/css/main.css) stylesheet.
 
