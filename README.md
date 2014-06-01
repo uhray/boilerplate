@@ -18,7 +18,7 @@ Then go go <a>http://localhost:3000</a>.
 
 To host the static site: `node static.js`.
 
-To host the optimized site: `foreman start`. See [foreman](http://foreman.io)
+To host the optimized site: `foreman start`. See [foreman](https://github.com/ddollar/foreman).
 
 ## Features
 

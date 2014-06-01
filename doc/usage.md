@@ -6,9 +6,9 @@ Once you have downloaded and installed the boilerplate, using it usually involve
 1. Understanding the basic structure of the site. [see here](#basic-structure).
 2. Creating a static design.
 3. Server-side API development. [see here](api.md#server-side-api-development).
-4. Client-side API connectivity. [see here](api.md##client-side-api-connectivity)
+4. Client-side API connectivity. [see here](api.md#client-side-api-connectivity).
 5. Create dynamic frontend that connects with live API.
-6. Deploy
+6. Deploy. [see here](deploy.md#deploying).
 
 ## Basic Structure
 
@@ -97,7 +97,7 @@ This is used to fire up node server: `node server.js`. See [Deploying](deploying
 
 ### static.js
 
-This is used to fire up node server for static UI/Ux design: `node server.js`. See [Deploying](deploying.md) and [Building static design](static.md).
+This is used to fire up node server for static UI/UX design: `node static.js`. See [Deploying](deploying.md) and [Building static design](static.md).
 
 ### Procfile
 
@@ -105,7 +105,7 @@ Established the forman settings: `foreman start` calls `node server.js` with the
 
 ### build.js
 
-With [r.js](https://github.com/jrburke/r.js) it optimizes the frontend js and partials for optimized deployment. It will be built on `npm install` post-install. See [Building](building.md).
+With [r.js](https://github.com/jrburke/r.js) it optimizes the frontend js and partials for optimized deployment. It will be built on `npm install` post-install. See [Building](building.md#rjs-javascript-optimization).
 
 ### bower.json
 
