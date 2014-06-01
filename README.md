@@ -46,17 +46,15 @@ We are not yet complete with a first version of the boilerplate.
 
 Things on the "todo" list:
 
-* underscore.js to lodash switchover
-* Server side logging & debugging
 * Establishing API Authentication and Protection
 * Authentication on frontend with page
 * Frontend API connectivity - LOAD crud for frontend use too???
-* Integrate [cbax](https://github.com/uhray/cbax.git) with bower and npm
 
 ## Potential Future Advancements
 
 More advanced tools that could be incorporated:
 
+* Integrate [cbax](https://github.com/uhray/cbax.git) with bower
 * Client side logging/debugging
 * Google Analytics Usage Tracking
 * Advanced Usage tracking - potentially creating a method for tracking stuff in relation to the specific app for algorithmic processing and personalization.
