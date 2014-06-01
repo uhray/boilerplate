@@ -10,6 +10,8 @@
     "utools": "git@github.com:uhray/utools.git",
     "require-jade": "~0.0.3",
     "almond": "~0.2.9",
-    "lodash": "~2.4.1"
+    "lodash": "~2.4.1",
+    "requirejs-text": "~2.0.12",
+    "emitter": "~1.5.2"
   }
 }

@@ -24,7 +24,8 @@ To host the optimized site: `foreman start`. See [foreman](http://foreman.io)
 * Uses [r.js](https://github.com/jrburke/r.js) for frontend optimization in production.
 * Hosted using [expressjs](http://expressjs.com), configured with some [middleware](http://expressjs.com/4x/api.html#middleware).
 * API ready to be built on [crud](https://github.com/uhray/utools.git).
-* Ready for [jade](https://github.com/visionmedia/jade) for the backend rendering and frontend rendering using [require-jade](https://github.com/rocketlabsdev/require-jade).
+* Ready for [jade](https://github.com/visionmedia/jade) for the backend rendering.
+* Uses [ripplejs](https://github.com/ripplejs/ripple) for frontend view rendering (by way of [waves](https://github.com/ripplejs/waves)).
 * Includes Normalize.css(http://necolas.github.com/normalize.css/) for CSS normalizations and common bug fixes.
 * The latest [Modernizr](http://modernizr.com/) build for feature detection.
 * Built in (but removable) CSS element reset. (see [main.css](lib/public/css/main.css)).
@@ -47,7 +48,6 @@ Things on the "todo" list:
 * underscore.js to lodash switchover
 * Server side logging & debugging
 * Establishing API Authentication and Protection
-* Frontend UI: Widget and Layout Design
 * Authentication on frontend with page
 * Frontend API connectivity - LOAD crud for frontend use too???
 * Integrate [cbax](https://github.com/uhray/cbax.git) with bower and npm

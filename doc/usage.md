@@ -28,7 +28,15 @@ Once you have downloaded and installed the boilerplate, using it usually involve
 |       ├── img/
 |       ├── js/
 |           ├── configure.js
-|           ├── main.js
+|           ├── router.js
+|           ├── vendor/
+|               ├── waves.js
+|           ├── controllers/
+|               ├── home.js
+|           ├── views/
+|               ├── home/
+|                   ├── main.js
+|                   ├── template.mustache
 |        ├── partials/
 |            ├── header.jade
 |   ├── views/
@@ -70,10 +78,6 @@ Place any images used for the site here. They will be statically accessible one 
 ### lib/public/js
 
 This directory contains all app-specific javascript. [About the JS](js.md)
-
-### lib/public/partials/
-
-This directory contains all partials you want statically hosted. Using [require-jade](https://github.com/rocketlabsdev/require-jade), these will be available to the frontend javascript. [About frontend partials](partials.md).
 
 ### lib/views
 
