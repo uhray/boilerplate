@@ -1,4 +1,5 @@
-## Uhray Node JS Boilerplate
+Uhray Node JS Boilerplate
+=============
 
 We have created a simple boilerplate to get projects up and running quickly and to set the stage for easy development without restricting freedom.
 
