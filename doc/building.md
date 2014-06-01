@@ -24,3 +24,9 @@ To add a new module to the project, run `bower install --save <module name>`. It
 
 ## r.js Javascript Optimization
 
+The [r.js](https://github.com/jrburke/r.js) optimization takes all the publicly hosted javascript and minifies it into one file. This is useful for production mode.
+
+The [build.js](../build.js) file descriptions the r.js optimization rules.
+
+See [deploying](deploying.md) for how to deploy in production mode and use the optimized file.
+
