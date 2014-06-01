@@ -40,7 +40,7 @@ To host the optimized site: `foreman start`. See [foreman](http://foreman.io)
 
 Take a look at the [usage documentation](doc/usage.md) to learn how to use the boilerplate.
 
-## Things Left Do Do
+## Things Left To Do
 
 We are not yet complete with a first version of the boilerplate.
 
