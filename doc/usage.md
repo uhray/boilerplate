@@ -65,7 +65,7 @@ Contains the boilerplate documentation. You can use it, and update anything here
 
 ### lib/api
 
-This is where you can use [crud](https://github.com/uhray/curd.git) (or anything else you want) to create your unique API. See [Developing an API](api.md).
+This is where you can use [crud](https://github.com/uhray/crud.git) (or anything else you want) to create your unique API. See [Developing an API](api.md).
 
 ### lib/public/css
 
