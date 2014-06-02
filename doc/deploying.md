@@ -15,7 +15,7 @@ This mode allows you to be editing javascript pages separately in their non-mini
 
 To run this mode, start the server with `node server.js`.
 
-## Production mode
+## Production Mode
 
 This mode is so that all public javascript is hosted from the [r.js] optimized file. See [building](building.md#rjs-javascript-optimization) for more info. Additionally, the environment variables set in [.env](../.env) will be set.
 

@@ -4,10 +4,10 @@ Usage
 Once you have downloaded and installed the boilerplate, using it usually involved the following:
 
 1. Understanding the basic structure of the site. [[here]](#basic-structure)
-2. Creating a static design.
+2. Creating a static design. [[here]](static.md)
 3. Server-side API development. [[here]](api.md#server-side-api-development)
 4. Client-side API connectivity. [[here]](api.md#client-side-api-connectivity)
-5. Create dynamic frontend that connects with live API.
+5. Create dynamic frontend that connects with live API. [[here]](js.md)
 6. Deploy. [[here]](deploy.md#deploying)
 
 ## Basic Structure

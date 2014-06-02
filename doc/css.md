@@ -25,3 +25,5 @@ The reset starts the page with a number of reset elements. Feel free to remove t
 Add your own styles to the [main.css](../lib/public/css/main.css) stylesheet.
 
 These styles will be loaded for every page, including those in [static](static.md) development.
+
+If you wish to separate code into many stylesheets, you will need to edit the [lib/views/static/_include.jade](../lib/views/static/_include.jade) file for static pages and the [lib/views/main.jade](../lib/views/main.jade) for other files.
