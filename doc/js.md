@@ -44,7 +44,7 @@ By default, the following modules are installed with [bower](http://bower.io) (s
 * [Utools](https://github.com/uhray/utools) - Uhray tools library
 * [Waves](https://github.com/ripplejs/waves) - Compiled [ripplejs](https://github.com/ripplejs/ripple) module
 
-## Boilerplate Modules
+### Boilerplate Modules
 
 The boilerplate configures certain local modules using requirejs [packages](http://requirejs.org/docs/api.html#packages). They are listed here:
 
@@ -52,7 +52,7 @@ The boilerplate configures certain local modules using requirejs [packages](http
 * Views - modules relative to the [lib/pulic/js/views](../lib/public/js/views) directory.
 * JS - modules relative to the [lib/public/js](../lib/public/js) directory. This means any controller could also be required by `define([ 'js/controllers/controller_name.js' ], Function())` as well.
 
-## Using Modules
+### Using Modules
 
 To use any of them, require them in the `define` section of requirejs on a file. For example, to use lodash, you can have your file structured like this:
 
