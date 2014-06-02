@@ -1,7 +1,7 @@
 Developing an API
 =============
 
-Development for the API takes place in [lib/api](../lib/api), with the following file layout:
+Developing the API takes place in [lib/api](../lib/api), with the following file layout:
 
 ```
 lib/api
