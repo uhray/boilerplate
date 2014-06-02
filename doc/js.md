@@ -6,12 +6,12 @@ Developing the javascript takes place in [lib/public/js](../lib/public/js), with
 
 ```
 lib/public/js
-├── configure.js
 ├── router.js
-├── vendor/
-|   ├── waves.js
+├── configure.js
 ├── controllers/
 |   ├── home.js
+├── vendor/
+|   ├── waves.js
 ├── views/
 |   ├── home/
 |       ├── main.js
@@ -75,10 +75,100 @@ If you wish to install anymore 3rd party modules, you can do so two ways:
 
 ## Router
 
+The router, [router.js](../lib/public/js/router.js), is the page that's loaded up on each request. Here you will establish which controller gets called depending on the url grequest. Boilerplate expects you to use [page](http://visionmedia.github.io/page.js/) to handle routing, though I suppose you could use whatever you wish.
+
+Example:
+
+```js
+
+define( [ 'page', 'controllers/home' ], function(page, c$home) {
+
+  page('/*', c$home);
+  page();
+
+});
+
+```
+
+This page can also be used to establish any javscript configurations or polyfills you may want to implement. You can also load up [Modernizr](http://modernizr.com/) here if you want.
+
 ## Model
+
+There is not really a "model" in the traditional sense. I put this here because it fits in with the Model-View-Controller conversation. The frotend model is established via [crud]((https://github.com/uhray/utools.git) in the API. See [Developing an API](api.md).
 
 ## View
 
+The views are located in [lib/public/js/views](../lib/public/js/views).
+
+Views are predefined templates that, given a data object, create the HTML to be placed in the page. They can also have predefined event handling or emit things (think [emitter](https://github.com/jhermsmeier/emitter.js)).
+
+### Creating a view
+
+In boilerplate, views are expected to be folders in the [view directory](../lib/public/js/views). Each folder fits the following format:
+
+```
+lib/public/js/views/example
+├── template.mustache
+├── main.js
+```
+
+#### main.js
+
+The `main.js` file is whats required from a view. You can do anything you want here, as long as you return a function that follows some expected behavior. To keep things consistent, we use [ripplejs](https://github.com/ripplejs/ripple) for frontend view rendering (by way of [waves](https://github.com/ripplejs/waves)) for view rendering.
+
+Ripplejs allows you to define an html template and pass data to create a new view. You can use the view object to dynamically update data. You can also have specific events emitted so view users (controllers) can do things on events.
+
+Example:
+
+```js
+define([ 'waves', 'text!./template.mustache' ], function(waves, template) {
+  var view = waves(template);  // Create ripplesjs view. More on templates below
+
+  // An event example. Template would need an on-click event
+  view.prototype.h1click = function(event) {
+    console.log('You have clicked the h1');
+
+    // Emitting something for the view's controller to listen for
+    this.emit('h1click');
+  }
+
+  return view;
+});
+```
+
+#### template.mustache
+
+This is a text template for the rippeljs view. It allows you to define the template in a separate file (not deal with concatinating mult-line strings). See [ripplejs](https://github.com/ripplejs/ripple) for how to define templates.
+
+Example:
+
+```html
+<h1 on-click="{{ this.h1click }}">{{ title }}</h1>
+```
+
+### Using a view
+
+Views are used in the controllers. An example is below:
+
+```js
+define([ 'views/home/main' ], function(view) {
+  var home = new view({ data: { title: 'Welcome Home' } })
+
+  // Append the created element to the body
+  home.appendTo(document.body);
+
+  // Listen for an event
+  home.on('h1click', function() {
+    console.log('Action `h1click` was emitted');
+
+    // This would update the rendered view in the page
+    home.set('title', 'New title post click');
+  });
+})
+```
+
 ## Controller
+
+
 
 

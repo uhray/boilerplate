@@ -27,12 +27,12 @@ Once you have downloaded and installed the boilerplate, using it usually involve
 |           ├── main.css
 |       ├── img/
 |       ├── js/
-|           ├── configure.js
 |           ├── router.js
-|           ├── vendor/
-|               ├── waves.js
+|           ├── configure.js
 |           ├── controllers/
 |               ├── home.js
+|           ├── vendor/
+|               ├── waves.js
 |           ├── views/
 |               ├── home/
 |                   ├── main.js
