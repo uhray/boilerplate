@@ -48,9 +48,9 @@ By default, the following modules are installed with [bower](http://bower.io) (s
 
 The boilerplate configures certain local modules using requirejs [packages](http://requirejs.org/docs/api.html#packages). They are listed here:
 
-* Controllers - modules relative to the [lib/js/controllers](../lib/js/controllers) directory.
-* Views - modules relative to the [lib/js/views](../lib/js/views) directory.
-* JS - modules relative to the [lib/js](../lib/js) directory. This means any controller could also be required by `define([ 'js/controllers/controller_name.js' ], Function())` as well.
+* Controllers - modules relative to the [lib/public/js/controllers](../lib/public/js/controllers) directory.
+* Views - modules relative to the [lib/pulic/js/views](../lib/public/js/views) directory.
+* JS - modules relative to the [lib/public/js](../lib/public/js) directory. This means any controller could also be required by `define([ 'js/controllers/controller_name.js' ], Function())` as well.
 
 ## Using Modules
 
