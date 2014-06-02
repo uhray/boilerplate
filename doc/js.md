@@ -18,7 +18,7 @@ lib/public/js
 |       ├── template.mustache
 ```
 
-This is where the bulk of the web development takes place. The js folder structure the "dynamic frontend design" with the following sections:
+This is where the bulk of the web development takes place. The public javascript will work from within the loaded view (see [views](views.md)), to modify any content on the page. The js folder structure the "dynamic frontend design" with the following sections:
 
 * [Configuration](#configuration) - establishing paths for javascript
 * [Router](#router) - initializes pages and directs to a controller based on the url

@@ -50,6 +50,7 @@ Things on the "todo" list:
 * Establishing API Authentication and Protection
 * Authentication on frontend with page
 * Frontend API connectivity - LOAD crud for frontend use too???
+* Add necessary [polyfills](https://github.com/Modernizr/Modernizr/wiki/HTML5-Cross-browser-Polyfills)
 
 ## Potential Future Advancements
 

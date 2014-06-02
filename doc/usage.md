@@ -14,7 +14,7 @@ Once you have downloaded and installed the boilerplate, using it usually involve
 
 ```
 .
-├── doc
+├── doc/
 ├── lib/
 |   ├── api/
 |       ├── controller.js
