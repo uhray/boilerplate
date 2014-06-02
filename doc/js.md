@@ -80,27 +80,25 @@ The router, [router.js](../lib/public/js/router.js), is the page that's loaded u
 Example:
 
 ```js
-
 define( [ 'page', 'controllers/home' ], function(page, c$home) {
 
   page('/*', c$home);
   page();
 
 });
-
 ```
 
-This page can also be used to establish any javscript configurations or polyfills you may want to implement. You can also load up [Modernizr](http://modernizr.com/) here if you want.
+This page can also be used to establish any javscript configurations or polyfills you may want to implement. You can also load up [modernizr](http://modernizr.com/) here if you want.
 
 ## Model
 
-There is not really a "model" in the traditional sense. I put this here because it fits in with the Model-View-Controller conversation. The frotend model is established via [crud]((https://github.com/uhray/utools.git) in the API. See [Developing an API](api.md).
+There is not really a "model" in the traditional sense. I put this here because it fits in with the Model-View-Controller conversation. The frotend model is established via [crud](https://github.com/uhray/utools.git) in the API. See [Developing an API](api.md).
 
 ## View
 
 The views are located in [lib/public/js/views](../lib/public/js/views).
 
-Views are predefined templates that, given a data object, create the HTML to be placed in the page. They can also have predefined event handling or emit things (think [emitter](https://github.com/jhermsmeier/emitter.js)).
+Views are predefined templates that, given a data object, create the HTML to be placed in the page. They can also have predefined event handling or emit things (think [emitter](https://github.com/jhermsmeier/emitter.js)). They can be templates that layout a whole page or more of a widget that is reused a number of times.
 
 ### Creating a view
 
@@ -111,6 +109,8 @@ lib/public/js/views/example
 ├── template.mustache
 ├── main.js
 ```
+
+Additionally, if a view could use it, maybe you should add a `README.md` file and document what data the view needs or what events it emits. That would be cool.
 
 #### main.js
 
@@ -151,24 +151,41 @@ Example:
 Views are used in the controllers. An example is below:
 
 ```js
-define([ 'views/home/main' ], function(view) {
-  var home = new view({ data: { title: 'Welcome Home' } })
+var home = new view({ data: { title: 'Welcome Home' } })
 
-  // Append the created element to the body
-  home.appendTo(document.body);
+// Append the created element to the body
+home.appendTo(document.body);
 
-  // Listen for an event
-  home.on('h1click', function() {
-    console.log('Action `h1click` was emitted');
+// Listen for an event
+home.on('h1click', function() {
+  console.log('Action `h1click` was emitted');
 
-    // This would update the rendered view in the page
-    home.set('title', 'New title post click');
-  });
-})
+  // This would update the rendered view in the page
+  home.set('title', 'New title post click');
+});
 ```
 
 ## Controller
 
+Controlers are located in [lib/public/js/controllers](../lib/public/js/controllers). Controllers are called via the [router](#router)
 
+Each controller should return a function that to router can call when the controller should be. These functions can do whatever is necessary to make the frontend page work. Be creative.
+
+You can generally think of each controller as page on the webapp (home, profile page, etc). The controllers can have a single [view](#view) or use a number of views and place them in the page with some organization. (Also, ripplejs allows inserting views into other views. May be worth trying out).
+
+Example:
+
+```js
+define([ 'views/home/main' ], function(view) {
+
+// Return function the router will call
+return function(req, next) {
+  var home = new view({ data: { title: 'Welcome Home' } });
+
+  home.appendTo(document.body);
+}
+
+});
+```
 
 
