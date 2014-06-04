@@ -77,7 +77,7 @@ Place any images used for the site here. They will be statically accessible one 
 
 ### lib/public/js
 
-This directory contains all app-specific javascript. [About the JS](js.md)
+This directory contains all app-specific javascript. [About the JS](js.md).
 
 ### lib/views
 
