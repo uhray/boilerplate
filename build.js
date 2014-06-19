@@ -3,8 +3,8 @@
     baseUrl: './lib/public',
     name: 'bower_components/almond/almond',
     wrap: true,
-    include: [ 'js/main' ],
-    insertRequire: ['js/main'],
-    exclude: [ 'jade' ],
+    include: [ 'js/router' ],
+    insertRequire: ['js/router'],
+    exclude: [ ],
     out: './lib/public/js/main-built.js'
 })
