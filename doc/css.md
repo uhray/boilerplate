@@ -4,6 +4,7 @@ About the CSS
 The boilerplate comes with the following:
 
 * Includes [normalize.css](http://necolas.github.com/normalize.css/) for CSS normalizations and common bug fixes.
+* Includes [html5-boilerplate](https://github.com/h5bp/html5-boilerplate) main css for cross-browser default styles.
 * The latest [Modernizr](http://modernizr.com/) build for feature detection.
 * Built in (but removable) CSS element reset. (see [main.css](../lib/public/css/main.css)).
 Built in (but removable) CSS element reset. (see main.css).

@@ -36,6 +36,7 @@ To host the optimized site: `foreman start`. See [foreman](https://github.com/dd
 [utools](https://github.com/uhray/utools.git), and [cbax](https://github.com/uhray/cbax.git), [mongoose](http://mongoosejs.com/), and others.
 * Built ready for [heroku](https://heroku.com) deployment.
 * Easily extendable to new modules [npm](http://npmjs.org) and [bower](http://bower.io).
+* Incorporates main css from [htmlboilerplate](https://github.com/h5bp/html5-boilerplate)
 
 ## Usage
 
