@@ -10,7 +10,7 @@ You can go to [lib/public/css/main.css](../lib/public/css/main.css) to create st
 
 ## Creating HTML
 
-Create jade files in [lib/views/static](../lib/views/static) to create HTML files.
+Create jade files in [lib/views/static](../lib/views/static) to create jade files.
 
 To auto include the css styling, add `extends _include` to the top of the jade file and then place all jade templating in a `block body`. See [lib/views/static/home.jade](../lib/views/static/home.jade) as an example.
 
