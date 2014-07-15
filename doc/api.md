@@ -44,9 +44,7 @@ For example, if you have an entity `'/users'`, and there is a create crud route,
 
 ## Client-side API connectivity
 
-CRUD is currently under construction. But, the boilerplate will connect with cruds frontend interface when it is completed.
-
-The frontend interface will all you to use requirejs to require `'crud'` and get the crud api frontend interface.
+Use [CRUD](https://github.com/uhray/crud) for connected to the api on the frontend.
 
 ## Document
 
