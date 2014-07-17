@@ -21,8 +21,5 @@ app.listen(process.env.PORT || 3000, function() {
   });
 
   // Error handlers
-  app.use(function(e, req, res, n) {
-    // silence errors
-  });
-
+  app.use(require('errorhandler')());
 });
