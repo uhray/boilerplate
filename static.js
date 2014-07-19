@@ -1,4 +1,7 @@
 var express = require('express'),
+    fs = require('fs'),
+    path = require('path'),
+    util = require('util'),
     app = express();
 
 
@@ -16,6 +19,19 @@ app.listen(process.env.PORT || 3000, function() {
   console.log('App listening on port %s', process.env.PORT || 3000);
 
   // Configure web
+  app.get('/', function(req, res, next) {
+    var files = fs.readdirSync(path.join(__dirname, 'lib/views/static'))
+                  .filter(function(d) { return d[0] != '_'; })
+                  .map(function(d) { return d.replace(/\.jade$/, '') }),
+        _ = [ '<body><ul>',
+             files.map(function(d) {
+               return util.format('<li><a href="/%s">%s</a></li>', d, d)
+             }).join('\n'),
+             '</body></ul>' ];
+    res.send(_.join('\n'));
+
+  });
+
   app.get('/:page', function(req, res, next) {
     res.render(req.params.page, {});
   });
