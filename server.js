@@ -17,6 +17,7 @@ app.use(require('express-session')({
 }));
 app.use(require('body-parser').urlencoded({ extended: true }));
 app.use(require('body-parser').json());
+app.use(require('serve-favicon')(__dirname + '/lib/public/img/favicon.ico'));
 app.use(require('compression')());
 app.set('views', 'lib/views');
 app.use('/public', require('serve-static')('lib/public'));
