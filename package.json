@@ -6,7 +6,6 @@
     "utools": "git+ssh://git@github.com:uhray/utools.git",
     "cbax": "git+ssh://git@github.com:uhray/cbax.git",
     "crud": "git+ssh://git@github.com:uhray/crud.git",
-    "bower": "^1.3.3",
     "jade": "^1.3.1",
     "express": "^4.2.0",
     "requirejs": "^2.1.11",
@@ -18,7 +17,8 @@
     "serve-static": "^1.1.0",
     "express-session": "^1.1.0",
     "mongoose": "^3.8.9",
-    "cookie-parser": "^1.3.1"
+    "cookie-parser": "^1.3.1",
+    "bower": "^1.3.8"
   },
   "scripts": {
     "postinstall": "./node_modules/bower/bin/bower install; ./node_modules/requirejs/bin/r.js -o build.js"
