@@ -93,7 +93,7 @@ Contains the boilerplate README, connecting to the docs.
 
 ### server.js
 
-This is used to fire up node server: `node server.js`. See [Deploying](deploying.md).
+This is used to fire up node server: `node server.js`. But should be done via formeman. See [Deploying](deploying.md).
 
 ### static.js
 
@@ -123,7 +123,9 @@ The install path is set to <i>lib/public/bower_components/</i>, which is also [g
 
 ### .env
 
-The [foreman](https://github.com/ddollar/foreman) enviroment is established here. These environments will be set when you run `foreman start`, which is what [Heroku](http://heroku.com) will do. The important environment variable sets `ENV=PRODUCTION`, which will tell the server to statically host and use the public js file created by the [build.js](#build.js) file so the page loads are significantly faster.
+This isn't actually in the repo, because it should be git ignored. But, this file sets the environment variables for you [foreman](https://github.com/ddollar/foreman) processes. See [deploying](deploying.md) for started the servers with foreman.
+
+This works nicely in conjunction with heroku. In heroku, if you type `heroku config`, you'll see a list of configuration environment variable. If you put config variabled like `var1=value` in your .env file, then you can have specific config variable for your local version of the app.
 
 ### gitignore
 
