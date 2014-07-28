@@ -13,7 +13,7 @@ To run this mode, start the server with `node static.js`.
 
 This mode allows you to be editing javascript pages separately in their non-minified version and host the web application.
 
-To run this mode, start the server with `node server.js`.
+To run this mode, start the server with `foreman run node server.js`.
 
 ## Production Mode
 

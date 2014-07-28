@@ -1,3 +1,5 @@
+__production__ = !!~process.argv.indexOf('PRODUCTION');
+
 var express = require('express'),
     api = require('./lib/api'),
     app = express();
@@ -29,7 +31,6 @@ configure_method(app, 'delete');
 app.listen(process.env.PORT || 3000, function() {
   console.log('App listening on port %s', process.env.PORT || 3000);
 
-
   // Configure api
   api(app);
 
@@ -37,7 +38,7 @@ app.listen(process.env.PORT || 3000, function() {
   // Configure web
   app.get('/*', function(req, res, next) {
     res.render('main', {
-      production : process.env.ENV == 'PRODUCTION',
+      production : __production__,
       locals : {
         user: req.user || {}
       }
