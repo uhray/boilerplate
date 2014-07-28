@@ -10,6 +10,7 @@ app.set('host', process.env.HOST || '127.0.0.1');
 app.set('view engine', 'jade');
 app.engine('jade', require('jade').__express);
 app.use(require('morgan')('dev'));
+app.use(require('serve-favicon')(__dirname + '/lib/public/img/favicon.ico'));
 app.use(require('compression')());
 app.set('views', 'lib/views/static');
 app.use('/public', require('serve-static')('lib/public'));
