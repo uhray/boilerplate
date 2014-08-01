@@ -6,26 +6,31 @@ var express = require('express'),
 
 
 // ============================ CONFIGURE APP ============================= //
+
+// configure app
 app.set('host', process.env.HOST || '127.0.0.1');
 app.set('view engine', 'jade');
+app.set('views', 'lib/views');
 app.engine('jade', require('jade').__express);
-app.use(require('connect-timeout')(5000));
+
+// toplevel middleware
 app.use(require('morgan')('dev'));
 app.use(require('serve-favicon')(__dirname + '/lib/public/img/favicon.ico'));
 app.use(require('compression')());
-app.set('views', 'lib/views');
 app.use('/public', require('serve-static')('lib/public'));
-app.use(require('cookie-parser')());
-app.use(require('connect-session')({
-  secret: '__SECRET__',
+app.use(require('cookie-session')({
+  secret: 'fdajk89n432;;fajkdjf',
 }));
 app.use(require('body-parser').urlencoded({ extended: true }));
 app.use(require('body-parser').json());
+
+// configure methods to log route
 configure_method(app, 'get');
 configure_method(app, 'put');
 configure_method(app, 'post');
 configure_method(app, 'delete');
 
+// start app
 app.listen(process.env.PORT || 3000, function() {
   console.log('App listening on port %s', process.env.PORT || 3000);
 
