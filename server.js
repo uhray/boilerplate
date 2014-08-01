@@ -45,7 +45,7 @@ app.listen(process.env.PORT || 3000, function() {
 
 
   // Error handlers
-  app.use(require('errorhandler')());
+  if (!__production__) app.use(require('errorhandler')());
 });
 
 
