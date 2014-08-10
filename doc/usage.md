@@ -53,7 +53,6 @@ Once you have downloaded and installed the boilerplate, using it usually involve
 ├── package.json
 ├── .bowerrc
 ├── .env
-├── .git
 ├── .gitignore
 ```
 
