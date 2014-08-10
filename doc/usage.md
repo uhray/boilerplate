@@ -37,8 +37,6 @@ Once you have downloaded and installed the boilerplate, using it usually involve
 |               ├── home/
 |                   ├── main.js
 |                   ├── template.mustache
-|        ├── partials/
-|            ├── header.jade
 |   ├── views/
 |       ├── main.jade
 |       ├── static/
