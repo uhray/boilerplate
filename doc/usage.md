@@ -102,7 +102,7 @@ Established the forman settings: `foreman start` calls `node server.js` with the
 
 ### build.js
 
-With [r.js](https://github.com/jrburke/r.js) it optimizes the frontend js and partials for optimized deployment. It will be built on `npm install` post-install. See [Building](building.md#rjs-javascript-optimization).
+With [r.js](https://github.com/jrburke/r.js) it optimizes the frontend js for optimized deployment. It will be built on `npm install` post-install. See [Building](building.md#rjs-javascript-optimization).
 
 ### bower.json
 
