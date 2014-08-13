@@ -1,7 +1,7 @@
 Usage
 =============
 
-Once you have downloaded and installed the boilerplate, using it usually involved the following:
+Once you have downloaded and installed the boilerplate, using it usually involves the following:
 
 1. Understanding the basic structure of the site. [[here]](#basic-structure)
 2. Creating a static design. [[here]](static.md)
