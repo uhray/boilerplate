@@ -8,7 +8,7 @@ Once you have downloaded and installed the boilerplate, using it usually involve
 3. Server-side API development. [[here]](api.md#server-side-api-development)
 4. Client-side API connectivity. [[here]](api.md#client-side-api-connectivity)
 5. Create dynamic frontend that connects with live API. [[here]](js.md)
-6. Deploy. [[here]](deploy.md#deploying)
+6. Deploy. [[here]](deploying.md#deploying)
 
 ## Basic Structure
 
