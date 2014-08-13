@@ -25,7 +25,7 @@ To host the optimized site: `foreman start`. See [foreman](https://github.com/dd
 * Uses [Require.js](http://requirejs.org) for frontend javascript organization.
 * Uses [r.js](https://github.com/jrburke/r.js) for frontend optimization in production.
 * Hosted using [expressjs](http://expressjs.com), configured with some [middleware](http://expressjs.com/4x/api.html#middleware).
-* API ready to be built on [crud](https://github.com/uhray/utools.git).
+* API ready to be built on [crud](https://github.com/uhray/crud.git).
 * Ready for [jade](https://github.com/visionmedia/jade) for the backend rendering.
 * Uses [ripplejs](https://github.com/ripplejs/ripple) for frontend view rendering (by way of [waves](https://github.com/ripplejs/waves)).
 * Includes [normalize.css](http://necolas.github.com/normalize.css/) for CSS normalizations and common bug fixes.
