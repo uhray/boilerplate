@@ -29,13 +29,13 @@ To host the optimized site: `foreman start`. See [foreman](https://github.com/dd
 * Ready for [jade](https://github.com/visionmedia/jade) for the backend rendering.
 * Uses [ripplejs](https://github.com/ripplejs/ripple) for frontend view rendering (by way of [waves](https://github.com/ripplejs/waves)).
 * Includes [normalize.css](http://necolas.github.com/normalize.css/) for CSS normalizations and common bug fixes.
-* The latest [Modernizr](http://modernizr.com/) build for feature detection.
+* Includes the latest [Modernizr](http://modernizr.com/) build for feature detection.
 * Built in (but removable) CSS element reset. (see [main.css](lib/public/css/main.css)).
 * Built ready to use the frontend js ([bower](http://bower.io)) modules [page.js](https://github.com/visionmedia/page.js.git), [async.js](https://github.com/caolan/async), [lodash](http://lodash.com/), [utools](https://github.com/uhray/utools.git), and [jquery](https://github.com/jquery/jquery). (Note: you can choose not to use these).
 * Built ready to use the server-side js ([npm](http://npmjs.org)) modules
 [utools](https://github.com/uhray/utools.git), and [cbax](https://github.com/uhray/cbax.git), [mongoose](http://mongoosejs.com/), and others.
 * Built ready for [heroku](https://heroku.com) deployment.
-* Easily extendable to new modules [npm](http://npmjs.org) and [bower](http://bower.io).
+* Easily extendable to new [npm](http://npmjs.org) and [bower](http://bower.io) modules.
 * Incorporates main css from [htmlboilerplate](https://github.com/h5bp/html5-boilerplate)
 
 ## Usage
