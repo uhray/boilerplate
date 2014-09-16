@@ -18,8 +18,8 @@ require('nconf')
 
 // configure express app
 app.set('host', process.env.HOST || '127.0.0.1');
-app.engine('mustache', mustache);
-app.set('view engine', 'mustache');
+app.engine('html', mustache);
+app.set('view engine', 'html');
 app.set('views', __dirname + '/lib/backend/shells');
 if (!__production__) mustache.cache._max = 0;  // turn off mustache caching
 

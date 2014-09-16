@@ -1,0 +1,46 @@
+<style>
+.modal-component-background {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  padding: 0.5em;
+  text-align: center;
+  -moz-box-sizing: border-box; box-sizing: border-box;
+}
+
+.modal-component-outer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.modal-component {
+  position: relative;
+  background-color: white;
+  padding: 2em;
+  box-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+  margin: 0 auto;
+  display: inline-block;
+  max-width: 100%;
+  max-height: 100%;
+  overflow-y: auto;
+  -moz-box-sizing: border-box; box-sizing: border-box;
+}
+
+.modal-component-button {
+  text-align: center;
+  background-color: rgb(70,70,180);
+  color: white;
+  padding: 0.5em 1em;
+  display: inline-block;
+  cursor: pointer;
+}
+</style>
+
+<div class='modal-component-background' on-click='close'>
+  <div class='modal-component-outer'>
+    <div class='modal-component'>
+      {{>content}}
+    </div>
+  </div>
+</div>
