@@ -4,20 +4,23 @@ var express = require('express'),
     api = require('./lib/backend/api'),
     __production__ = !!~process.argv.indexOf('PRODUCTION'),
     mustache =  require('mustache-express')(),
+    nconf = require('nconf'),
     app = express();
 
 
 // ============================== CONFIGURE APP ============================= //
 
 // load configurations
-require('nconf')
+nconf
   .argv()  // overrides everything
   .env()   // overrides config file
   .file({ file: __dirname + '/lib/config/config.json' })
-  .set('lib', __dirname + '/lib');
+nconf.set('lib', __dirname + '/lib')
+nconf.set('PORT', '5000')
+nconf.set('HOST', '127.0.0.1')
 
 // configure express app
-app.set('host', process.env.HOST || '127.0.0.1');
+app.set('host', nconf.get('HOST'))
 app.engine('html', mustache);
 app.set('view engine', 'html');
 app.set('views', __dirname + '/lib/backend/shells');
@@ -40,8 +43,8 @@ configure_method(app, 'post');
 configure_method(app, 'delete');
 
 // start app
-app.listen(process.env.PORT || 3000, function() {
-  console.log('App listening on port %s', process.env.PORT || 3000);
+app.listen(nconf.get('PORT'), function() {
+  console.log('App listening on port %s', nconf.get('PORT'));
 
   // Configure api
   api(app);
