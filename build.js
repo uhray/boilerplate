@@ -1,10 +1,11 @@
 ({
-    mainConfigFile: './lib/public/js/configure.js',
-    baseUrl: './lib/public',
-    name: 'bower_components/almond/almond',
+    mainConfigFile: './lib/frontend/configure.js',
+    baseUrl: './lib/frontend',
+    name: 'bower/almond/almond',
     wrap: true,
-    include: [ 'js/router' ],
-    insertRequire: ['js/router'],
+    include: [ 'router' ],
+    insertRequire: [ 'router' ],
     exclude: [ ],
-    out: './lib/public/js/main-built.js'
+    stubModules: [ 'rv' ],
+    out: './lib/frontend/main-built.js'
 })
