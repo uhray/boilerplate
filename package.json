@@ -1,26 +1,27 @@
 {
-  "name": "sample_webapp",
+  "name": "boilerplate",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "utools": "git+ssh://git@github.com:uhray/utools.git",
-    "cbax": "git+ssh://git@github.com:uhray/cbax.git",
-    "crud": "git+ssh://git@github.com:uhray/crud.git",
-    "jade": "^1.3.1",
+    "node-crud": "1.0.0",
     "express": "^4.2.0",
-    "requirejs": "^2.1.11",
     "morgan": "^1.0.1",
     "body-parser": "^1.2.0",
     "compression": "1.0.2",
     "errorhandler": "^1.0.1",
     "serve-static": "^1.1.0",
     "mongoose": "^3.8.9",
-    "bower": "^1.3.8",
     "serve-favicon": "2.0.1",
-    "connect-session": "0.0.1",
-    "cookie-session": "^1.0.2"
+    "cookie-session": "^1.0.2",
+    "mustache-express": "^1.2.0",
+    "bower": "^1.3.9",
+    "requirejs": "^2.1.14",
+    "debug": "^1.0.4",
+    "cbax": "^1.0.0",
+    "winston": "^0.7.3",
+    "nconf": "^0.6.9"
   },
   "scripts": {
-    "postinstall": "./node_modules/bower/bin/bower install; ./node_modules/requirejs/bin/r.js -o build.js"
+    "postinstall": "./node_modules/bower/bin/bower cache clean; ./node_modules/bower/bin/bower install; ./node_modules/requirejs/bin/r.js -o build.js"
   }
 }

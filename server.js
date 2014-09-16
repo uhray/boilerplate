@@ -1,26 +1,35 @@
-__production__ = !!~process.argv.indexOf('PRODUCTION');
 
 var express = require('express'),
-    api = require('./lib/api'),
+    logging = require('./lib/config/logging'),
+    api = require('./lib/backend/api'),
+    __production__ = !!~process.argv.indexOf('PRODUCTION'),
+    mustache =  require('mustache-express')(),
     app = express();
 
 
-// ============================ CONFIGURE APP ============================= //
+// ============================== CONFIGURE APP ============================= //
 
-// configure app
+// load configurations
+require('nconf')
+  .argv()  // overrides everything
+  .env()   // overrides config file
+  .file({ file: __dirname + '/lib/config/config.json' })
+  .set('lib', __dirname + '/lib');
+
+// configure express app
 app.set('host', process.env.HOST || '127.0.0.1');
-app.set('view engine', 'jade');
-app.set('views', 'lib/views');
-app.engine('jade', require('jade').__express);
+app.engine('mustache', mustache);
+app.set('view engine', 'mustache');
+app.set('views', __dirname + '/lib/backend/shells');
+if (!__production__) mustache.cache._max = 0;  // turn off mustache caching
 
 // toplevel middleware
 app.use(require('morgan')('dev'));
-app.use(require('serve-favicon')(__dirname + '/lib/public/img/favicon.ico'));
+app.use(require('serve-favicon')(__dirname +
+                                '/lib/frontend/images/favicon.ico'));
 app.use(require('compression')());
-app.use('/public', require('serve-static')('lib/public'));
-app.use(require('cookie-session')({
-  secret: 'fdajk89n432;;fajkdjf',
-}));
+app.use('/public', require('serve-static')('lib/frontend'));
+app.use(require('cookie-session')({ secret: '__SECRET__' }));
 app.use(require('body-parser').urlencoded({ extended: true }));
 app.use(require('body-parser').json());
 
@@ -38,13 +47,13 @@ app.listen(process.env.PORT || 3000, function() {
   api(app);
 
 
-  // Configure web
+  // Configure routes for shells
   app.get('/*', function(req, res, next) {
     res.render('main', {
       production : __production__,
-      locals : {
+      locals : JSON.stringify({
         user: req.user || {}
-      }
+      })
     });
   });
 
@@ -54,8 +63,7 @@ app.listen(process.env.PORT || 3000, function() {
 });
 
 
-
-// ================================ TOOLS ================================= //
+// ================================= TOOLS ================================== //
 
 function configure_method(app, method) {
   var m = app[method];
