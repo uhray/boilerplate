@@ -55,7 +55,8 @@ app.listen(nconf.get('PORT'), function() {
     res.render('main', {
       production : __production__,
       locals : JSON.stringify({
-        user: req.user || {}
+        user: req.user || {},
+        production: __production__
       })
     });
   });
