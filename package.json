@@ -22,6 +22,6 @@
     "nconf": "^0.6.9"
   },
   "scripts": {
-    "postinstall": "./node_modules/bower/bin/bower cache clean; ./node_modules/bower/bin/bower install; ./node_modules/requirejs/bin/r.js -o build.js"
+    "postinstall": "./node_modules/bower/bin/bower cache clean; ./node_modules/bower/bin/bower install; ./node_modules/requirejs/bin/r.js -o lib/config/frontend-build.js"
   }
 }
