@@ -31,7 +31,7 @@ app.use(require('morgan')('dev'));
 app.use(require('serve-favicon')(__dirname +
                                 '/lib/frontend/images/favicon.ico'));
 app.use(require('compression')());
-app.use('/public', require('serve-static')('lib/frontend'));
+app.use('/public', require('serve-static')(__dirname + '/lib/frontend'));
 app.use(require('cookie-session')({ secret: '__SECRET__' }));
 app.use(require('body-parser').urlencoded({ extended: true }));
 app.use(require('body-parser').json());
