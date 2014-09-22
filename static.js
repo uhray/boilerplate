@@ -4,13 +4,23 @@ var express = require('express'),
     fs = require('fs'),
     util = require('util'),
     dir = __dirname + '/lib/static',
+    nconf = require('nconf'),
     app = express();
 
 
 // ============================== CONFIGURE APP ============================= //
 
+// load configurations
+nconf
+  .argv()  // overrides everything
+  .env()   // overrides config file
+  .file({ file: __dirname + '/lib/config/config.json' })
+nconf.set('lib', __dirname + '/lib')
+nconf.set('PORT', '5000')
+nconf.set('HOST', '127.0.0.1')
+
 // configure express app
-app.set('host', process.env.HOST || '127.0.0.1');
+app.set('host', nconf.get('HOST'))
 app.engine('html', mustache);
 app.set('view engine', 'html');
 app.set('views', dir);
@@ -25,8 +35,8 @@ app.use('/public', require('serve-static')(__dirname + '/lib/frontend'));
 app.use(require('cookie-session')({ secret: '__SECRET__' }));
 
 // start app
-app.listen(process.env.PORT || 3000, function() {
-  console.log('App listening on port %s', process.env.PORT || 3000);
+app.listen(nconf.get('PORT'), function() {
+  console.log('App listening on port %s', nconf.get('PORT'));
 
   // Configure routes for shells
   app.get('/', function(req, res, next) {
@@ -61,5 +71,3 @@ function configure_method(app, method) {
     return m.apply(this, arguments);
   }
 }
-
-
