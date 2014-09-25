@@ -1,10 +1,10 @@
 
 var express = require('express'),
-    logging = require('./lib/config/logging'),
-    api = require('./lib/backend/api'),
+    api = require('./app/backend/api'),
     __production__ = !!~process.argv.indexOf('PRODUCTION'),
     mustache =  require('mustache-express')(),
     nconf = require('nconf'),
+    winston = require('winston'),
     app = express();
 
 
@@ -14,24 +14,33 @@ var express = require('express'),
 nconf
   .argv()  // overrides everything
   .env()   // overrides config file
-  .file({ file: __dirname + '/lib/config/config.json' })
-nconf.set('lib', __dirname + '/lib')
+  .file({ file: __dirname + '/config/settings.json' })
+nconf.set('lib', __dirname + '/app')
 nconf.set('PORT', '5000')
 nconf.set('HOST', '127.0.0.1')
+
+// configure logging
+winston.remove(winston.transports.Console);
+winston.add(winston.transports.Console, {
+  level: nconf.get('log_level') || 'info',
+  colorize: true,
+  prettyPrint: true
+});
+winston.exitOnError = false;
 
 // configure express app
 app.set('host', nconf.get('HOST'))
 app.engine('html', mustache);
 app.set('view engine', 'html');
-app.set('views', __dirname + '/lib/backend/shells');
+app.set('views', __dirname + '/app/backend/shells');
 if (!__production__) mustache.cache._max = 0;  // turn off mustache caching
 
 // toplevel middleware
 app.use(require('morgan')('dev'));
 app.use(require('serve-favicon')(__dirname +
-                                '/lib/frontend/images/favicon.ico'));
+                                '/app/frontend/images/favicon.ico'));
 app.use(require('compression')());
-app.use('/public', require('serve-static')(__dirname + '/lib/frontend'));
+app.use('/public', require('serve-static')(__dirname + '/app/frontend'));
 app.use(require('cookie-session')({ secret: '__SECRET__' }));
 app.use(require('body-parser').urlencoded({ extended: true }));
 app.use(require('body-parser').json());

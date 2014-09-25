@@ -3,7 +3,7 @@ var express = require('express'),
     mustache =  require('mustache-express')(),
     fs = require('fs'),
     util = require('util'),
-    dir = __dirname + '/lib/static',
+    dir = __dirname + '/app/static',
     nconf = require('nconf'),
     app = express();
 
@@ -14,8 +14,8 @@ var express = require('express'),
 nconf
   .argv()  // overrides everything
   .env()   // overrides config file
-  .file({ file: __dirname + '/lib/config/config.json' })
-nconf.set('lib', __dirname + '/lib')
+  .file({ file: __dirname + '/app/config/config.json' })
+nconf.set('lib', __dirname + '/app')
 nconf.set('PORT', '5000')
 nconf.set('HOST', '127.0.0.1')
 
@@ -30,8 +30,8 @@ mustache.cache._max = 0;  // turn off mustache caching
 // toplevel middleware
 app.use(require('morgan')('dev'));
 app.use(require('serve-favicon')(__dirname +
-                                '/lib/frontend/images/favicon.ico'));
-app.use('/public', require('serve-static')(__dirname + '/lib/frontend'));
+                                '/app/frontend/images/favicon.ico'));
+app.use('/public', require('serve-static')(__dirname + '/app/frontend'));
 app.use(require('cookie-session')({ secret: '__SECRET__' }));
 
 // start app

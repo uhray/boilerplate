@@ -23,6 +23,6 @@
     "turnkey": "0.0.0"
   },
   "scripts": {
-    "postinstall": "./node_modules/bower/bin/bower cache clean; ./node_modules/bower/bin/bower install; ./node_modules/requirejs/bin/r.js -o lib/config/frontend-build.js"
+    "postinstall": "./node_modules/bower/bin/bower cache clean; ./node_modules/bower/bin/bower install; ./node_modules/requirejs/bin/r.js -o config/rjs-build.js"
   }
 }

@@ -16,5 +16,5 @@ results
 newrelic_agent.log
 
 npm-debug.log
-lib/frontend/bower/*
-lib/frontend/main-built.js
+app/frontend/bower/*
+app/frontend/main-built.js
