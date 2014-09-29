@@ -21,6 +21,7 @@ module.exports = exports = function(app) {
   // connect to db
   if (!url) return logger.warn('No MONGOHQ_URL. Not attaching to db.');
 
+  mongoose.connect(url);
   mongoose.connection.on('error',function (e) {
     console.error('Mongoose default connection error: ' + e);
   });
