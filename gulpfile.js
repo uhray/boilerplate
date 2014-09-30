@@ -4,7 +4,7 @@ var gulp = require('gulp'),
 
 // Top Level Commands ----------------------------------------------------------
 gulp.task('default', ['info']);
-gulp.task('static', ['static-server']);
+gulp.task('static', ['static-server', 'dev-scss', 'dev-watch']);
 gulp.task('dev', ['dev-server', 'dev-scss', 'dev-watch']);
 gulp.task('prod', ['prod-server']);
 
