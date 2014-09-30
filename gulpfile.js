@@ -1,5 +1,6 @@
 var gulp = require('gulp'),
     sass = require('gulp-ruby-sass'),
+    autoprefixer = require('gulp-autoprefixer'),
     child = require('child_process');
 
 // Top Level Commands ----------------------------------------------------------
@@ -40,6 +41,7 @@ gulp.task('scss_to_css', ['bower_install'], function() {
                   sourcemapPath: '..'
              }))
              .on('error', function (err) { console.log(err.message); })
+             .pipe(autoprefixer())
              .pipe(gulp.dest('app/frontend/styles/css'));
 });
 
