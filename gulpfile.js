@@ -37,6 +37,6 @@ gulp.task('dev-scss', function() {
 });
 
 gulp.task('dev-watch', function() {
-  gulp.watch('app/frontend/styles/*.scss', ['sass']);
+  gulp.watch('app/frontend/styles/*.scss', ['dev-scss']);
 });
 
