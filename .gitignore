@@ -9,6 +9,7 @@ lib-cov
 *.DS_Store
 node_modules/*
 .env
+.sass-cache
 
 pids
 logs
