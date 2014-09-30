@@ -3,6 +3,7 @@ var gulp = require('gulp'),
     child = require('child_process');
 
 // Top Level Commands ----------------------------------------------------------
+
 gulp.task('default', ['info']);
 gulp.task('install', ['npm_install', 'bower_clean', 'bower_install']);
 gulp.task('static', ['install', 'scss_to_css', 'static_server', 'scss_watch']);
