@@ -4,10 +4,10 @@ var gulp = require('gulp'),
 
 // Top Level Commands ----------------------------------------------------------
 gulp.task('default', ['info']);
-gulp.task('install', ['npm_install', 'post_install']);
-gulp.task('static', ['install', 'static_server', 'scss_to_css', 'watch_scss']);
-gulp.task('dev', ['install', 'dev_server', 'scss_to_css', 'watch_scss']);
-gulp.task('prod', ['install', 'prod_server']);
+gulp.task('install', ['npm_install', 'bower_clean', 'bower_install']);
+gulp.task('static', ['install', 'scss_to_css', 'static_server', 'scss_watch']);
+gulp.task('dev', ['install', 'scss_to_css', 'dev_server', 'scss_watch']);
+gulp.task('prod', ['install', 'scss_to_css', 'minify_js', 'prod_server']);
 
 // Helper Tasks ----------------------------------------------------------------
 
@@ -15,42 +15,54 @@ gulp.task('info', function() {
   console.log('\nUsage:\t gulp [ install | static | dev | prod ]\n');
 });
 
-gulp.task('npm_install', function() {
-  child.spawn('npm', ['install'], { stdio: 'inherit' });
+gulp.task('npm_install', function(cb) {
+  child.spawn('npm', ['install'], { stdio: 'inherit' })
+       .on('close', cb);
 });
 
-gulp.task('post_install', function() {
+gulp.task('bower_clean', ['npm_install'], function(cb) {
   child.spawn('./node_modules/bower/bin/bower', ['cache', 'clean'],
-              { stdio: 'inherit' });
+              { stdio: 'inherit' })
+       .on('close', cb);
+});
+
+gulp.task('bower_install', ['bower_clean'], function(cb) {
   child.spawn('./node_modules/bower/bin/bower', ['install'],
-              { stdio: 'inherit' });
-  child.spawn('./node_modules/requirejs/bin/r.js', ['-o', 'config/rjs-build.js'],
-              { stdio: 'inherit' });
+              { stdio: 'inherit' })
+       .on('close', cb);
 });
 
-gulp.task('static_server', function() {
-  child.spawn('foreman', ['start', 'static'], { stdio: 'inherit' });
-});
-
-gulp.task('dev_server', function() {
-  child.spawn('foreman', ['start', 'dev'], { stdio: 'inherit' });
-});
-
-gulp.task('prod_server', function() {
-  child.spawn('foreman', ['start', 'web'], { stdio: 'inherit' });
-});
-
-gulp.task('scss_to_css', function() {
+gulp.task('scss_to_css', ['bower_install'], function() {
   return gulp.src('app/frontend/styles/*.scss')
              .pipe(sass({
-                sourcemap: true,
-                sourcemapPath: '..'
-              }))
+                  sourcemap: true,
+                  sourcemapPath: '..'
+             }))
              .on('error', function (err) { console.log(err.message); })
              .pipe(gulp.dest('app/frontend/styles/css'));
 });
 
-gulp.task('watch_scss', function() {
+gulp.task('minify_js', ['scss_to_css'], function(cb) {
+  child.spawn('./node_modules/requirejs/bin/r.js', ['-o', 'config/rjs-build.js'],
+              { stdio: 'inherit' })
+       .on('close', cb);
+});
+
+gulp.task('static_server', ['scss_to_css'], function() {
+  child.spawn('foreman', ['start', 'static'], { stdio: 'inherit' });
+});
+
+gulp.task('dev_server', ['scss_to_css'], function() {
+  child.spawn('foreman', ['start', 'dev'], { stdio: 'inherit' });
+});
+
+gulp.task('prod_server', ['minify_js'], function() {
+  child.spawn('foreman', ['start', 'web'], { stdio: 'inherit' });
+});
+
+gulp.task('scss_watch', ['scss_to_css'], function() {
   gulp.watch('app/frontend/styles/*.scss', ['scss_to_css']);
 });
+
+
 
