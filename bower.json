@@ -7,7 +7,7 @@
     "crud": "~1.0.0",
     "requirejs": "~2.1.14",
     "almond": "~0.2.9",
-    "ractive": "~0.5.5",
+    "ractive": "~0.6.0",
     "rv": "git://github.com/ractivejs/rv.git#v0.1.6",
     "perfbar": "~0.0.2",
     "debug": "visionmedia/debug#~2.0.0"
