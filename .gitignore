@@ -9,6 +9,7 @@ lib-cov
 *.DS_Store
 node_modules/*
 .env
+.sass-cache
 
 pids
 logs
@@ -16,5 +17,6 @@ results
 newrelic_agent.log
 
 npm-debug.log
+app/frontend/styles/css
 app/frontend/bower/*
 app/frontend/main-built.js
