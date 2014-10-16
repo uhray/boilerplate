@@ -67,5 +67,3 @@ gulp.task('scss_watch', ['scss_to_css'], function() {
   gulp.watch('app/frontend/styles/*.scss', ['scss_to_css']);
 });
 
-
-
