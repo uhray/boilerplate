@@ -1,9 +1,9 @@
-var crud = require('./crud'),
-    models = require('./models'),
-    nconf = require('nconf'),
+var nconf = require('nconf'),
     turnkey = require('turnkey'),
+    logger = require('winston'),
     mongoose = require('mongoose'),
-    logger = require('winston');
+    crud = require('node-crud'),
+    resources = require('require-dir')('./resources');
 
 module.exports = exports = function(app) {
   var url = nconf.get('MONGOHQ_URL');
@@ -12,7 +12,7 @@ module.exports = exports = function(app) {
   turnkey.launch({
     logger: logger,
     router: app,
-    model: models.users,
+    model: resources.users.Model
   })
 
   // launch crud api
@@ -29,4 +29,5 @@ module.exports = exports = function(app) {
     console.log('connected to db.');
   });
 }
+
 
