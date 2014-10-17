@@ -18,12 +18,12 @@
     "morgan": "^1.0.1",
     "mustache-express": "^1.2.0",
     "nconf": "^0.6.9",
-    "node-crud": "2.0.1",
     "requirejs": "^2.1.14",
     "serve-favicon": "2.0.1",
     "serve-static": "^1.1.0",
     "turnkey": "0.0.0",
     "winston": "^0.7.3",
-    "require-dir": "^0.1.0"
+    "require-dir": "^0.1.0",
+    "node-crud": "^2.0.2"
   }
 }
