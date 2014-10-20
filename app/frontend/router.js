@@ -11,7 +11,6 @@ function(page, p$home, debug) {
   page('/*', p$home);
   page();
 
-
   function clear(ctx, next) {
     debug('clearing for %s', ctx.path);
     var b = document && document.getElementById &&

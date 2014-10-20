@@ -7,7 +7,6 @@ var express = require('express'),
     winston = require('winston'),
     app = express();
 
-
 // ============================== CONFIGURE APP ============================= //
 
 // load configurations
@@ -46,10 +45,10 @@ app.use(require('body-parser').urlencoded({ extended: true }));
 app.use(require('body-parser').json());
 
 // configure methods to log route
-configure_method(app, 'get');
-configure_method(app, 'put');
-configure_method(app, 'post');
-configure_method(app, 'delete');
+configureMethod(app, 'get');
+configureMethod(app, 'put');
+configureMethod(app, 'post');
+configureMethod(app, 'delete');
 
 // start app
 app.listen(nconf.get('PORT'), function() {
@@ -58,27 +57,24 @@ app.listen(nconf.get('PORT'), function() {
   // Configure api
   api(app);
 
-
   // Configure routes for shells
   app.get('/*', function(req, res, next) {
     res.render('main', {
-      production : __production__,
-      locals : JSON.stringify({
+      production: __production__,
+      locals: JSON.stringify({
         user: req.user || {},
         production: __production__
       })
     });
   });
 
-
   // Error handlers
   if (!__production__) app.use(require('errorhandler')());
 });
 
-
 // ================================= TOOLS ================================== //
 
-function configure_method(app, method) {
+function configureMethod(app, method) {
   var m = app[method];
 
   app[method] = function(path) {
@@ -87,4 +83,3 @@ function configure_method(app, method) {
     return m.apply(this, arguments);
   }
 }
-

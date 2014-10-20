@@ -7,7 +7,6 @@ var express = require('express'),
     nconf = require('nconf'),
     app = express();
 
-
 // ============================== CONFIGURE APP ============================= //
 
 // load configurations
@@ -43,11 +42,11 @@ app.listen(nconf.get('PORT'), function() {
     var files = fs.readdirSync(dir)
                   .filter(function(d) { return d[0] != '_'; })
                   .map(function(d) { return d.replace(/\.mustache$/, '') }),
-        _ = [ '<body><h1>static pages:</h1><ul>',
+        _ = ['<body><h1>static pages:</h1><ul>',
              files.map(function(d) {
                return util.format('<li><a href="/%s">%s</a></li>', d, d)
              }).join('\n'),
-             '</body></ul>' ];
+             '</body></ul>'];
     res.send(_.join('\n'));
   });
 
@@ -59,10 +58,9 @@ app.listen(nconf.get('PORT'), function() {
   app.use(require('errorhandler')());
 });
 
-
 // ================================= TOOLS ================================== //
 
-function configure_method(app, method) {
+function configureMethod(app, method) {
   var m = app[method];
 
   app[method] = function(path) {

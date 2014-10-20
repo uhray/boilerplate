@@ -26,5 +26,9 @@
     "require-dir": "^0.1.0",
     "node-crud": "^2.0.2",
     "crud-mongoose": "0.0.0"
+  },
+  "devDependencies": {
+    "gulp-jscs": "^1.2.0",
+    "jscs": "^1.7.3"
   }
 }

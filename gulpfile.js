@@ -14,7 +14,7 @@ gulp.task('prod', ['install', 'scss_to_css', 'minify_js', 'prod_server']);
 // Helper Tasks ----------------------------------------------------------------
 
 gulp.task('info', function() {
-  console.log('\nUsage:\t gulp [ install | static | dev | prod ]\n');
+  console.log('\nUsage:\t gulp [ install | static | dev | prod | lint ]\n');
 });
 
 gulp.task('npm_install', function(cb) {
@@ -40,13 +40,14 @@ gulp.task('scss_to_css', ['bower_install'], function() {
                   sourcemap: true,
                   sourcemapPath: '..'
              }))
-             .on('error', function (err) { console.log(err.message); })
+             .on('error', function(err) { console.log(err.message); })
              .pipe(autoprefixer())
              .pipe(gulp.dest('app/frontend/styles/css'));
 });
 
 gulp.task('minify_js', ['scss_to_css'], function(cb) {
-  child.spawn('./node_modules/requirejs/bin/r.js', ['-o', 'config/rjs-build.js'],
+  child.spawn('./node_modules/requirejs/bin/r.js',
+              ['-o', 'config/rjs-build.js'],
               { stdio: 'inherit' })
        .on('close', cb);
 });
@@ -67,3 +68,7 @@ gulp.task('scss_watch', ['scss_to_css'], function() {
   gulp.watch('app/frontend/styles/*.scss', ['scss_to_css']);
 });
 
+gulp.task('lint', function() {
+  child.spawn('./node_modules/.bin/jscs', ['./'],
+              { stdio: 'inherit' })
+});
