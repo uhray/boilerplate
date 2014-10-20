@@ -16,6 +16,7 @@ module.exports = exports = function(app) {
   })
 
   // launch crud api
+  crud.configure({ cors: nconf.get('cors') });
   crud.launch(app);
 
   // connect to db
