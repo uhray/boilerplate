@@ -12,8 +12,12 @@ module.exports = exports = function(app) {
   turnkey.launch({
     logger: logger,
     router: app,
-    model: resources.users.Model
-  })
+    model: resources.users.Model,
+    forgot_mailer: function(user, code, cb) {
+      logger.info('Forgot code for %s: %s', user.username, code);
+      cb();
+    }
+  });
 
   // launch crud api
   crud.configure({ cors: nconf.get('cors') });

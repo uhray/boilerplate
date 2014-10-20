@@ -8,7 +8,7 @@ var crud = require('node-crud'),
     cm = require('crud-mongoose'),
     mongoose = require('mongoose'),
     debug = require('debug')('api:users'),
-    policies = require('../policies'),
+    turnkey = require('turnkey'),
     Schema, Model;
 
 // Create a Schema & Model -----------------------------------------------------
@@ -16,8 +16,9 @@ var crud = require('node-crud'),
 Schema = exports.Schema = new mongoose.Schema({
   firstName: { type: String, required: true },
   lastName:  { type: String, required: true },
+  username: { type: String, index: true, unique: true },
   info: {
-    gender: String,
+    gender: { type: String, enum: [ 'M', 'F' ] },
     age: Number
   },
   dates: {
@@ -32,15 +33,15 @@ Model = exports.Model = mongoose.model('users', Schema);
 // All Users -------------------------------------------------------------------
 
 crud.entity('/users').Read()
-  // .pipe(policies.loggedIn())  authentication commented out for boilerplate
+  // .use(turnkey.loggedIn()) authentication commented out for boilerplate
   .pipe(cm.findAll(Model));
 
 crud.entity('/users').Create()
-  // .pipe(policies.loggedIn())  authentication commented out for boilerplate
+  .use(turnkey.createPassword())
   .pipe(cm.createNew(Model));
 
 crud.entity('/users').Delete()
-  // .pipe(policies.loggedIn())  authentication commented out for boilerplate
+  // .use(turnkey.loggedIn()) authentication commented out for boilerplate
   .pipe(cm.removeAll(Model));
 
 crud.entity('/users').on('error', function(method, e) {
@@ -50,15 +51,16 @@ crud.entity('/users').on('error', function(method, e) {
 // One User --------------------------------------------------------------------
 
 crud.entity('/users/:_id').Read()
-  // .pipe(policies.loggedIn())  authentication commented out for boilerplate
+  // .use(turnkey.loggedIn()) authentication commented out for boilerplate
   .pipe(cm.findOne(Model));
 
 crud.entity('/users/:_id').Update()
-  // .pipe(policies.loggedIn())  authentication commented out for boilerplate
+  // .use(turnkey.loggedIn()) authentication commented out for boilerplate
+  .use(turnkey.updatePassword())
   .pipe(cm.updateOne(Model));
 
 crud.entity('/users/:_id').Delete()
-  // .pipe(policies.loggedIn())  authentication commented out for boilerplate
+  // .use(turnkey.loggedIn()) authentication commented out for boilerplate
   .pipe(cm.removeOne(Model));
 
 crud.entity('/users/:_id').on('error', function(method, e) {
