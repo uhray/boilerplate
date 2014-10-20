@@ -29,6 +29,7 @@
   },
   "devDependencies": {
     "gulp-jscs": "^1.2.0",
-    "jscs": "^1.7.3"
+    "jscs": "^1.7.3",
+    "sass": "^0.5.0"
   }
 }

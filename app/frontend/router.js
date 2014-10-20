@@ -1,21 +1,26 @@
 define(
 [
-'page',
+'director',
 'pages/home/main',
 'debug'
 ],
-function(page, p$home, debug) {
-  var debug = debug('router');
+function(Director, p$home, debug) {
+  var debug = debug('router'),
+      routes = {
+        '/': p$home,
+      },
+      router = new Director(routes);
 
-  page(clear);
-  page('/*', p$home);
-  page();
+  router.configure({
+    before: clear
+  });
 
-  function clear(ctx, next) {
-    debug('clearing for %s', ctx.path);
+  router.init('/');
+
+  function clear() {
+    debug('clearing for new page');
     var b = document && document.getElementById &&
             document.getElementById('body');
     if (b && 'innerHTML' in b) b.innerHTML = '';
-    next();
   }
 });

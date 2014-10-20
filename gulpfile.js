@@ -37,8 +37,8 @@ gulp.task('bower_install', ['bower_clean'], function(cb) {
 gulp.task('scss_to_css', ['bower_install'], function() {
   return gulp.src('app/frontend/styles/*.scss')
              .pipe(sass({
-                  sourcemap: true,
-                  sourcemapPath: '..'
+               sourcemap: true,
+               sourcemapPath: '..'
              }))
              .on('error', function(err) { console.log(err.message); })
              .pipe(autoprefixer())
