@@ -13,7 +13,7 @@ module.exports = exports = function(app) {
     logger: logger,
     router: app,
     model: resources.users.Model,
-    forgot_mailer: function(user, code, cb) {
+    forgotMailer: function(user, code, cb) {
       logger.info('Forgot code for %s: %s', user.username, code);
       cb();
     }
