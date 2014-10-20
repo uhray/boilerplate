@@ -1,22 +1,13 @@
 
-var express = require('express'),
+var nconf = loadConfigs(require('nconf')),
+    express = require('express'),
     api = require('./app/backend/api'),
     __production__ = !!~process.argv.indexOf('PRODUCTION'),
     mustache =  require('mustache-express')(),
-    nconf = require('nconf'),
     winston = require('winston'),
     app = express();
 
 // ============================== CONFIGURE APP ============================= //
-
-// load configurations
-nconf
-  .argv()  // overrides everything
-  .env()   // overrides config file
-  .file({ file: __dirname + '/config/settings.json' })
-nconf.set('lib', __dirname + '/app')
-nconf.set('PORT', '5000')
-nconf.set('HOST', '127.0.0.1')
 
 // configure logging
 winston.remove(winston.transports.Console);
@@ -82,4 +73,15 @@ function configureMethod(app, method) {
     console.log('%s route:', method, path);
     return m.apply(this, arguments);
   }
+}
+
+function loadConfigs(nconf) {
+  nconf
+    .argv()  // overrides everything
+    .env()   // overrides config file
+    .file({ file: __dirname + '/config/settings.json' })
+  nconf.set('lib', __dirname + '/app')
+  nconf.set('PORT', '5000')
+  nconf.set('HOST', '127.0.0.1')
+  return nconf;
 }
