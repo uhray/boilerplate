@@ -24,7 +24,7 @@
     "winston": "^0.7.3",
     "require-dir": "^0.1.0",
     "node-crud": "^2.0.2",
-    "crud-mongoose": "0.0.0",
+    "crud-mongoose": "^0.0.0",
     "turnkey": "^0.0.1"
   },
   "devDependencies": {
