@@ -10,7 +10,7 @@ require.config({
   shim: {
     page:     { exports: 'page' },
     debug:    { exports: 'debug' },
-    director   : { exports : 'Router' }
+    director: { exports: 'Router' }
   },
   packages: [
     { name: 'components', location: 'components' },
