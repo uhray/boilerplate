@@ -5,10 +5,10 @@
 // Load Modules ----------------------------------------------------------------
 
 var crud = require('node-crud'),
+    cm = require('crud-mongoose'),
     mongoose = require('mongoose'),
     debug = require('debug')('api:users'),
     policies = require('../policies'),
-    tools = require('../tools'),
     Schema, Model;
 
 // Create a Schema & Model -----------------------------------------------------
@@ -16,13 +16,14 @@ var crud = require('node-crud'),
 Schema = exports.Schema = new mongoose.Schema({
   firstName: { type: String, required: true },
   lastName:  { type: String, required: true },
-  booleans: {
-    deleted: { type: Boolean, default: false }
+  info: {
+    gender: String,
+    age: Number
   },
   dates: {
-    created: { type: Date, default: Date.now, get: tools.getEpoch },
-    updated: { type: Date, default: Date.now, get: tools.getEpoch },
-    deleted: { type: Date, get: tools.getEpoch }
+    created: { type: Date, default: Date.now },
+    updated: { type: Date, default: Date.now },
+    deleted: { type: Date }
   }
 });
 
@@ -31,10 +32,16 @@ Model = exports.Model = mongoose.model('users', Schema);
 // All Users -------------------------------------------------------------------
 
 crud.entity('/users').Read()
-    // .pipe(policies.loggedIn())  authentication commented out for boilerplate
-    .pipe(function(data, query, cb) {
-      Model.find(query).lean().exec(cb);
-    });
+  // .pipe(policies.loggedIn())  authentication commented out for boilerplate
+  .pipe(cm.findAll(Model));
+
+crud.entity('/users').Create()
+  // .pipe(policies.loggedIn())  authentication commented out for boilerplate
+  .pipe(cm.createNew(Model));
+
+crud.entity('/users').Delete()
+  // .pipe(policies.loggedIn())  authentication commented out for boilerplate
+  .pipe(cm.removeAll(Model));
 
 crud.entity('/users').on('error', function(method, e) {
   debug('%s error: %j', method, e);
@@ -43,10 +50,16 @@ crud.entity('/users').on('error', function(method, e) {
 // One User --------------------------------------------------------------------
 
 crud.entity('/users/:_id').Read()
-    // .pipe(policies.loggedIn())  authentication commented out for boilerplate
-    .pipe(function(data, query, cb) {
-      Model.findOne(query).lean().exec(cb);
-    });
+  // .pipe(policies.loggedIn())  authentication commented out for boilerplate
+  .pipe(cm.findOne(Model));
+
+crud.entity('/users/:_id').Update()
+  // .pipe(policies.loggedIn())  authentication commented out for boilerplate
+  .pipe(cm.updateOne(Model));
+
+crud.entity('/users/:_id').Delete()
+  // .pipe(policies.loggedIn())  authentication commented out for boilerplate
+  .pipe(cm.removeOne(Model));
 
 crud.entity('/users/:_id').on('error', function(method, e) {
   debug('one | %s error: %j', method, e);
