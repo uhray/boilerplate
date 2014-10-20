@@ -18,7 +18,7 @@ Schema = exports.Schema = new mongoose.Schema({
   lastName:  { type: String, required: true },
   username: { type: String, index: true, unique: true },
   info: {
-    gender: { type: String, enum: [ 'M', 'F' ] },
+    gender: { type: String, enum: ['M', 'F'] },
     age: Number
   },
   dates: {
@@ -34,7 +34,7 @@ Model = exports.Model = mongoose.model('users', Schema);
 
 crud.entity('/users').Read()
   // .use(turnkey.loggedIn()) authentication commented out for boilerplate
-  .pipe(cm.findAll(Model));
+  .pipe(cm.findAll(Model, ['-turnkey']));
 
 crud.entity('/users').Create()
   .use(turnkey.createPassword())
@@ -52,7 +52,7 @@ crud.entity('/users').on('error', function(method, e) {
 
 crud.entity('/users/:_id').Read()
   // .use(turnkey.loggedIn()) authentication commented out for boilerplate
-  .pipe(cm.findOne(Model));
+  .pipe(cm.findOne(Model, ['-turnkey']));
 
 crud.entity('/users/:_id').Update()
   // .use(turnkey.loggedIn()) authentication commented out for boilerplate
