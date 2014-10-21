@@ -12,10 +12,13 @@ function(Ractive, modal, template) {
           template: template,
           data: {
             time: new Date(),
-            format: function(d) {
-              return d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
-            },
             showModal: false
+          },
+          computed: {
+            timestamp: function() {
+              var t = this.get('time');
+              return t.getHours() + ':' + t.getMinutes() + ':' + t.getSeconds();
+            }
           },
           components: {
             modal: modal
