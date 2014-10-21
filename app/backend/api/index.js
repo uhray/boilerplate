@@ -13,6 +13,7 @@ module.exports = exports = function(app) {
     logger: logger,
     router: app,
     model: resources.users.Model,
+    cors: nconf.get('cors'),
     forgotMailer: function(user, code, cb) {
       logger.info('Forgot code for %s: %s', user.username, code);
       cb();
