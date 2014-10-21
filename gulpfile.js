@@ -10,6 +10,7 @@ gulp.task('install', ['npm_install', 'bower_clean', 'bower_install']);
 gulp.task('static', ['install', 'scss_to_css', 'static_server', 'scss_watch']);
 gulp.task('dev', ['install', 'scss_to_css', 'dev_server', 'scss_watch']);
 gulp.task('prod', ['install', 'scss_to_css', 'minify_js', 'prod_server']);
+gulp.task('lint', ['dolint']);
 
 // Helper Tasks ----------------------------------------------------------------
 
@@ -68,7 +69,8 @@ gulp.task('scss_watch', ['scss_to_css'], function() {
   gulp.watch('app/frontend/styles/*.scss', ['scss_to_css']);
 });
 
-gulp.task('lint', function() {
+gulp.task('dolint', function(cb) {
   child.spawn('./node_modules/.bin/jscs', ['./'],
               { stdio: 'inherit' })
+       .on('close', cb);
 });
