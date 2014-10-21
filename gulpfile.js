@@ -72,5 +72,4 @@ gulp.task('scss_watch', ['scss_to_css'], function() {
 gulp.task('dolint', function(cb) {
   child.spawn('./node_modules/.bin/jscs', ['./'],
               { stdio: 'inherit' })
-       .on('close', cb);
 });
