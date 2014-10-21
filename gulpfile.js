@@ -70,6 +70,5 @@ gulp.task('scss_watch', ['scss_to_css'], function() {
 });
 
 gulp.task('dolint', function() {
-  child.spawn('./node_modules/.bin/jscs', ['./'],
-              { stdio: 'inherit' })
+  child.spawn('./node_modules/.bin/jscs', ['./'], { stdio: 'inherit' });
 });
