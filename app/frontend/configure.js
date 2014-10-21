@@ -1,7 +1,7 @@
 require.config({
   baseUrl: '/public',
   paths: {
-    crud:        'bower/crud/crud',
+    crud:        'bower/crud/dist/crud',
     debug:       'bower/debug/dist/debug',
     director:    'bower/director/build/director.min',
     ractive:     'bower/ractive/ractive',
