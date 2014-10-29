@@ -25,6 +25,11 @@ The Uhray boilerplate is a starting point for our webapp projects. It was origin
 
 Take a look at the [documentation table of contents](doc/toc.md). This documentation is bundled with the project, which makes it readily available for offline reading and provides a useful starting point for any documentation you want to write about your project.
 
+## Browser Compatibility
+
+This boilerplate should be ready to go for all evergreen browsers.
+
+
 
 
 
