@@ -26,7 +26,7 @@ app.set('views', __dirname + '/app/backend/shells');
 if (!__production__) mustache.cache._max = 0;  // turn off mustache caching
 
 // toplevel middleware
-app.use(require('morgan')('dev'));
+if (!__production__) app.use(require('morgan')('dev'));
 app.use(require('serve-favicon')(__dirname +
                                 '/app/frontend/images/favicon.ico'));
 app.use(require('compression')());
