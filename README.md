@@ -1,7 +1,7 @@
 Uhray Boilerplate
 ===============
 
-The Uhray boilerplate is a starting point for our webapp projects. It was originally inspired by [html5-boilerplate](https://github.com/h5bp/html5-boilerplate), but is focused on dynamic web applications that need more than just an HTML5 site.
+The Uhray boilerplate is a starting point web application development projects. It was originally inspired by [html5-boilerplate](https://github.com/h5bp/html5-boilerplate), but we focused on dynamic web applications that need more than the basics of an HTML5 website. We set out to build a collection of tech tools, both internally developed and externally leveraged, that would allow developers to easily and efficiently create modern web applications. We wanted to organize the codebase according to how we typically think about web applications (page-centric, complete separation of frontend and backend, etc). Lastly, we wanted to create a framework with complete transparency and no magic. This gives the developer complete flexibility to do virtually anything he desires, however he chooses, without being pigeonholed or restricted to the confines of typical development frameworks. The end result is the Uhray Boilerplate.
 
 ## Features
 
