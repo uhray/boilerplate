@@ -1,4 +1,5 @@
 # Uhray Boilerplate Docs
+
 **Intro**
 * [Quick Start](#quick-start)
 * [Codebase Organization](#codebase-organization)
@@ -6,15 +7,25 @@
    	* [Frontend](#2-frontend)
    	* [Static](#3-static)
 
+**Backend Docs**
+* [API](#api)
+* [Shells](#shells)
+* [Server Configuration](#server-configuration)
 
-**Docs**
+**Frontend Docs**
 * [Static Development](#static-development)
-* [Design an API](api.md)
-* [Configuring Shells](shells.md)
-* [Creating Pages on the App](pages.md)
-* [Server Configuration](configuration.md)
-* [Directory Structure Overview](directories.md)
-* [Deploy, Build, and Lint](deploy.md)
+* [Routing](#routing)
+* [Pages](#pages)
+* [Using Styles](#using-styles)
+* [Using Images](#using-images)
+* [Using Components](#using-components)
+* [Using Modules](#using-modules)
+
+**Other Docs**
+* [Package Management](#package-management)
+* [Linting](#linting)
+* [Build Options](#build-options)
+* [Heroku Deployment](#heroku-deployment)
 
 
 # Quick Start
