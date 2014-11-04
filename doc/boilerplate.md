@@ -16,10 +16,10 @@
 * [Static Development](#static-development)
 * [Routing](#routing)
 * [Pages](#pages)
-* [Using Styles](#using-styles)
-* [Using Images](#using-images)
-* [Using Components](#using-components)
-* [Using Modules](#using-modules)
+* [Styles](#styles)
+* [Images](#images)
+* [Components](#components)
+* [Modules](#modules)
 
 **Other Docs**
 * [Package Management](#package-management)
