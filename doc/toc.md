@@ -50,7 +50,16 @@ In the server.js file in the Boilerplate directory, you can see where routes are
 
 ### 2. Frontend
 
-**Pages**
+**Components**<br>
+The components directory houses reusable frontend widgets that are packages just like pages, with an HTML/Mustache template and an Ractive Javascript file.
+
+**Images**<br>
+As the name suggests, the images directory houses images to be displayed within the application.
+
+**Modules**<br>
+The modules directory is simply a place to store reuseable javascript code within the application.
+
+**Pages**<br>
 Once the server sets up the REST API and sends over a shell to the frontend, the *router.js* file handles which page should be loaded based on the URL. Each page inside of the pages directory consists of two files:
 
  1. HTML template with Mustache for embedding content
@@ -58,17 +67,8 @@ Once the server sets up the REST API and sends over a shell to the frontend, the
 	 - defines data, filter functions, and events for the page
 	 - renders page with embedded content within the shell
 
-**Images**
-As the name suggests, the images directory houses images to be displayed within the application. 
-
-**Styles**
+**Styles**<br>
 The styles directory houses CSS/SCSS files for styling frontend page elements. 
-
-**Modules**
-The modules directory is simply a place to store reuseable javascript code within the application. 
-
-**Components** 
-The components directory houses reusable frontend widgets that are packages just like pages, with an HTML/Mustache template and an Ractive Javascript file. 
 
 ### 3. Static
 The static directory is a place for quickly designing static front-end HTML web pages which are styled with the CSS files from the frontend style's directory. This is useful for establishing the look and feel of a web application without available data or a functional API. These static pages will often become the HTML/Mustache templates for the frontend pages of the web application.
