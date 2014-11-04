@@ -17,7 +17,7 @@ We set out to build a collection of tech tools, both internally developed and ex
 
 ## Codebase Organization
 
-The root project directory contains many files and directories primarily related to the application server, configurations, build commands, etc. We'll get into many of these specifics later, but the primary file of important is *server.js* which is the application server. The real meat of the Uhray boilerplate is within the app directory where there are three sub-directories: static, frontend, and backend. 
+The root project directory contains many files and directories primarily related to the application server, configurations, build commands, etc. We'll get into many of these specifics later, but the primary file of importance is *server.js* which is the application server. The real meat of the Uhray boilerplate is within the app directory where there are three sub-directories: static, frontend, and backend. 
 
 ```
 app/
