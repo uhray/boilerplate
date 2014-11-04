@@ -21,6 +21,21 @@ The Uhray boilerplate is a starting point for web application development projec
 * Ready for [mongodb](http://www.mongodb.org/) connectivity via [mongoosejs](http://mongoosejs.com/).
 * Linting with [JSCS](https://www.npmjs.org/package/jscs).
 
+## Quick Start
+
+Dependencies:
+* [node](http://nodejs.org/)
+* [npm](https://www.npmjs.org/) (now comes with node)
+* [bower](http://bower.io/)
+
+```
+git clone git@github.com:uhray/boilerplate.git
+cd boilerplate
+npm install && bower install
+node server.js
+// Application is now running at http://localhost:5000
+```
+
 ## Documentation
 
 Take a look at the [Uhray Boilerplate Docs](doc/boilerplate.md). This documentation is bundled with the project, which makes it readily available for offline reading and provides a useful starting point for any documentation you want to write about your project.
