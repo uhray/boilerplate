@@ -101,6 +101,8 @@ The static directory is a place for quickly designing static front-end HTML web 
 # Quick Start
 
 Dependencies:  node, npm, bower
+
+Starting the application server...
 ```bash
 git clone git@github.com:uhray/boilerplate.git
 cd boilerplate
@@ -108,3 +110,4 @@ npm install && bower install
 node server.js
 // Application should now be running at http://localhost:5000
 ```
+
