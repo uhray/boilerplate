@@ -1,7 +1,3 @@
-Table of Contents
-======================
-
-
 ## What's the point?
 We set out to build a collection of tech tools, both internally developed and externally leverages, that would allow developers to easily and efficiently create modern web applications. We wanted to organize the codebase according to how we traditionally think about web applications (page-centric, complete separation of frontend and backend, etc). Lastly, we wanted to create a framework with complete transparency and no magic. This gives the developer complete flexibility to do virtually anything he desires, however he chooses, without being pigeonholed or restricted to the confines of typical development frameworks. The end result is the Uhray Boilerplate.
 
