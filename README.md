@@ -1,7 +1,7 @@
 Uhray Boilerplate
 ===============
 
-The Uhray boilerplate is a starting point web application development projects. It was originally inspired by [html5-boilerplate](https://github.com/h5bp/html5-boilerplate), but we focused on dynamic web applications that need more than the basics of an HTML5 website. We set out to build a collection of tech tools, both internally developed and externally leveraged, that would allow developers to easily and efficiently create modern web applications. We wanted to organize the codebase according to how we typically think about web applications (page-centric, complete separation of frontend and backend, etc). Lastly, we wanted to create a framework with complete transparency and no magic. This gives the developer complete flexibility to do virtually anything he desires, however he chooses, without being pigeonholed or restricted to the confines of typical development frameworks. The end result is the Uhray Boilerplate.
+The Uhray boilerplate is a starting point for web application development projects. It was originally inspired by [html5-boilerplate](https://github.com/h5bp/html5-boilerplate), but we shifted the focus to creating dynamic web applications that needed more than the basics of an HTML5 site. We set out to build a collection of tech tools, both internally developed and externally leveraged, that would allow developers to easily and efficiently create modern web applications. We wanted to organize the codebase according to how we typically think about web applications (page-centric, complete separation of frontend and backend, etc). Lastly, we wanted to create a framework with complete transparency and no magic. This gives the developer complete flexibility to do virtually anything he desires, however he chooses, without being pigeonholed or restricted to the confines of typical development frameworks. The end result is the Uhray Boilerplate.
 
 ## Features
 
@@ -23,7 +23,7 @@ The Uhray boilerplate is a starting point web application development projects. 
 
 ## Documentation
 
-Take a look at the [documentation table of contents](doc/toc.md). This documentation is bundled with the project, which makes it readily available for offline reading and provides a useful starting point for any documentation you want to write about your project.
+Take a look at the [Uhray Boilerplate Docs](docs/boilerplate.md). This documentation is bundled with the project, which makes it readily available for offline reading and provides a useful starting point for any documentation you want to write about your project.
 
 ## Browser Compatibility
 
