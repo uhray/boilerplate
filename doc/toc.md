@@ -15,8 +15,16 @@
 * [Directory Structure Overview](directories.md)
 * [Deploy, Build, and Lint](deploy.md)
 
+
+
+
+
 # What's the point?
-We set out to build a collection of tech tools, both internally developed and externally leverages, that would allow developers to easily and efficiently create modern web applications. We wanted to organize the codebase according to how we traditionally think about web applications (page-centric, complete separation of frontend and backend, etc). Lastly, we wanted to create a framework with complete transparency and no magic. This gives the developer complete flexibility to do virtually anything he desires, however he chooses, without being pigeonholed or restricted to the confines of typical development frameworks. The end result is the Uhray Boilerplate.
+We set out to build a collection of tech tools, both internally developed and externally leveraged, that would allow developers to easily and efficiently create modern web applications. We wanted to organize the codebase according to how we traditionally think about web applications (page-centric, complete separation of frontend and backend, etc). Lastly, we wanted to create a framework with complete transparency and no magic. This gives the developer complete flexibility to do virtually anything he desires, however he chooses, without being pigeonholed or restricted to the confines of typical development frameworks. The end result is the Uhray Boilerplate.
+
+
+
+
 
 # Codebase Organization
 
@@ -33,6 +41,8 @@ static.js
 
 ### 1. Backend
 
+The backend directory houses two important components to a web application, the API and what we call *shells*.
+
 ```
 backend/
 	api/
@@ -41,8 +51,6 @@ backend/
 	shells/
 ```
 
-The backend directory houses two important components to a web application, the API and what we call *shells*.
-
 **API**<br>
 By default, Uhray's boilerplate is setup for use with a MongoDB database, using Mongoose for database connectivity and querying. It also comes setup for the creation of a REST API built on top of [crud](https://github.com/uhray/crud) and [crud-mongoose](https://github.com/uhray/crud-mongoose), modules developed by Uhray which allow a developer to easily setup configurable Create (C), Read (R), Update (U), and Delete(D) capabilities for database resources. Each resource file in the resources directory establishes the schema for that particular model and then defines the API routes for interacting with the resource.
 
@@ -50,6 +58,8 @@ By default, Uhray's boilerplate is setup for use with a MongoDB database, using 
 In the server.js file in the Boilerplate directory, you can see where routes are configured for particular shells. When the server receives a request for a particular route, it responds with a rendered shell, a skeleton of static HTML & CSS that is sent to the client-side and immediately displayed before the frontend takes care of loading the remainder of the elements and data into the main body of the page. The advantage here is that we can update data on the frontend as we move between pages without re-requesting the content. This makes for a faster and more seamless user experience with fewer page loads/refreshes. Of course you can have different shells load when different styling is desired between pages by configuring routes in the *server.js* file. 
 
 ### 2. Frontend
+
+The frontend directory all starts with the *router.js* file. After the server sends over a shell to the frontend, the *router.js* file handles which application page should be loaded based on the URL. Each page can utilize components, images, modules or styles in addition to it's own template and javascript rendering (Ractive.js).
 
 ```
 frontend/
@@ -84,6 +94,9 @@ The styles directory houses CSS/SCSS files for styling frontend page elements.
 
 ### 3. Static
 The static directory is a place for quickly designing static front-end HTML web pages which are styled with the CSS files from the frontend style's directory. This is useful for establishing the look and feel of a web application without available data or a functional API. These static pages will often become the HTML/Mustache templates for the frontend pages of the web application.
+
+
+
 
 # Quick Start
 
