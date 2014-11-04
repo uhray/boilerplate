@@ -43,17 +43,14 @@ static.js
 The backend directory houses two important components to a web application, the API and what we call *shells*.
 
 **API**
-
 By default, Uhray's boilerplate is setup for use with a MongoDB database, using Mongoose for database connectivity and querying. It also comes setup for the creation of a REST API built on top of [crud](https://github.com/uhray/crud) and [crud-mongoose](https://github.com/uhray/crud-mongoose), modules developed by Uhray which allow a developer to easily setup configurable Create (C), Read (R), Update (U), and Delete(D) capabilities for database resources. Each resource file in the resources directory establishes the schema for that particular model and then defines the API routes for interacting with the resource.
 
 **Shells**
-
 In the server.js file in the Boilerplate directory, you can see where routes are configured for particular shells. When the server receives a request for a particular route, it responds with a rendered shell, a skeleton of static HTML & CSS that is sent to the client-side and immediately displayed before the frontend takes care of loading the remainder of the elements and data into the main body of the page. The advantage here is that we can update data on the frontend as we move between pages without re-requesting the content. This makes for a faster and more seamless user experience with fewer page loads/refreshes. Of course you can have different shells load when different styling is desired between pages by configuring routes in the *server.js* file. 
 
 ### 2. Frontend
 
 **Pages**
-
 Once the server sets up the REST API and sends over a shell to the frontend, the *router.js* file handles which page should be loaded based on the URL. Each page inside of the pages directory consists of two files:
 
  1. HTML template with Mustache for embedding content
@@ -62,19 +59,15 @@ Once the server sets up the REST API and sends over a shell to the frontend, the
 	 - renders page with embedded content within the shell
 
 **Images**
-
 As the name suggests, the images directory houses images to be displayed within the application. 
 
 **Styles**
-
 The styles directory houses CSS/SCSS files for styling frontend page elements. 
 
 **Modules**
-
 The modules directory is simply a place to store reuseable javascript code within the application. 
 
 **Components** 
-
 The components directory houses reusable frontend widgets that are packages just like pages, with an HTML/Mustache template and an Ractive Javascript file. 
 
 ### 3. Static
