@@ -34,7 +34,7 @@ app/
 		styles
 		configure.js
 		router.js
-static/
+	static/
 server.js
 static.js
 ```
