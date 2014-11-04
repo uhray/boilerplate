@@ -1,7 +1,13 @@
+# Table of Contents
+* [What's the point?](www.google.com)
+* [Codebase Organization](www.google.com)
+* [Quick Start](www.google.com)
+
+
 ## What's the point?
 We set out to build a collection of tech tools, both internally developed and externally leverages, that would allow developers to easily and efficiently create modern web applications. We wanted to organize the codebase according to how we traditionally think about web applications (page-centric, complete separation of frontend and backend, etc). Lastly, we wanted to create a framework with complete transparency and no magic. This gives the developer complete flexibility to do virtually anything he desires, however he chooses, without being pigeonholed or restricted to the confines of typical development frameworks. The end result is the Uhray Boilerplate.
 
-## Organizational Design
+## Codebase Organization
 
 The root project directory contains many files and directories primarily related to the application server, configurations, build commands, etc. We'll get into many of these specifics later, but the primary file of important is *server.js* which is the application server. The real meat of the Uhray boilerplate is within the app directory where there are three sub-directories: static, frontend, and backend. 
 
