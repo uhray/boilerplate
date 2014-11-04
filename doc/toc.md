@@ -2,6 +2,9 @@
 **Intro**
 * [What's the point?](#whats-the-point)
 * [Codebase Organization](#codebase-organization)
+   * [Frontend](#1-frontend)
+   * [Backend](#2-backend)
+   * [Static](#3-static)
 * [Quick Start](#quick-start)
 
 **Docs**
