@@ -1,8 +1,15 @@
 # Table of Contents
+**Intro**
 * [What's the point?](www.google.com)
 * [Codebase Organization](www.google.com)
 * [Quick Start](www.google.com)
-
+**Docs**
+* [Design an API](api.md)
+* [Configuring Shells](shells.md)
+* [Creating Pages on the App](pages.md)
+* [Server Configuration](configuration.md)
+* [Directory Structure Overview](directories.md)
+* [Deploy, Build, and Lint](deploy.md)
 
 ## What's the point?
 We set out to build a collection of tech tools, both internally developed and externally leverages, that would allow developers to easily and efficiently create modern web applications. We wanted to organize the codebase according to how we traditionally think about web applications (page-centric, complete separation of frontend and backend, etc). Lastly, we wanted to create a framework with complete transparency and no magic. This gives the developer complete flexibility to do virtually anything he desires, however he chooses, without being pigeonholed or restricted to the confines of typical development frameworks. The end result is the Uhray Boilerplate.
@@ -66,14 +73,3 @@ npm install && bower install
 node server.js
 // Application should now be running at http://localhost:5000
 ```
-
-
-## Develop
-
-* [Design an API](api.md)
-* [Configuring Shells](shells.md)
-* [Creating Pages on the App](pages.md)
-* [Server Configuration](configuration.md)
-* [Directory Structure Overview](directories.md)
-* [Deploy, Build, and Lint](deploy.md)
-
