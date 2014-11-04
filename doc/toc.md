@@ -82,7 +82,7 @@ As the name suggests, the images directory houses images to be displayed within 
 The modules directory is simply a place to store reuseable javascript code within the application.
 
 **Pages**<br>
-Once the server sets up the REST API and sends over a shell to the frontend, the *router.js* file handles which page should be loaded based on the URL. Each page inside of the pages directory consists of two files:
+Each page inside of the pages directory is a directory consisting of two files:
 
  1. HTML template with Mustache for embedding content
  2. Ractive Javascript file
