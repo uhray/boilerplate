@@ -1,10 +1,11 @@
 # Uhray Boilerplate Docs
 **Intro**
+* [Quick Start](#quick-start)
 * [Codebase Organization](#codebase-organization)
 	* [Backend](#1-backend)
    	* [Frontend](#2-frontend)
    	* [Static](#3-static)
-* [Quick Start](#quick-start)
+
 
 **Docs**
 * [Static Development](#static-development)
@@ -16,8 +17,20 @@
 * [Deploy, Build, and Lint](deploy.md)
 
 
+# Quick Start
 
+Dependencies:
+* [node](http://nodejs.org/)
+* [npm](https://www.npmjs.org/) (now comes with node)
+* [bower](http://bower.io/)
 
+```bash
+git clone git@github.com:uhray/boilerplate.git
+cd boilerplate
+npm install && bower install
+node server.js
+// Application should now be running at http://localhost:5000
+```
 
 # Codebase Organization
 
@@ -92,18 +105,5 @@ The static directory is a place for quickly designing static front-end HTML web 
 
 
 
-# Quick Start
 
-Dependencies:
-* [node](http://nodejs.org/)
-* [npm](https://www.npmjs.org/) (now comes with node)
-* [bower](http://bower.io/)
-
-```bash
-git clone git@github.com:uhray/boilerplate.git
-cd boilerplate
-npm install && bower install
-node server.js
-// Application should now be running at http://localhost:5000
-```
 
