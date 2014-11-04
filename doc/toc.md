@@ -8,6 +8,7 @@
 * [Quick Start](#quick-start)
 
 **Docs**
+* [Static Development](#static-development)
 * [Design an API](api.md)
 * [Configuring Shells](shells.md)
 * [Creating Pages on the App](pages.md)
