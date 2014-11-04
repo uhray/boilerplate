@@ -86,25 +86,12 @@ frontend/
 	router.js
 ```
 
-**Components**<br>
-The components directory houses reusable frontend widgets that are packages just like pages, with an HTML/Mustache template and an Ractive Javascript file.
+The frontend is intentionally designed to be page-centric, meaning that code is organized and structured around each page that will be in the web application. Inside of the pages directory, each page is defined as a directory itself consisting of 2 files:
 
-**Images**<br>
-As the name suggests, the images directory houses images to be displayed within the application.
-
-**Modules**<br>
-The modules directory is simply a place to store reuseable javascript code within the application.
-
-**Pages**<br>
-Each page inside of the pages directory is a directory consisting of two files:
-
- 1. HTML template with Mustache for embedding content
- 2. Ractive Javascript file
+ 1. An HTML/Mustache template
+ 2. An Ractive.js File
 	 - defines data, filter functions, and events for the page
-	 - renders page with embedded content within the shell
-
-**Styles**<br>
-The styles directory houses CSS/SCSS files for styling frontend page elements. 
+	 - renders template with appropriate content before embedding within the shell
 
 ### 3. Static
 The static directory is a place for quickly designing static front-end HTML web pages which are styled with the CSS files from the frontend style's directory. This is useful for establishing the look and feel of a web application without available data or a functional API. These static pages will often become the HTML/Mustache templates for the frontend pages of the web application.
