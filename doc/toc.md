@@ -40,7 +40,7 @@ static.js
 ```
 
 ### 1. Backend
-The backend directory houses two important components to a web application, the api and what we call *shells*.
+The backend directory houses two important components to a web application, the API and what we call *shells*.
 
 *API*
 
