@@ -96,7 +96,7 @@ The static directory is a place for quickly designing static front-end HTML web 
 
 Dependencies:
 * [node](http://nodejs.org/)
-* npm (now comes with node)
+* [npm](https://www.npmjs.org/) (now comes with node)
 * [bower](http://bower.io/)
 
 ```bash
