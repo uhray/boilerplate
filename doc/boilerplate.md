@@ -25,7 +25,10 @@
 * [Heroku Deployment](#heroku-deployment)
 
 
-# Quick Start
+# INTRO
+
+
+## Quick Start
 
 Dependencies:
 * [node](http://nodejs.org/)
@@ -40,7 +43,7 @@ node server.js
 // Application should now be running at http://localhost:5000
 ```
 
-# Codebase Organization
+## Codebase Organization
 
 The root project directory contains many files and directories primarily related to the application server, configurations, build commands, etc. We'll get into many of these specifics later, but the primary file of importance is *server.js* which is the application server. The *static.js* file is similar, but only hosts static HTML/CSS pages, not an entire web application. The real meat of the Uhray boilerplate is within the app directory where there are three sub-directories: static, frontend, and backend. 
 
@@ -93,12 +96,54 @@ The frontend is intentionally designed to be page-centric, meaning that code is 
 	 - defines data, filter functions, and events for the page
 	 - renders template with appropriate content before embedding within the shell
 
-### 3. Static
+
+
+
+
+
+# BACKEND DOCS
+
+## API
+
+## Shells
+
+## Server Configuration
+
+
+
+
+
+
+# FRONTEND DOCS
+
+## Static Development
 The static directory is a place for quickly designing static front-end HTML web pages which are styled with the CSS files from the frontend style's directory. This is useful for establishing the look and feel of a web application without available data or a functional API. These static pages will often become the HTML/Mustache templates for the frontend pages of the web application.
 
+## Routing
+
+## Pages
+
+## Styles
+
+## Images
+
+## Components
+
+## Modules
 
 
 
 
+
+
+# OTHER DOCS
+
+## Package Management
+
+## Linting
+
+## Build Options
+
+## Heroku Deployment
 
 
