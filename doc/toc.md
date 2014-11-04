@@ -1,8 +1,8 @@
 # Table of Contents
 **Intro**
-* [What's the point?](www.google.com)
-* [Codebase Organization](www.google.com)
-* [Quick Start](www.google.com)
+* [What's the point?](#whats-the-point)
+* [Codebase Organization](#codebase-organization)
+* [Quick Start](#quick-start)
 
 **Docs**
 * [Design an API](api.md)
