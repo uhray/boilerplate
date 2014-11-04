@@ -15,10 +15,10 @@
 * [Directory Structure Overview](directories.md)
 * [Deploy, Build, and Lint](deploy.md)
 
-## What's the point?
+# What's the point?
 We set out to build a collection of tech tools, both internally developed and externally leverages, that would allow developers to easily and efficiently create modern web applications. We wanted to organize the codebase according to how we traditionally think about web applications (page-centric, complete separation of frontend and backend, etc). Lastly, we wanted to create a framework with complete transparency and no magic. This gives the developer complete flexibility to do virtually anything he desires, however he chooses, without being pigeonholed or restricted to the confines of typical development frameworks. The end result is the Uhray Boilerplate.
 
-## Codebase Organization
+# Codebase Organization
 
 The root project directory contains many files and directories primarily related to the application server, configurations, build commands, etc. We'll get into many of these specifics later, but the primary file of importance is *server.js* which is the application server. The real meat of the Uhray boilerplate is within the app directory where there are three sub-directories: static, frontend, and backend. 
 
@@ -76,7 +76,7 @@ The styles directory houses CSS/SCSS files for styling frontend page elements.
 ### 3. Static
 The static directory is a place for quickly designing static front-end HTML web pages which are styled with the CSS files from the frontend style's directory. This is useful for establishing the look and feel of a web application without available data or a functional API. These static pages will often become the HTML/Mustache templates for the frontend pages of the web application.
 
-## Quick Start
+# Quick Start
 
 Dependencies:  node, npm, bower
 ```bash
