@@ -23,7 +23,7 @@ The Uhray boilerplate is a starting point for web application development projec
 
 ## Documentation
 
-Take a look at the [Uhray Boilerplate Docs](docs/boilerplate.md). This documentation is bundled with the project, which makes it readily available for offline reading and provides a useful starting point for any documentation you want to write about your project.
+Take a look at the [Uhray Boilerplate Docs](doc/boilerplate.md). This documentation is bundled with the project, which makes it readily available for offline reading and provides a useful starting point for any documentation you want to write about your project.
 
 ## Browser Compatibility
 
