@@ -1,4 +1,4 @@
-# Uhray Boilerplate Docs
+# UHRAY BOILERPLATE DOCS
 
 **Intro**
 * [Quick Start](#quick-start)
@@ -24,10 +24,7 @@
 * [Build Options](#build-options)
 * [Heroku Deployment](#heroku-deployment)
 
-
-
-
-
+<br><br><br>
 # INTRO
 
 
@@ -99,10 +96,7 @@ The frontend is intentionally designed to be page-centric, meaning that code is 
 	 - renders template with appropriate content before embedding within the shell
 
 
-
-
-
-
+<br><br><br>
 # BACKEND DOCS
 
 ## API
@@ -144,6 +138,7 @@ Ex: ``` { 'PORT': '9123' } ```
  4. Variables set directly with nconf
 Ex: ``` nconf.set('PORT', '9123')```
 
+<br><br><br>
 # FRONTEND DOCS
 
 ## Static Development
@@ -264,11 +259,7 @@ The [images](https://github.com/uhray/boilerplate/tree/master/app/frontend/image
 
 ## Modules
 
-
-
-
-
-
+<br><br><br>
 # OTHER DOCS
 
 ## Package Management
