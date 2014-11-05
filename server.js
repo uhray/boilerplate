@@ -79,9 +79,9 @@ function loadConfigs(nconf) {
   nconf
     .argv()  // overrides everything
     .env()   // overrides config file
-    .file({ file: __dirname + '/config/settings.json' })
-  nconf.set('lib', __dirname + '/app')
-  nconf.set('PORT', '5000')
-  nconf.set('HOST', '127.0.0.1')
+    .file({ file: __dirname + '/config/settings.json' });
+  nconf.set('lib', __dirname + '/app');
+  nconf.set('PORT', '5000');
+  nconf.set('HOST', '127.0.0.1');
   return nconf;
 }
