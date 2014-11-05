@@ -5,9 +5,10 @@
 * [Codebase Organization](#codebase-organization)
 
 **Backend Docs**
+* [Server Configuration](#server-configuration)
 * [API](#api)
 * [Shells](#shells)
-* [Server Configuration](#server-configuration)
+
 
 **Frontend Docs**
 * [Static Development](#static-development)
@@ -24,7 +25,10 @@
 * [Build Options](#build-options)
 * [Heroku Deployment](#heroku-deployment)
 
-<br><br><br>
+
+
+
+<br><br>
 # INTRO
 
 
@@ -67,10 +71,12 @@ backend/
 	shells/
 ```
 
-**API**<br>
-By default, Uhray's boilerplate is setup for use with a MongoDB database, using Mongoose for database connectivity and querying. It also comes setup for the creation of a REST API built on top of [crud](https://github.com/uhray/crud) and [crud-mongoose](https://github.com/uhray/crud-mongoose), modules developed by Uhray which allow a developer to easily setup configurable Create (C), Read (R), Update (U), and Delete(D) capabilities for database resources. Each resource file in the resources directory establishes the schema for that particular model and then defines the API routes for interacting with the resource.
+API
 
-**Shells**<br>
+By default, Uhray's boilerplate is setup for use with a MongoDB database, using Mongoose for database connectivity and querying. It also comes setup for the creation of a REST API built on top of [crud](https://github.com/uhray/crud#backend) and [crud-mongoose](https://github.com/uhray/crud-mongoose), modules developed by Uhray which allow a developer to easily setup configurable Create (C), Read (R), Update (U), and Delete(D) capabilities for database resources. Each resource file in the resources directory establishes the schema for that particular model and then defines the API routes for interacting with the resource.
+
+Shells
+
 In the server.js file in the Boilerplate directory, you can see where routes are configured for particular shells. When the server receives a request for a particular route, it responds with a rendered shell, a skeleton of static HTML & CSS that is sent to the client-side and immediately displayed before the frontend takes care of loading the remainder of the elements and data into the main body of the page. The advantage here is that we can update data on the frontend as we move between pages without re-requesting the content. This makes for a faster and more seamless user experience with fewer page loads/refreshes. Of course you can have different shells load when different styling is desired between pages by configuring routes in the *server.js* file. 
 
 #### Frontend Organization
@@ -96,24 +102,28 @@ The frontend is intentionally designed to be page-centric, meaning that code is 
 	 - renders template with appropriate content before embedding within the shell
 
 
-<br><br><br>
+
+
+
+<br><br>
 # BACKEND DOCS
 
-## API
 
-## Shells
 
 ## Server Configuration
 
 #### Server Setup
-The Uhray Boilerplate was designed for applications running a Node.js server with express.js as a web application framework. Everything about the server starts with the [*server.js*](https://github.com/uhray/boilerplate/blob/master/server.js) file. There are a few default configurations (described below) that we setup to help you get up and running as quickly as possible. You are free to add, modify, or remove pretty much anything you want from *server.js* to suit your needs.
+The Uhray Boilerplate was designed for applications running a Node.js server with express.js as a web application framework. Everything about the server starts with the [*server.js*](https://github.com/uhray/boilerplate/blob/master/server.js) file. At a high level, this file is responsible for the execution of several operations:
 
-#### Default Configurations
-* Server-side logging via [winston](https://www.npmjs.org/package/winston)
-* Some default [express](http://expressjs.com/4x/api.html#application) app configurations and middleware (host, port, view engine, compression, etc.)
+ 1. Set up some default configurations like server-side logging via [winston](https://www.npmjs.org/package/winston) and some default [express](http://expressjs.com/4x/api.html#application) app configurations and middleware (host, port, view engine, compression, etc.)
+ 2. Starts up the server running your application
+ 3. Configures the API (establishing database connectivity, schemas, API routes to listen for, etc)
+ 4. Configures server routes for shells
+
+You are free to add, modify, or remove pretty much anything you want from *server.js* to suit your needs.
 
 #### Config Variables
-There are a number of ways to set an application's configuration variables. 
+There are a number of ways to set configuration variables within your application. 
 
 In the [loadConfigs](https://github.com/uhray/boilerplate/blob/master/server.js#L78) function of *server.js*, you will see the following code:
 
@@ -138,7 +148,90 @@ Ex: ``` { 'PORT': '9123' } ```
  4. Variables set directly with nconf
 Ex: ``` nconf.set('PORT', '9123')```
 
-<br><br><br>
+## API
+
+#### API Basics
+
+The backend API directory consists of an [*index.js*](https://github.com/uhray/boilerplate/blob/master/app/backend/api/index.js) file and a directory of [*resources*](https://github.com/uhray/boilerplate/tree/master/app/backend/api/resources).
+
+```
+api/
+	index.js
+	resources/
+```
+
+ When the *server.js* file is run, it makes a call to [configure the API](https://github.com/uhray/boilerplate/blob/master/server.js#L49). This executes the *index.js* file which, by default, does a number of useful things to get applications up and running quickly.
+
+ 1. Establishes basic authentication with forgot password functionality for users via [turnkey](https://github.com/uhray/turnkey)
+ 2. Launches API based via [crud](https://github.com/uhray/crud#backend) based on your resources
+ 3. Connects to your MongoDB if the [config variable](#config-variables) 'MONGOHQ_URL' is set to the database URL
+
+#### Resources
+
+In [REST APIs](http://en.wikipedia.org/wiki/Representational_state_transfer), a resource is defined as "an object with a type, associated data, relationships to other resources, and a set of methods that operate on it." Therefore, a resource is basically an *instance* of a [Mongoose Model](http://mongoosejs.com/docs/models.html) which is defined by a [Mongoose Schema](http://mongoosejs.com/docs/guide.html) accompanies with its associated API calls which are defined using [crud](https://github.com/uhray/crud#backend). 
+
+As an examples from the [users.js](https://github.com/uhray/boilerplate/blob/master/app/backend/api/resources/users.js) users resource file, we first define the Mongoose Schema for our users.
+
+```js
+Schema = exports.Schema = new mongoose.Schema({
+  firstName: { type: String, required: true },
+  lastName:  { type: String, required: true },
+  username: { type: String, index: true, unique: true },
+  info: {
+    gender: { type: String, enum: ['M', 'F'] },
+    age: Number
+  },
+  dates: {
+    created: { type: Date, default: Date.now },
+    updated: { type: Date, default: Date.now },
+    deleted: { type: Date }
+  }
+});
+```
+
+Next, we create the users model as an instantiation of that mongoose schema.
+
+```js
+Model = exports.Model = mongoose.model('users', Schema);
+```
+
+Lastly, we define API routes via [crud](https://github.com/uhray/crud#backend) where we also specify what exactly should happen with the resource when performing activities like create (C), read (R), update (U), and delete (D). To save time with common mongoose operations, we created [crud-mongoose](https://github.com/uhray/crud-mongoose) which is middleware that connects crud to mongoose and provides many convenient configurable calls for common mongoose operations.
+
+```js
+crud.entity('/users').Create()
+  .use(turnkey.createPassword())
+  .pipe(cm.createNew(Model));
+```
+
+#### Creating a New Resource
+
+To create a new resource, simple create a new JavaScript file in the API's [resources directory](https://github.com/uhray/boilerplate/tree/master/app/backend/api/resources). The file will need to define a [Mongoose Schema](http://mongoosejs.com/docs/guide.html), instantiate a [Mongoose Model](http://mongoosejs.com/docs/models.html), and define the crud API calls associated with that resource. If you're just getting started, check out the [users resource](https://github.com/uhray/boilerplate/blob/master/app/backend/api/resources/users.js) as an example.
+
+## Shells
+
+#### Rationale
+
+Shells are just HTML skeletons that are rendered and sent over to the frontend once. On the frontend, additional content can be then embedded within the shell itself, typically inside of a particular element -- we like to use a [main #body div tag](https://github.com/uhray/boilerplate/blob/master/app/backend/shells/main.html#L36). 
+
+The benefit to using shells is that you can simply add, change, or remove content from the shell on the frontend rather than requesting entirely new pages from the server. Pages with similar structure, styling, or background components (i.e. a navbar or sidebar) don't need to be completely re-rendered when the user jumps between pages. This creates a smoother user experience without the feel of page refreshes. It can also significantly lighten the load on your application server since parts of your HTML template and stylesheets don't need to be repeatedly served. The application server will just respond to API requests after a shell is sent to the frontend (unless you request a new shell for a different part of your web application).
+
+#### Setup
+
+Shells are configured in the [*server.js*](https://github.com/uhray/boilerplate/blob/master/server.js#L52-L60) file. The actual HTML shells are stored in the backend's [shells directory](https://github.com/uhray/boilerplate/tree/master/app/backend/shells). 
+
+By default, the Uhray Boilerplace comes with one shell ([*main.html*](https://github.com/uhray/boilerplate/blob/master/app/backend/shells/main.html)) that sets up some basic meta tags, links 3 stylesheets, provides a container for the frontend content to be embedded, and loads the frontend JavaScript code.
+
+#### Adding a New Shell
+
+In order to add a new shell, you need to do 2 things:
+
+ 1. Create a new HTML template in the backend's [shells directory](https://github.com/uhray/boilerplate/tree/master/app/backend/shells)
+ 2. Add a new route in [*server.js*](https://github.com/uhray/boilerplate/blob/master/server.js) that renders the template you created in step 1.
+
+> Note: The server.js file first configures the API routes which by default will be ```/api/*```. Next, the server configures the routes for shells specified in the [*server.js*](https://github.com/uhray/boilerplate/blob/master/server.js) file. By default, we just have one route ```/*``` that will catch anything that doesn't match the API routes and then render the [*main.html*](https://github.com/uhray/boilerplate/blob/master/app/backend/shells/main.html) shell. If you add a new shell, you must either define it before our default route, or change our default route  to something that doesn't interfere with your new shell's route.
+ 
+
+<br><br>
 # FRONTEND DOCS
 
 ## Static Development
@@ -159,7 +252,7 @@ app/
 		home.html
 ```
 
-The *_layout.html* file is an HTML skeleton that has some basic meta tag information and several CSS links. Every other HTML page in the static directory, like home.html, will extend the *_layout.html* file. These static pages will often become the HTML/Mustache templates for the frontend pages of the web application. 
+The *_layout.html* file is an HTML skeleton that has some basic meta tag information and several CSS links. By default, every other HTML page in the static directory, like home.html, will extend the *_layout.html* file. These static pages will often become the HTML/Mustache templates for the frontend pages of the web application. 
 
 #### Static Page Styling (CSS/SCSS)
 
@@ -188,6 +281,67 @@ Once started, the server should log something like:
 Open your browser to the localhost on the specified port (i.e. ```localhost:5200```). You'll be able to see updates to any newly saved static file code simply by refreshing your browser.
 
 ## Pages
+
+Each page of the web application is defined as a directory of 2 files within the [frontend pages directory](https://github.com/uhray/boilerplate/tree/master/app/frontend/pages).
+
+1. Ractive Template
+2. Ractive JavaScript File
+
+The page that is loaded and displayed to the user depends on the URL. See [Routing](#routing) for additional information.
+
+#### Ractive Template
+
+The Ractive template is simply an a snippet of HTML that will be embedded into the shell on the frontend to display the application's page to the user. Ractive templates allow some cool stuff like Mustaches to facilitate data binding, proxy event directives for event-binding, and element transitions. Click [here](http://docs.ractivejs.org/latest/templates) for more information.
+
+#### Ractive JavaScript File
+
+There are three primarily components to this Ractive JavaScript file.
+
+ 1. Defining the Ractive Template
+ 2. Defining the HTML element from the shell where the template should be embedded
+ 3. Defining the data to bind to the template
+
+Additionally, you can also define [computed properties](http://docs.ractivejs.org/latest/computed-properties) and [components](http://docs.ractivejs.org/latest/components) to be used within the page. You can also set up [events](http://docs.ractivejs.org/latest/events-overview) or [observers](http://docs.ractivejs.org/latest/observers) in this file. There are many other things you can do by checking out the [Ractive Documentation](http://docs.ractivejs.org/latest/get-started).
+
+#### Creating a New Page
+
+To create a new page, you need to do several things:
+
+ 1. If the new page will need a new shell, see [Adding a New Shell](#adding-a-new-shell) for instructions
+ 2. Create a new directory in the frontend [pages directory](https://github.com/uhray/boilerplate/tree/master/app/frontend/pages)
+ 2. Create an Ractive Template (example: [*template.html*](https://github.com/uhray/boilerplate/blob/master/app/frontend/pages/home/template.html))  in this directory
+ 3. Create an Ractive JavaScript file (example: [*main.js*](https://github.com/uhray/boilerplate/blob/master/app/frontend/pages/home/main.js)).
+ 4. Update your [frontend routes](#routing) to display the page when users navigate to specific URLs
+
+#### Integrating MongoDB Data
+
+When defining the data for your pages in the Ractive JavaScript file, you'll likely want to include real data from your MongoDB. When talking about the API, we referenced the use of [crud](https://github.com/uhray/crud), a module we created to assist with building APIs on the backend. We extended this module with some frontend capabilities that allow you to easily interact with and retrieve data from your REST API. Check out the [frontend crud documentation](https://github.com/uhray/crud#frontend) for more info.
+
+Below is an example of how crud's backend and frontend components work together to get you the information you need.
+
+First, in the backend API you recall that we setup resources which included crud entities/routes that defined what should be done given a particular API call. Here was one of them from the [*users.js*](https://github.com/uhray/boilerplate/blob/master/app/backend/api/resources/users.js) resource file. 
+
+```js
+crud.entity('/users/:_id').Read()
+  .pipe(cm.findOne(Model, ['-turnkey']));
+```
+
+This backend API call finds the user with the specified ```_id``` and pipes the results to crud mongoose's [findOne function](https://github.com/uhray/crud-mongoose#findOne) which will remove the turnkey (password) information from the user's data before calling a callback with 2 arguments:  error and data. 
+
+Now, since we have that backend API route setup, we can use crud as follows on the frontend to actually retrieve the user data of interest.
+
+```js
+crud('/users', '53b705826000a64d08ae5f94');
+  .read(function(e, d) {
+    console.log('user info', e || d);
+  }); 
+```
+
+The above code will call the appropriate API route and it's callback function will be called where e is any error that occurred, and d will contain the user's data (user with _id of ```53b705826000a64d08ae5f94```) that can then be used in your application.
+
+If your page requires a plethora of data up-front in which many API calls need to be made before you instantiate an Ractive object with the data, we strongly recommend using [asyc](https://github.com/caolan/async). Async provides several operations for easily working with asynchronous JavaScript without needing to create a web of nested callback functions.
+
+
 
 
 ## Routing
@@ -257,9 +411,99 @@ The [images](https://github.com/uhray/boilerplate/tree/master/app/frontend/image
 
 ## Components
 
+#### Basic Setup
+In many cases, you may want to encapsulate some HTML and JavaScript code into a widget that can be easily reused on the frontend within Ractive templates -- think of things like a toggle button, modal, custom select dropdown, slideshow, text editor, etc.
+
+Thanks to [Ractive Components](http://docs.ractivejs.org/latest/components), you can achieve this functionality with ease. Within the Uhray Boilerplate, we setup components in a similar way to pages. Components are stored in the frontend [components directory](https://github.com/uhray/boilerplate/tree/master/app/frontend/components). Each component is a directory which contains two files:
+
+ 1. Ractive Template
+ 2. Ractive JavaScript File
+
+However, there are a couple differences between these files and those from the frontend pages directory that are perhaps best illustrated by example -- the Uhray Boilerplate comes with one example component, a [modal](https://github.com/uhray/boilerplate/tree/master/app/frontend/components/modal). 
+
+First of all, since components are meant to be completely encapsulated, the Ractive Template needs to include all of the default styling you wish to include for the component, whether linked from an external file or included directly in a ```<style>...</style>``` tag. If you look at the modal component code, you'll see that the [modal's template](https://github.com/uhray/boilerplate/blob/master/app/frontend/components/modal/template.html) contains all of the markup and styling necessary to produce the component. 
+	
+>Note: Inside the template, you'll notice some mustache, ```{{>content}}``` that can be confusing if you haven't seen it before. Here is some documentation explaining the uses of the [{{>content}} directive](http://docs.ractivejs.org/latest/components#content) and the related [{{yield}} directive](http://docs.ractivejs.org/latest/components#yield).
+
+Secondly, the Ractive JavaScript file will be extending the base Ractive framework, so you need to use [Ractive.extend()](http://docs.ractivejs.org/latest/ractive-extend). Notice in the [modal's Ractive JavaScript file](https://github.com/uhray/boilerplate/blob/master/app/frontend/components/modal/main.js) how ```Ractive.extend()``` is used. You'll also notice that an ```init``` function is defined. This function will be called as soon as the component is initialized.
+
+That's it! Only you've appropriately configured a component, it's ready to be used anywhere in your Frontend pages.
+
+#### Example
+
+Again, we'll use the [modal component](https://github.com/uhray/boilerplate/tree/master/app/frontend/components/modal) that comes with the Uhray Boilerplate for an example.
+
+In the page directory where we want to use this modal, we need to define the components that can be used in the page's Ractive JavaScript file, as shown below
+
+```js
+define(['ractive', 'rv!./template', 'components/modal/main'],
+function(Ractive, template, modal) {
+  return function() {
+    var ractive = new Ractive({
+          el: '#body',
+          template: template,
+          data: { showModal: false )},
+          components: {
+            modal: modal
+          }
+    });
+  }
+});
+```
+
+Now we are free to go ahead and use the modal component in that page's template file as shown below:
+
+```html
+<div class="center">
+	<h1>Welcome to the homepage</h1>
+
+	<label>
+	  show the modal component? <input type="checkbox" checked="{{showModal}}"/>
+	</label>
+	
+	{{#if showModal}}
+		<modal>
+		  <p>This is a modal</p>
+		</modal>
+	{{/showModal}}
+</div>
+```
+
+In the above example, when the checkbox is clicked, the data value showModal becomes ```true```.  When showModal is ```true```, the modal component is displayed. Note how your component basically becomes a custom HTML element. Also note that the content within the modal element (```<p>This is a modal</p>```) is what will populate within the {{>content}} directive from the modal's component template.
+
 ## Modules
 
-<br><br><br>
+The frontend [modules directory](https://github.com/uhray/boilerplate/tree/master/app/frontend/modules) is simply a place to put reusable JavaScript code. The use cases are virtually endless, but here's a simple example.
+
+Perhaps you are storing a user's title (Mr, Mrs, etc.), first name, and last name separately in MongoDB. You want a simple function that creates a display name for that user that you can reuse all throughout your application's frontend code.
+
+First you create a JavaScript file in the modules directory, say *tools.js*, because you anticipate you'll create many other useful abstractions throughout development and put them in this same file.
+
+```js 
+// tools.js
+module.exports = exports = {};
+exports.display_name = function(title, firstname, lastname) {
+		return title + " " + firstname + " " + lastname;
+};	
+```
+
+Now, on any frontend JavaScript page, you can require this *tools.js* file via require.js and utilize your display_name function as follows:
+
+```js
+define(['crud','modules/tools'], 
+function(crud, tools) {
+	crud('/users', '53b705826000a64d08ae5f94').read(function(e, user) {
+		var name = tools.display_name(user.title, user.first, user.last);
+		// do whatever you want with name
+	});
+});
+```
+
+This example is pretty trivial, but it really helps to abstract larger chunks of code for things like complex computations, algorithms, etc. in order to keep the rest of your frontend code clean and readable.
+
+
+
+<br><br>
 # OTHER DOCS
 
 ## Package Management
@@ -371,9 +615,9 @@ http://sharp-rain-871.herokuapp.com/ | https://git.heroku.com/sharp-rain-871.git
 	You not have a git remote called *heroku* that is associated with your local git repository a.k.a. your application.
 
  7. Now deploy your code to Heroku by running: 
-	 ```git push heroku master```.
+	 ```git push heroku master```
  8. Ensure that at least one instance of the app is running by running:
 	  ``` heroku ps:scale web=1```
- 9. Visit the app by running:
+ 9. Check out your app by running:
 	 ```heroku open```
 
