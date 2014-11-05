@@ -27,12 +27,13 @@ Dependencies:
 * [node](http://nodejs.org/)
 * [npm](https://www.npmjs.org/) (now comes with node)
 * [bower](http://bower.io/)
+* [gulp](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md#getting-started)
 
 ```
 git clone git@github.com:uhray/boilerplate.git
 cd boilerplate
 npm install && bower install
-node server.js
+gulp dev
 // Application is now running at http://localhost:5000
 ```
 
