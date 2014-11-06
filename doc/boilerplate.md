@@ -43,7 +43,7 @@ Dependencies:
 ```bash
 git clone git@github.com:uhray/boilerplate.git
 cd boilerplate
-npm install && bower install
+npm install
 gulp dev
 # Application is now running at http://localhost:5000
 ```
