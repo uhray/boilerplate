@@ -35,7 +35,7 @@ gulp.task('bower_install', ['bower_clean'], function(cb) {
        .on('close', cb);
 });
 
-gulp.task('scss_to_css', ['bower_install'], function() {
+gulp.task('scss_to_css', function() {
   return gulp.src('app/frontend/styles/*.scss')
              .pipe(sass({
                sourcemap: true,
@@ -46,7 +46,7 @@ gulp.task('scss_to_css', ['bower_install'], function() {
              .pipe(gulp.dest('app/frontend/styles/css'));
 });
 
-gulp.task('minify_js', ['scss_to_css'], function(cb) {
+gulp.task('minify_js', ['bower_install'], function(cb) {
   child.spawn('./node_modules/requirejs/bin/r.js',
               ['-o', 'config/rjs-build.js'],
               { stdio: 'inherit' })
@@ -57,11 +57,11 @@ gulp.task('static_server', ['scss_to_css'], function() {
   child.spawn('foreman', ['start', 'static'], { stdio: 'inherit' });
 });
 
-gulp.task('dev_server', ['scss_to_css'], function() {
+gulp.task('dev_server', ['install', 'scss_to_css'], function() {
   child.spawn('foreman', ['start', 'dev'], { stdio: 'inherit' });
 });
 
-gulp.task('prod_server', ['minify_js'], function() {
+gulp.task('prod_server', ['install', 'minify_js'], function() {
   child.spawn('foreman', ['start', 'web'], { stdio: 'inherit' });
 });
 
@@ -72,3 +72,4 @@ gulp.task('scss_watch', ['scss_to_css'], function() {
 gulp.task('dolint', function() {
   child.spawn('./node_modules/.bin/jscs', ['./'], { stdio: 'inherit' });
 });
+

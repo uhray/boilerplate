@@ -1,6 +1,6 @@
-// =============================================================================
+// ========================================================================== //
 //                              USER RESOURCE                                 //
-// =============================================================================
+// ========================================================================== //
 
 // Load Modules ----------------------------------------------------------------
 
@@ -23,8 +23,7 @@ Schema = exports.Schema = new mongoose.Schema({
   },
   dates: {
     created: { type: Date, default: Date.now },
-    updated: { type: Date, default: Date.now },
-    deleted: { type: Date }
+    updated: { type: Date, default: Date.now }
   }
 });
 
@@ -57,6 +56,8 @@ crud.entity('/users/:_id').Read()
 crud.entity('/users/:_id').Update()
   // .use(turnkey.loggedIn()) authentication commented out for boilerplate
   .use(turnkey.updatePassword())
+  .pipe(cm.parseData()
+          .overrides({ 'dates.updated': Date.now }))
   .pipe(cm.updateOne(Model));
 
 crud.entity('/users/:_id').Delete()
