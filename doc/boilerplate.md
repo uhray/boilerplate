@@ -230,7 +230,7 @@ By default, the Uhray Boilerplace comes with one shell ([*main.html*](https://gi
 
 In order to add a new shell, you need to do 2 things:
 
- 1. Create a new HTML template in the backend's [shells](https://github.com/uhray/boilerplate/tree/master/app/backend/shells) directory.
+ 1. Create a new HTML template in the backend's [shells](https://github.com/uhray/boilerplate/tree/master/app/backend/shells) directory. This html file is a template that's computed using [mustache](https://www.npmjs.org/package/mustache-express).
  2. Add a new route in [*server.js*](https://github.com/uhray/boilerplate/blob/master/server.js) that renders the template you created in step 1.
 
 > Note: The server.js file first configures the API routes which by default will be ```/api/*```. Next, the server configures the routes for shells specified in the [*server.js*](https://github.com/uhray/boilerplate/blob/master/server.js) file. By default, we just have one route ```/*``` that will catch anything that doesn't match the API routes and render the [main.html](https://github.com/uhray/boilerplate/blob/master/app/backend/shells/main.html) shell. If you add a new shell, you must either define it before our default route, or change our default route  to something that doesn't interfere with your new shell's route.
