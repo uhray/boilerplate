@@ -515,7 +515,9 @@ function(crud, tools) {
 });
 ```
 
-This example is pretty trivial, but it really does help to abstract larger chunks of code for things like complex computations, algorithms, etc. in order to keep the rest of your frontend code clean and readable. 
+This example is pretty trivial, but it really does help to abstract larger chunks of code for things like complex computations, algorithms, etc. in order to keep the rest of your frontend code clean and readable.
+
+We also place code that interacts with the shell in this modules directory. We do this to prevent needing to play such code in all of your frontend pages.
 
 
 
@@ -540,7 +542,7 @@ Uhray Boilerplate uses [bower](http://bower.io/) as a frontend package manager. 
  1. Manually edit *bower.json* and re-build your application.
  2. Run ```bower install <package-name> [--save|--save-dev]``` from the command line and re-build your application.
 
->Note: If you wish to include a GitHub module in your application, but it's not on bower, you can still include it by providing the Github SSH URL for the desired GitHub repository in the *bower.json* file as shown [here](https://github.com/uhray/boilerplate/blob/master/bower.json#L10).
+>Note: If you wish to include a GitHub module in your application, but it's not on bower, you can still include it by providing the Github HTTPS URL (with ```https://``` replaced with ```git://```) for the desired GitHub repository in the *bower.json* file as shown [here](https://github.com/uhray/boilerplate/blob/master/bower.json#L10).
 
 #### Require.js
 
@@ -579,25 +581,25 @@ Command: ```gulp static```. This static build is for starting the static server 
  1. Performs a gulp install.
  2. Converts all SCSS files to CSS files & runs [autoprefixer](http://css-tricks.com/autoprefixer/).
  3. Starts the static server (*static.js*), hosting all static pages.
- 4. Watches for changes to any SCSS files and auto-converts to CSS on the fly ([for editing stylesheets directly in the browser](#editing-cssscss-directly-from-chrome-devtools))..
+ 4. Watches for changes to any SCSS files and auto-converts to CSS on the fly.
 
 #### Dev
 
 Command: ```gulp dev```. This dev build is for starting the development server when working on the interactive web application. It does 4 things:
 
  1. Performs a gulp install.
- 2. Converts all SCSS files to CSS files & runs [autoprefixer].
+ 2. Converts all SCSS files to CSS files & runs [autoprefixer](http://css-tricks.com/autoprefixer/).
  3. Starts the development server (*server.js* in dev-mode), hosting the web app.
- 4. Watches for changes to any SCSS files and auto-converts to CSS on the fly ([for editing stylesheets directly in the browser](#editing-cssscss-directly-from-chrome-devtools)).
+ 4. Watches for changes to any SCSS files and auto-converts to CSS on the fly.
 
 #### Prod
 
 Command: ```gulp prod```. This prod build is for starting the production server when testing the web application or before deploying the application to Heroku. It does 4 things:
 
- 1. Performs a gulp install
- 2. Converts all SCSS files to CSS files & runs [autoprefixer]
- 3. Minifies all JavaScript files
- 4. Starts the production server (*server.js* in prod-mode), hosting the production web app
+ 1. Performs a gulp install.
+ 2. Converts all SCSS files to CSS files & runs [autoprefixer](http://css-tricks.com/autoprefixer/).
+ 3. Minifies all JavaScript files.
+ 4. Starts the production server (*server.js* in prod-mode), hosting the production web app.
 
 #### Lint
 
@@ -606,18 +608,17 @@ Command: ```gulp lint```. This lint build is for linting the application's codeb
 
 ## Heroku Deployment
 
- 1. Before deploying to Heroku, you need to run the [Production Build Command](#prod) as this will convert all SCSS files to CSS files and minify all JavaScript files for optimization. 
- 2. If you haven't already, you need to create an account on [Heroku](https://www.heroku.com/)
- 3. If you haven't already, you need to [install the Heroku CLI](https://devcenter.heroku.com/articles/getting-started-with-nodejs#set-up).
- 4. If you haven't already, you need to login to Heroku on the command line by running: 
+ 1. If you haven't already, you need to create an account on [Heroku](https://www.heroku.com/)
+ 2. If you haven't already, you need to [install the Heroku CLI](https://devcenter.heroku.com/articles/getting-started-with-nodejs#set-up).
+ 3. If you haven't already, you need to login to Heroku on the command line by running: 
 	 
 	 ```heroku login```
 	 
- 5. Ensure your web application is a functioning git repository with a *package.json* and a *Procfile* in the application's root directory.
+ 4. Ensure your web application is a functioning git repository with a *package.json* and a *Procfile* in the application's root directory.
  
 	>Note: Heroku knows what command to run to start your application by looking in the Procfile for the [*web* command](https://github.com/uhray/boilerplate/blob/master/Procfile#L2). Heroku then uses [foreman](https://github.com/ddollar/foreman) and runs ```foreman start web``` to fire up your application. By default, the web command for the Uhray Boilerplate is ```node server.js PRODUCTION```. You can try running this command to verify that everything is working properly before you deploy.
  
- 6. Create an app on Heroku from your application's root directory, preparing Heroku to receive your source code. You can do this one of two ways. 
+ 5. Create an app on Heroku from your application's root directory, preparing Heroku to receive your source code. You can do this one of two ways. 
 
  
 	 Option 1 is running the new beta command that uses HTTP-git: 
@@ -639,14 +640,14 @@ http://sharp-rain-871.herokuapp.com/ | https://git.heroku.com/sharp-rain-871.git
 
 	You not have a git remote called *heroku* that is associated with your local git repository a.k.a. your application.
 
- 7. Now deploy your code to Heroku by running: 
+ 6. Now deploy your code to Heroku by running: 
 	
 	 ```git push heroku master```
  
- 8. Ensure that at least one instance of the app is running by running:
+ 7. Ensure that at least one instance of the app is running by running:
 
 	 ``` heroku ps:scale web=1```
 
- 9. Check out your app by running:
+ 8. Check out your app by running:
 	
 	 ```heroku open```
