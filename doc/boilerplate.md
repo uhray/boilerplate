@@ -390,7 +390,7 @@ The last thing to note in the code above is the ```clear()``` function which is 
 
 The [styles](https://github.com/uhray/boilerplate/tree/master/app/frontend/styles) directory is meant to house all of your application's custom styling rules. In addition to regular CSS files, Uhray Boilerplate allows you to put SCSS files in this directory. SCSS allows you to do [really cool things](http://sass-lang.com/guide) like use variables in CSS. By default, the [*main.scss*](https://github.com/uhray/boilerplate/blob/master/app/frontend/styles/main.scss) file is linked to all of your frontend pages and static templates, so you can simply extend this file with new CSS or SCSS styling rules. 
 
->Note: During the build process, all SCSS files are converted to CSS files with the same base filename. See [Build Options](#build-options) for additional information.
+>Note: During the build process, all SCSS files are converted to CSS files with the same base filename. Also, all CSS files are run through [autoprefixer](https://github.com/postcss/autoprefixer) which automatically adds in any missing vender prefixes (-webit, -moz, -ms). See [Build Options](#build-options) for additional information.
 
 #### Adding a New Stylesheet
 
@@ -572,7 +572,7 @@ Command: ```gulp install```. This install build does 3 things:
 Command: ```gulp static```. This static build is for starting the static server when developing static application pages as documented in [Static Development](#static-development). It does 4 things:
 
  1. Performs a gulp install.
- 2. Converts all SCSS files to CSS files & adds vendor-prefixes via [autoprefixer](http://css-tricks.com/autoprefixer/).
+ 2. Converts all SCSS files to CSS files & runs [autoprefixer](http://css-tricks.com/autoprefixer/).
  3. Starts the static server (*static.js*), hosting all static pages.
  4. Watches for changes to any SCSS files and auto-converts to CSS on the fly ([for editing stylesheets directly in the browser](#editing-cssscss-directly-from-chrome-devtools))..
 
@@ -581,7 +581,7 @@ Command: ```gulp static```. This static build is for starting the static server 
 Command: ```gulp dev```. This dev build is for starting the development server when working on the interactive web application. It does 4 things:
 
  1. Performs a gulp install.
- 2. Converts all SCSS files to CSS files & adds vendor-prefixes via [autoprefixer].
+ 2. Converts all SCSS files to CSS files & runs [autoprefixer].
  3. Starts the development server (*server.js* in dev-mode), hosting the web app.
  4. Watches for changes to any SCSS files and auto-converts to CSS on the fly ([for editing stylesheets directly in the browser](#editing-cssscss-directly-from-chrome-devtools)).
 
@@ -590,7 +590,7 @@ Command: ```gulp dev```. This dev build is for starting the development server w
 Command: ```gulp prod```. This prod build is for starting the production server when testing the web application or before deploying the application to Heroku. It does 4 things:
 
  1. Performs a gulp install
- 2. Converts all SCSS files to CSS files & adds vendor-prefixes via [autoprefixer]
+ 2. Converts all SCSS files to CSS files & runs [autoprefixer]
  3. Minifies all JavaScript files
  4. Starts the production server (*server.js* in prod-mode), hosting the production web app
 
