@@ -14,7 +14,7 @@ If you are interested in developing hybrid mobile apps, check out the [Uhray Mob
 * Ready for [mustache](https://www.npmjs.org/package/mustache-express) for the backend rendering.
 * Uses [ractivejs](https://ractivejs.org) for frontend view rendering.
 * Includes [normalize.css](http://necolas.github.com/normalize.css/) for CSS normalizations and common bug fixes.
-* Built in (but removable) CSS element reset. (see [main.css](app/frontend/styles/main.scss)).
+* Built in (but removable) CSS element reset. (see [main.scss](app/frontend/styles/main.scss)).
 * Frontend JavaScript dependencies managed with [bower](http://bower.io).
 * Built ready for [heroku](https://heroku.com) deployment.
 * Easily extendable to new modules [npm](http://npmjs.org) and [bower](http://bower.io).
