@@ -61,7 +61,7 @@ server.js
 
 #### Backend Organization
 
-The backend directory houses two important components to a web application, the API and what we call *shells*.
+The backend directory houses two important parts of a web application, the API and what we call *shells*.
 
 ```
 backend/
@@ -246,7 +246,7 @@ When developing web applications, we find it easiest to implement static front-e
 
 #### Static Page Organization
 
-In addition to the backend and frontend components of the Boilerplate's app directory, there is also a [static](https://github.com/uhray/boilerplate/tree/master/app/static) directory.
+In addition to the backend and frontend parts of the Boilerplate's app directory, there is also a [static](https://github.com/uhray/boilerplate/tree/master/app/static) directory.
 
 ```bash
 app/
@@ -300,7 +300,7 @@ The Ractive template is simply a snippet of HTML that will be embedded into the 
 
 #### Ractive JavaScript File
 
-There are three primary components to this Ractive JavaScript file.
+There are three primary parts to this Ractive JavaScript file.
 
  1. Defining the Ractive Template.
  2. Defining the HTML element from the shell where the template should be embedded.
@@ -322,7 +322,7 @@ To create a new page, you need to do several things:
 
 When defining the data for your pages in the Ractive JavaScript file, you'll likely want to include real data from your MongoDB. When talking about the API, we referenced the use of [crud](https://github.com/uhray/crud), a module we created to assist with building APIs on the backend. We extended this module with some frontend capabilities that allow you to easily interact with and retrieve data from your REST API. Check out the [frontend crud documentation](https://github.com/uhray/crud#frontend) for more info.
 
-Below is an example of how crud's backend and frontend components work together in your application.
+Below is an example of how crud's backend and frontend code work together in your application.
 
 First, in the backend API you recall that we setup resources which included crud entities/routes that defined what should be done given a particular API call. Here was one of them from the [*users.js*](https://github.com/uhray/boilerplate/blob/master/app/backend/api/resources/users.js) resource file. 
 
@@ -432,15 +432,13 @@ Within the Uhray Boilerplate, we setup components in a similar way to pages. Com
  1. Ractive Template
  2. Ractive JavaScript File
 
-However, there are two big differences between these files and those from the frontend pages directory, as explained in the example below. 
+However, there are some differences between these files and those from the frontend pages directory, as explained in the example below. 
 
 #### Example
 
 It's probably best to explain the differences between component files and page files via example -- the Uhray Boilerplate comes with one component, a [modal](https://github.com/uhray/boilerplate/tree/master/app/frontend/components/modal). 
 
-First of all, since components are meant to be completely encapsulated, the Ractive Template needs to include all of the default styling you wish to include for the component, whether linked from an external file or included directly in a ```<style>...</style>``` tag. If you look at the modal component code, you'll see that the [modal's template](https://github.com/uhray/boilerplate/blob/master/app/frontend/components/modal/template.html) contains all of the markup and styling necessary to produce the component. 
-	
->Note: Inside the template, you'll notice some mustache, ```{{>content}}``` that can be confusing if you haven't seen it before. Here is some documentation explaining the uses of the [{{>content}} directive](http://docs.ractivejs.org/latest/components#content) and the related [{{yield}} directive](http://docs.ractivejs.org/latest/components#yield).
+First, inside the template, you'll notice some mustache, ```{{>content}}``` that can be confusing if you haven't seen it before. Here is some documentation explaining the uses of the [{{>content}} directive](http://docs.ractivejs.org/latest/components#content) and the related [{{yield}} directive](http://docs.ractivejs.org/latest/components#yield).
 
 Secondly, the Ractive JavaScript file will be extending the base Ractive framework, so you need to use [Ractive.extend()](http://docs.ractivejs.org/latest/ractive-extend). Notice in the [modal's Ractive JavaScript file](https://github.com/uhray/boilerplate/blob/master/app/frontend/components/modal/main.js) how ```Ractive.extend()``` is used. You'll also notice that an ```init``` function is defined. This function will be called as soon as the component is initialized.
 
@@ -496,10 +494,13 @@ First you create a JavaScript file in the modules directory, say *tools.js* beca
 
 ```js 
 // tools.js
-module.exports = exports = {};
-exports.display_name = function(title, firstname, lastname) {
-	return title + " " + firstname + " " + lastname;
-};	
+define([], function() {
+	var tools = {};
+	tools.display_name = function(title, firstname, lastname) {
+		return title + " " + firstname + " " + lastname;
+	};
+	return tools;
+});
 ```
 
 Now, on any frontend JavaScript page, you can require this *tools.js* file via require.js and utilize your display_name function as follows:
