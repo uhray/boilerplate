@@ -147,7 +147,7 @@ Ex: ``` node server.js --PORT 9123```
  2. Environment variables (process.env)
 Ex: ``` PORT=9123 node server.js```
  3. JSON file of key value pairs
-Ex: ``` { 'PORT': '9123' } ``` 
+Ex: ``` { "PORT": 9123 } ``` 
  4. Variables set directly with nconf
 Ex: ``` nconf.set('PORT', '9123')```
 
