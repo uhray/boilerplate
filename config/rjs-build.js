@@ -3,8 +3,8 @@
     baseUrl: '../app/frontend',
     name: 'bower/almond/almond',
     wrap: true,
-    include: [ 'router' ],
-    insertRequire: [ 'router' ],
+    include: [ 'configure' ],
+    insertRequire: [ 'configure' ],
     exclude: [ ],
     stubModules: [ 'rv' ],
     out: '../app/frontend/main-built.js'
