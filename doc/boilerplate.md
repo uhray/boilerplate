@@ -356,7 +356,7 @@ If your page requires a lot of data up-front before you instantiate an Ractive o
 After the server has packaged up a backend shell and sent it over to the frontend, the [*router.js*](https://github.com/uhray/boilerplate/blob/master/app/frontend/router.js) file determines what frontend page should be loaded into the shell based on the URL. These routes are setup using [director](https://github.com/flatiron/director). 
 
 Below is a barebones example of the *router.js* file.
-```
+```js
 define(
 ['director', 'pages/home/main'],
 function(Director, p$home) {
