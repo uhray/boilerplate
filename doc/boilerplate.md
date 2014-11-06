@@ -388,7 +388,7 @@ The last thing to note in the code above is the ```clear()``` function which is 
 
 ## Styles
 
-The [styles](https://github.com/uhray/boilerplate/tree/master/app/frontend/styles) directory is meant to house all of your application's styling rules. In addition to regular CSS files, Uhray Boilerplate allows you to put SCSS files in this directory. SCSS allows you to do [really cool things](http://sass-lang.com/guide) like use variables in CSS. By default, the [*main.scss*](https://github.com/uhray/boilerplate/blob/master/app/frontend/styles/main.scss) file is linked to all of your frontend pages and static templates, so you can simply extend this file with new CSS or SCSS styling rules. 
+The [styles](https://github.com/uhray/boilerplate/tree/master/app/frontend/styles) directory is meant to house all of your application's custom styling rules. In addition to regular CSS files, Uhray Boilerplate allows you to put SCSS files in this directory. SCSS allows you to do [really cool things](http://sass-lang.com/guide) like use variables in CSS. By default, the [*main.scss*](https://github.com/uhray/boilerplate/blob/master/app/frontend/styles/main.scss) file is linked to all of your frontend pages and static templates, so you can simply extend this file with new CSS or SCSS styling rules. 
 
 >Note: During the build process, all SCSS files are converted to CSS files with the same base filename. See [Build Options](#build-options) for additional information.
 
@@ -402,7 +402,7 @@ styles/
 	new_stylesheet.scss
 ```	
 
-Next, you'll have to add a corresponding link tag to the base [_layout.html](https://github.com/uhray/boilerplate/blob/master/app/static/_layout.html) file or your specific page's *template.html* file.
+Next, you'll have to add a corresponding link tag to the base [_layout.html](https://github.com/uhray/boilerplate/blob/master/app/static/_layout.html) file for static development or the [backend shell](https://github.com/uhray/boilerplate/blob/master/app/backend/shells/main.html) for regular application development.
 
 ```
 <link rel="stylesheet" href="/public/styles/css/new_stylesheet.css">
@@ -410,25 +410,33 @@ Next, you'll have to add a corresponding link tag to the base [_layout.html](htt
 
 #### Editing CSS/SCSS Directly from Chrome DevTools
 
-If you're like us, you love using Chrome Dev Tools to inspect HTML elements and easily change the styling of different elements in Chrome with immediate visual feedback. Uhray Boilerplate supports sourcemaps allowing you to edit style rules directly in Chrome. This saves A LOT of time by preventing you from repeatedly switching between your stylesheets and Chrome DevTools throughout your design/development workflow.
+If you're like us, you love using Chrome DevTools to inspect HTML elements and easily change the styling of different elements in Chrome with immediate visual feedback. Uhray Boilerplate supports sourcemaps with its stylesheets allowing you to edit style rules directly in Chrome. This saves A LOT of time by preventing you from repeatedly switching between your stylesheets and Chrome DevTools throughout your design/development workflow.
 
-Here's an introduction to source maps and a tutorial of setting it up with Chrome: http://www.sitepoint.com/using-source-maps-debug-sass-chrome/
+Here's an introduction to source maps and a tutorial for setting everything up with Chrome: http://www.sitepoint.com/using-source-maps-debug-sass-chrome/
 
 ## Images
 
 The [images](https://github.com/uhray/boilerplate/tree/master/app/frontend/images) directory is where you can put all of the images used within your application. By default, we've only included a favicon (*favicon.ico*) which is served via middleware in the [*server.js*](https://github.com/uhray/boilerplate/blob/master/server.js#L30-L31) file.
 
+>Note: All images in this directory will be publicly hosted with your application.
+
 ## Components
 
-#### Basic Setup
-In many cases, you may want to encapsulate some HTML and JavaScript code into a widget that can be easily reused on the frontend within Ractive templates -- think of things like a toggle button, modal, custom select dropdown, slideshow, text editor, etc.
+#### Basics
+In many cases, you may want to encapsulate some HTML and JavaScript code into a widget that can be easily reused on the frontend within Ractive templates -- think of things like a toggle button, modal, custom select dropdown, slideshow, text editor, etc. Thanks to [Ractive Components](http://docs.ractivejs.org/latest/components), you can achieve this functionality with relative ease. 
 
-Thanks to [Ractive Components](http://docs.ractivejs.org/latest/components), you can achieve this functionality with ease. Within the Uhray Boilerplate, we setup components in a similar way to pages. Components are stored in the frontend [components directory](https://github.com/uhray/boilerplate/tree/master/app/frontend/components). Each component is a directory which contains two files:
+#### Setup
+
+Within the Uhray Boilerplate, we setup components in a similar way to pages. Components are stored in the frontend [components](https://github.com/uhray/boilerplate/tree/master/app/frontend/components) directory. Each component is a directory which contains two files:
 
  1. Ractive Template
  2. Ractive JavaScript File
 
-However, there are a couple differences between these files and those from the frontend pages directory that are perhaps best illustrated by example -- the Uhray Boilerplate comes with one example component, a [modal](https://github.com/uhray/boilerplate/tree/master/app/frontend/components/modal). 
+However, there are two big differences between these files and those from the frontend pages directory, as explained in the example below. 
+
+#### Example
+
+It's probably best to explain the differences between component files and page files via example -- the Uhray Boilerplate comes with one component, a [modal](https://github.com/uhray/boilerplate/tree/master/app/frontend/components/modal). 
 
 First of all, since components are meant to be completely encapsulated, the Ractive Template needs to include all of the default styling you wish to include for the component, whether linked from an external file or included directly in a ```<style>...</style>``` tag. If you look at the modal component code, you'll see that the [modal's template](https://github.com/uhray/boilerplate/blob/master/app/frontend/components/modal/template.html) contains all of the markup and styling necessary to produce the component. 
 	
@@ -436,13 +444,9 @@ First of all, since components are meant to be completely encapsulated, the Ract
 
 Secondly, the Ractive JavaScript file will be extending the base Ractive framework, so you need to use [Ractive.extend()](http://docs.ractivejs.org/latest/ractive-extend). Notice in the [modal's Ractive JavaScript file](https://github.com/uhray/boilerplate/blob/master/app/frontend/components/modal/main.js) how ```Ractive.extend()``` is used. You'll also notice that an ```init``` function is defined. This function will be called as soon as the component is initialized.
 
-That's it! Only you've appropriately configured a component, it's ready to be used anywhere in your Frontend pages.
+Once you've appropriately configured a component, it's ready to be used anywhere in your frontend pages.
 
-#### Example
-
-Again, we'll use the [modal component](https://github.com/uhray/boilerplate/tree/master/app/frontend/components/modal) that comes with the Uhray Boilerplate for an example.
-
-In the page directory where we want to use this modal, we need to define the components that can be used in the page's Ractive JavaScript file, as shown below
+In the page directory, where we want to use this modal, we need to define the components that can be used in the page's Ractive JavaScript file, as shown below:
 
 ```js
 define(['ractive', 'rv!./template', 'components/modal/main'],
@@ -478,21 +482,23 @@ Now we are free to go ahead and use the modal component in that page's template 
 </div>
 ```
 
-In the above example, when the checkbox is clicked, the data value showModal becomes ```true```.  When showModal is ```true```, the modal component is displayed. Note how your component basically becomes a custom HTML element. Also note that the content within the modal element (```<p>This is a modal</p>```) is what will populate within the {{>content}} directive from the modal's component template.
+In the above example, when the checkbox is clicked, the data value showModal becomes ```true```.  When showModal is ```true```, the modal component is displayed. Note how your component basically becomes a custom HTML element. Also note that the content within the modal element (```<p>This is a modal</p>```) is what will populate within the {{>content}} directive from the modal's component template. That's it!
 
 ## Modules
 
-The frontend [modules directory](https://github.com/uhray/boilerplate/tree/master/app/frontend/modules) is simply a place to put reusable JavaScript code. The use cases are virtually endless, but here's a simple example.
+The frontend [modules](https://github.com/uhray/boilerplate/tree/master/app/frontend/modules) directory is simply a place to put reusable JavaScript code. The use cases are virtually endless, but here's a simple example.
 
-Perhaps you are storing a user's title (Mr, Mrs, etc.), first name, and last name separately in MongoDB. You want a simple function that creates a display name for that user that you can reuse all throughout your application's frontend code.
+#### Example
 
-First you create a JavaScript file in the modules directory, say *tools.js*, because you anticipate you'll create many other useful abstractions throughout development and put them in this same file.
+Let's say you are storing a user's title (Mr, Mrs, etc.), first name, and last name separately in MongoDB. You want a simple function that creates a display name for that user, combining their title, first, and last name. You plan to reuse this function all throughout your application's frontend code.
+
+First you create a JavaScript file in the modules directory, say *tools.js* because you anticipate you'll create many other useful abstractions throughout development and put them in this same file.
 
 ```js 
 // tools.js
 module.exports = exports = {};
 exports.display_name = function(title, firstname, lastname) {
-		return title + " " + firstname + " " + lastname;
+	return title + " " + firstname + " " + lastname;
 };	
 ```
 
@@ -508,7 +514,7 @@ function(crud, tools) {
 });
 ```
 
-This example is pretty trivial, but it really helps to abstract larger chunks of code for things like complex computations, algorithms, etc. in order to keep the rest of your frontend code clean and readable.
+This example is pretty trivial, but it really does help to abstract larger chunks of code for things like complex computations, algorithms, etc. in order to keep the rest of your frontend code clean and readable. 
 
 
 
@@ -519,7 +525,7 @@ This example is pretty trivial, but it really helps to abstract larger chunks of
 
 #### Backend Package Management
 
-Uhray Boilerplate uses [npm](https://www.npmjs.org/) as a backend package manager. As of now, npm comes bundled with [node](http://nodejs.org/). To add an npm package to your application, all you need to do is add it to the [*package.json*](https://github.com/uhray/boilerplate/blob/master/package.json) file in the root Uhray Boilerplate directory. You can do this 1 of 2 ways:
+Uhray Boilerplate uses [npm](https://www.npmjs.org/) as a backend package manager. As of now, npm comes bundled with [node](http://nodejs.org/). To add an npm package to your application, all you need to do is add it to the [package.json](https://github.com/uhray/boilerplate/blob/master/package.json) file in the root Uhray Boilerplate directory. You can do this 1 of 2 ways:
 
  1. Manually edit *package.json* and re-build your application server.
  2. Run ```npm install <package-name> [--save|--save-dev]``` from the command line and re-build your application.
@@ -533,7 +539,7 @@ Uhray Boilerplate uses [bower](http://bower.io/) as a frontend package manager. 
  1. Manually edit *bower.json* and re-build your application.
  2. Run ```bower install <package-name> [--save|--save-dev]``` from the command line and re-build your application.
 
->Note: If you wish to include a GitHub module in your application, but it's not on bower, you can still include by providing the Github SSH URL for the desired module's repository in the *bower.json* file as shown [here](https://github.com/uhray/boilerplate/blob/master/bower.json#L10).
+>Note: If you wish to include a GitHub module in your application, but it's not on bower, you can still include it by providing the Github SSH URL for the desired GitHub repository in the *bower.json* file as shown [here](https://github.com/uhray/boilerplate/blob/master/bower.json#L10).
 
 
 ## Linting
@@ -556,27 +562,27 @@ Command: ```gulp```. This default build command will simply display the availabl
 
 Command: ```gulp install```. This install build does 3 things:
 
- 1. Installs npm packages from *package.json*
- 2. Cleans out bower cache
- 3. Install bower packages from *bower.json*
+ 1. Installs npm packages from *package.json*.
+ 2. Cleans out bower cache.
+ 3. Installs bower packages from *bower.json*.
 
 
 #### Static
 
 Command: ```gulp static```. This static build is for starting the static server when developing static application pages as documented in [Static Development](#static-development). It does 4 things:
 
- 1. Performs a gulp install
- 2. Converts all SCSS files to CSS files
- 3. Starts the static server, hosting all static pages
- 4. Watches for changes to any SCSS files and auto-converts to CSS on the fly ([for editing stylesheets directly in the browser](#editing-cssscss-directly-from-chrome-devtools)).
+ 1. Performs a gulp install.
+ 2. Converts all SCSS files to CSS files & adds vendor-prefixes via [autoprefixer](http://css-tricks.com/autoprefixer/).
+ 3. Starts the static server (*static.js*), hosting all static pages.
+ 4. Watches for changes to any SCSS files and auto-converts to CSS on the fly ([for editing stylesheets directly in the browser](#editing-cssscss-directly-from-chrome-devtools))..
 
 #### Dev
 
-Command: ```gulp dev```. This dev build is for starting the development server when working on the interactive web application. It's essentially the same things as the static build. It does 4 things:
+Command: ```gulp dev```. This dev build is for starting the development server when working on the interactive web application. It does 4 things:
 
- 1. Performs a gulp install
- 2. Converts all SCSS files to CSS files
- 3. Starts the development server, hosting the web app
+ 1. Performs a gulp install.
+ 2. Converts all SCSS files to CSS files & adds vendor-prefixes via [autoprefixer].
+ 3. Starts the development server (*server.js* in dev-mode), hosting the web app.
  4. Watches for changes to any SCSS files and auto-converts to CSS on the fly ([for editing stylesheets directly in the browser](#editing-cssscss-directly-from-chrome-devtools)).
 
 #### Prod
@@ -584,13 +590,13 @@ Command: ```gulp dev```. This dev build is for starting the development server w
 Command: ```gulp prod```. This prod build is for starting the production server when testing the web application or before deploying the application to Heroku. It does 4 things:
 
  1. Performs a gulp install
- 2. Converts all SCSS files to CSS files
+ 2. Converts all SCSS files to CSS files & adds vendor-prefixes via [autoprefixer]
  3. Minifies all JavaScript files
- 4. Starts the production server, hosting the production web app
+ 4. Starts the production server (*server.js* in prod-mode), hosting the production web app
 
 #### Lint
 
-Command: ```gulp lint```. This lint build is for linting the application's codebase for possible errors. Right now, this only runs the JavaScript linter [jscs](https://www.npmjs.org/package/jscs) as detailed [here](#linting).
+Command: ```gulp lint```. This lint build is for linting the application's codebase for possible errors. Right now, this only runs the JavaScript linter [jscs](https://www.npmjs.org/package/jscs). See [Linting Docs](#linting) for more information.
 
 
 ## Heroku Deployment
@@ -599,7 +605,9 @@ Command: ```gulp lint```. This lint build is for linting the application's codeb
  2. If you haven't already, you need to create an account on [Heroku](https://www.heroku.com/)
  3. If you haven't already, you need to [install the Heroku CLI](https://devcenter.heroku.com/articles/getting-started-with-nodejs#set-up).
  4. If you haven't already, you need to login to Heroku on the command line by running: 
+	 
 	 ```heroku login```
+	 
  5. Ensure your web application is a functioning git repository with a *package.json* and a *Procfile* in the application's root directory.
  
 	>Note: Heroku knows what command to run to start your application by looking in the Procfile for the [*web* command](https://github.com/uhray/boilerplate/blob/master/Procfile#L2). Heroku then uses [foreman](https://github.com/ddollar/foreman) and runs ```foreman start web``` to fire up your application. By default, the web command for the Uhray Boilerplate is ```node server.js PRODUCTION```. You can try running this command to verify that everything is working properly before you deploy.
@@ -608,11 +616,14 @@ Command: ```gulp lint```. This lint build is for linting the application's codeb
 
  
 	 Option 1 is running the new beta command that uses HTTP-git: 
-		```heroku create --http-git```.
+	
+	```heroku create --http-git```.
 
 	Option 2 is running the traditional command that uses SSH: 
-		```heroku create```. 
-	 >Note: Option 2 above requires you to have SSH configured properly on your local development machine. Click [here](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2) for more info.
+
+	```heroku create```. 
+	
+	 >Note: Option 2 above requires you to have SSH configured properly on your local development machine. Click [here](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2) for more information.
 
 	After running Option 1 or Option 2, you should see something similar to this:
 
@@ -624,8 +635,13 @@ http://sharp-rain-871.herokuapp.com/ | https://git.heroku.com/sharp-rain-871.git
 	You not have a git remote called *heroku* that is associated with your local git repository a.k.a. your application.
 
  7. Now deploy your code to Heroku by running: 
+	
 	 ```git push heroku master```
+ 
  8. Ensure that at least one instance of the app is running by running:
-	  ``` heroku ps:scale web=1```
+
+	 ``` heroku ps:scale web=1```
+
  9. Check out your app by running:
+	
 	 ```heroku open```
