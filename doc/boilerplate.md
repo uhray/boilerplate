@@ -61,7 +61,7 @@ server.js
 
 #### Backend Organization
 
-The backend directory houses two important components to a web application, the API and what we call *shells*.
+The backend directory houses two important parts of a web application, the API and what we call *shells*.
 
 ```
 backend/
@@ -246,7 +246,7 @@ When developing web applications, we find it easiest to implement static front-e
 
 #### Static Page Organization
 
-In addition to the backend and frontend components of the Boilerplate's app directory, there is also a [static](https://github.com/uhray/boilerplate/tree/master/app/static) directory.
+In addition to the backend and frontend parts of the Boilerplate's app directory, there is also a [static](https://github.com/uhray/boilerplate/tree/master/app/static) directory.
 
 ```bash
 app/
@@ -300,7 +300,7 @@ The Ractive template is simply a snippet of HTML that will be embedded into the 
 
 #### Ractive JavaScript File
 
-There are three primary components to this Ractive JavaScript file.
+There are three primary parts to this Ractive JavaScript file.
 
  1. Defining the Ractive Template.
  2. Defining the HTML element from the shell where the template should be embedded.
@@ -322,7 +322,7 @@ To create a new page, you need to do several things:
 
 When defining the data for your pages in the Ractive JavaScript file, you'll likely want to include real data from your MongoDB. When talking about the API, we referenced the use of [crud](https://github.com/uhray/crud), a module we created to assist with building APIs on the backend. We extended this module with some frontend capabilities that allow you to easily interact with and retrieve data from your REST API. Check out the [frontend crud documentation](https://github.com/uhray/crud#frontend) for more info.
 
-Below is an example of how crud's backend and frontend components work together in your application.
+Below is an example of how crud's backend and frontend code work together in your application.
 
 First, in the backend API you recall that we setup resources which included crud entities/routes that defined what should be done given a particular API call. Here was one of them from the [*users.js*](https://github.com/uhray/boilerplate/blob/master/app/backend/api/resources/users.js) resource file. 
 
@@ -432,15 +432,13 @@ Within the Uhray Boilerplate, we setup components in a similar way to pages. Com
  1. Ractive Template
  2. Ractive JavaScript File
 
-However, there are two big differences between these files and those from the frontend pages directory, as explained in the example below. 
+However, there are some differences between these files and those from the frontend pages directory, as explained in the example below. 
 
 #### Example
 
 It's probably best to explain the differences between component files and page files via example -- the Uhray Boilerplate comes with one component, a [modal](https://github.com/uhray/boilerplate/tree/master/app/frontend/components/modal). 
 
-First of all, since components are meant to be completely encapsulated, the Ractive Template needs to include all of the default styling you wish to include for the component, whether linked from an external file or included directly in a ```<style>...</style>``` tag. If you look at the modal component code, you'll see that the [modal's template](https://github.com/uhray/boilerplate/blob/master/app/frontend/components/modal/template.html) contains all of the markup and styling necessary to produce the component. 
-	
->Note: Inside the template, you'll notice some mustache, ```{{>content}}``` that can be confusing if you haven't seen it before. Here is some documentation explaining the uses of the [{{>content}} directive](http://docs.ractivejs.org/latest/components#content) and the related [{{yield}} directive](http://docs.ractivejs.org/latest/components#yield).
+First, inside the template, you'll notice some mustache, ```{{>content}}``` that can be confusing if you haven't seen it before. Here is some documentation explaining the uses of the [{{>content}} directive](http://docs.ractivejs.org/latest/components#content) and the related [{{yield}} directive](http://docs.ractivejs.org/latest/components#yield).
 
 Secondly, the Ractive JavaScript file will be extending the base Ractive framework, so you need to use [Ractive.extend()](http://docs.ractivejs.org/latest/ractive-extend). Notice in the [modal's Ractive JavaScript file](https://github.com/uhray/boilerplate/blob/master/app/frontend/components/modal/main.js) how ```Ractive.extend()``` is used. You'll also notice that an ```init``` function is defined. This function will be called as soon as the component is initialized.
 
@@ -496,10 +494,13 @@ First you create a JavaScript file in the modules directory, say *tools.js* beca
 
 ```js 
 // tools.js
-module.exports = exports = {};
-exports.display_name = function(title, firstname, lastname) {
-	return title + " " + firstname + " " + lastname;
-};	
+define([], function() {
+	var tools = {};
+	tools.display_name = function(title, firstname, lastname) {
+		return title + " " + firstname + " " + lastname;
+	};
+	return tools;
+});
 ```
 
 Now, on any frontend JavaScript page, you can require this *tools.js* file via require.js and utilize your display_name function as follows:
@@ -514,7 +515,9 @@ function(crud, tools) {
 });
 ```
 
-This example is pretty trivial, but it really does help to abstract larger chunks of code for things like complex computations, algorithms, etc. in order to keep the rest of your frontend code clean and readable. 
+This example is pretty trivial, but it really does help to abstract larger chunks of code for things like complex computations, algorithms, etc. in order to keep the rest of your frontend code clean and readable.
+
+We also place code that interacts with the shell in this modules directory. We do this to prevent needing to play such code in all of your frontend pages.
 
 
 
@@ -539,7 +542,7 @@ Uhray Boilerplate uses [bower](http://bower.io/) as a frontend package manager. 
  1. Manually edit *bower.json* and re-build your application.
  2. Run ```bower install <package-name> [--save|--save-dev]``` from the command line and re-build your application.
 
->Note: If you wish to include a GitHub module in your application, but it's not on bower, you can still include it by providing the Github SSH URL for the desired GitHub repository in the *bower.json* file as shown [here](https://github.com/uhray/boilerplate/blob/master/bower.json#L10).
+>Note: If you wish to include a GitHub module in your application, but it's not on bower, you can still include it by providing the Github HTTPS URL (with ```https://``` replaced with ```git://```) for the desired GitHub repository in the *bower.json* file as shown [here](https://github.com/uhray/boilerplate/blob/master/bower.json#L10).
 
 #### Require.js
 
@@ -578,25 +581,25 @@ Command: ```gulp static```. This static build is for starting the static server 
  1. Performs a gulp install.
  2. Converts all SCSS files to CSS files & runs [autoprefixer](http://css-tricks.com/autoprefixer/).
  3. Starts the static server (*static.js*), hosting all static pages.
- 4. Watches for changes to any SCSS files and auto-converts to CSS on the fly ([for editing stylesheets directly in the browser](#editing-cssscss-directly-from-chrome-devtools))..
+ 4. Watches for changes to any SCSS files and auto-converts to CSS on the fly.
 
 #### Dev
 
 Command: ```gulp dev```. This dev build is for starting the development server when working on the interactive web application. It does 4 things:
 
  1. Performs a gulp install.
- 2. Converts all SCSS files to CSS files & runs [autoprefixer].
+ 2. Converts all SCSS files to CSS files & runs [autoprefixer](http://css-tricks.com/autoprefixer/).
  3. Starts the development server (*server.js* in dev-mode), hosting the web app.
- 4. Watches for changes to any SCSS files and auto-converts to CSS on the fly ([for editing stylesheets directly in the browser](#editing-cssscss-directly-from-chrome-devtools)).
+ 4. Watches for changes to any SCSS files and auto-converts to CSS on the fly.
 
 #### Prod
 
 Command: ```gulp prod```. This prod build is for starting the production server when testing the web application or before deploying the application to Heroku. It does 4 things:
 
- 1. Performs a gulp install
- 2. Converts all SCSS files to CSS files & runs [autoprefixer]
- 3. Minifies all JavaScript files
- 4. Starts the production server (*server.js* in prod-mode), hosting the production web app
+ 1. Performs a gulp install.
+ 2. Converts all SCSS files to CSS files & runs [autoprefixer](http://css-tricks.com/autoprefixer/).
+ 3. Minifies all JavaScript files.
+ 4. Starts the production server (*server.js* in prod-mode), hosting the production web app.
 
 #### Lint
 
@@ -605,18 +608,17 @@ Command: ```gulp lint```. This lint build is for linting the application's codeb
 
 ## Heroku Deployment
 
- 1. Before deploying to Heroku, you need to run the [Production Build Command](#prod) as this will convert all SCSS files to CSS files and minify all JavaScript files for optimization. 
- 2. If you haven't already, you need to create an account on [Heroku](https://www.heroku.com/)
- 3. If you haven't already, you need to [install the Heroku CLI](https://devcenter.heroku.com/articles/getting-started-with-nodejs#set-up).
- 4. If you haven't already, you need to login to Heroku on the command line by running: 
+ 1. If you haven't already, you need to create an account on [Heroku](https://www.heroku.com/)
+ 2. If you haven't already, you need to [install the Heroku CLI](https://devcenter.heroku.com/articles/getting-started-with-nodejs#set-up).
+ 3. If you haven't already, you need to login to Heroku on the command line by running: 
 	 
 	 ```heroku login```
 	 
- 5. Ensure your web application is a functioning git repository with a *package.json* and a *Procfile* in the application's root directory.
+ 4. Ensure your web application is a functioning git repository with a *package.json* and a *Procfile* in the application's root directory.
  
 	>Note: Heroku knows what command to run to start your application by looking in the Procfile for the [*web* command](https://github.com/uhray/boilerplate/blob/master/Procfile#L2). Heroku then uses [foreman](https://github.com/ddollar/foreman) and runs ```foreman start web``` to fire up your application. By default, the web command for the Uhray Boilerplate is ```node server.js PRODUCTION```. You can try running this command to verify that everything is working properly before you deploy.
  
- 6. Create an app on Heroku from your application's root directory, preparing Heroku to receive your source code. You can do this one of two ways. 
+ 5. Create an app on Heroku from your application's root directory, preparing Heroku to receive your source code. You can do this one of two ways. 
 
  
 	 Option 1 is running the new beta command that uses HTTP-git: 
@@ -638,14 +640,14 @@ http://sharp-rain-871.herokuapp.com/ | https://git.heroku.com/sharp-rain-871.git
 
 	You not have a git remote called *heroku* that is associated with your local git repository a.k.a. your application.
 
- 7. Now deploy your code to Heroku by running: 
+ 6. Now deploy your code to Heroku by running: 
 	
 	 ```git push heroku master```
  
- 8. Ensure that at least one instance of the app is running by running:
+ 7. Ensure that at least one instance of the app is running by running:
 
 	 ``` heroku ps:scale web=1```
 
- 9. Check out your app by running:
+ 8. Check out your app by running:
 	
 	 ```heroku open```
