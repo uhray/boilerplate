@@ -380,7 +380,7 @@ function(Director, p$home) {
 });
 ```
 
-By default, this *router.js* file only has one route set up. It shows that given the ```'/'``` route, the home page *p\$home* should be loaded. As you can see in the require.js syntax at the top of this file, *p\$home* is actually the Ractive javascript file *main.js* inside the *pages/home* directory. As you know from the [Pages](#Pages) documentation, loading a page's Ractive file will load up and render that page's *template.html* file with the appropriate data within the shell. 
+By default, this *router.js* file only has one route set up. It shows that given the ```'/'``` route, the home page *p$home* should be loaded. As you can see in the require.js syntax at the top of this file, *p$home* is actually the Ractive javascript file *main.js* inside the *pages/home* directory. As you know from the [Pages](#Pages) documentation, loading a page's Ractive file will load up and render that page's *template.html* file with the appropriate data within the shell. 
 
 The last thing to note in the code above is the ```clear()``` function which is called by *director* before handling a route. When a user navigates between pages, this function will remove all HTML elements from within the shell's ```<div id="body">``` element thus resulting in the original shell. Then, director loads up the page associated with the new route which embeds new content into that same ```<div id="body">``` element. 
 
