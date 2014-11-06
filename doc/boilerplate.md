@@ -216,7 +216,7 @@ To create a new resource, simple create a new JavaScript file in the API's [reso
 
 #### Basics
 
-When the server receives a request for a particular route, it responds with a randered shell. A shell is simply a skeleton of static HTML & CSS that is sent to the client-side and immediately displayed before the frontend takes care of loading the remainder of the elements and data into the main body of the page. 
+When the server receives a request for a particular route, it responds with a rendered shell. A shell is simply a skeleton of static HTML & CSS that is sent to the client-side and immediately displayed before the frontend takes care of loading the remainder of the elements and data into the main body of the page. 
 
 The advantage to using shells is that you can update data on the frontend as a user navigates between pages without re-requesting the shell content from the application server or re-rendering the entire view. This creates a smoother user experience without the constant feel of page refreshes. It can also significantly lighten the load on your application server since parts of your HTML template and stylesheets don't need to be repeatedly served. The application server will just respond to API requests after a shell is sent to the frontend (unless you request a new shell for a different part of your web application).
 
