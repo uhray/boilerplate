@@ -541,6 +541,10 @@ Uhray Boilerplate uses [bower](http://bower.io/) as a frontend package manager. 
 
 >Note: If you wish to include a GitHub module in your application, but it's not on bower, you can still include it by providing the Github SSH URL for the desired GitHub repository in the *bower.json* file as shown [here](https://github.com/uhray/boilerplate/blob/master/bower.json#L10).
 
+#### Require.js
+
+We use *require.js* as a file and module loader on the frontend. The frontend's [configure.js](https://github.com/uhray/boilerplate/blob/master/app/frontend/configure.js) file is the main configuration file for *require.js*.
+
 
 ## Linting
 
