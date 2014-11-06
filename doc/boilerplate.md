@@ -314,7 +314,7 @@ To create a new page, you need to do several things:
 
  1. If the new page will need a new shell, see [Adding a New Shell](#adding-a-new-shell) for instructions.
  2. Create a new directory in the frontend [pages](https://github.com/uhray/boilerplate/tree/master/app/frontend/pages) directory.
- 2. In this directory, create an Ractive Template (example: [template.html](https://github.com/uhray/boilerplate/blob/master/app/frontend/pages/home/template.html)).
+ 2. In this directory, create an Ractive Template (example: [*template.html*](https://github.com/uhray/boilerplate/blob/master/app/frontend/pages/home/template.html)).
  3. In this directory, create an Ractive JavaScript file (example: [*main.js*](https://github.com/uhray/boilerplate/blob/master/app/frontend/pages/home/main.js)).
  4. Update your [frontend routes](#routing) to define which URLs should load the new page.
 
