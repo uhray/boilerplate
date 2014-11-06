@@ -9,7 +9,7 @@ gulp.task('default', ['info']);
 gulp.task('install', ['npm_install', 'bower_clean', 'bower_install']);
 gulp.task('static', ['install', 'scss_to_css', 'static_server', 'scss_watch']);
 gulp.task('dev', ['install', 'scss_to_css', 'dev_server', 'scss_watch']);
-gulp.task('prod', ['install', 'scss_to_css', 'minify_js', 'prod_server']);
+gulp.task('prod', ['install', 'scss_to_css_prod', 'minify_js', 'prod_server']);
 gulp.task('lint', ['dolint']);
 
 // Helper Tasks ----------------------------------------------------------------
@@ -35,14 +35,16 @@ gulp.task('bower_install', ['bower_clean'], function(cb) {
        .on('close', cb);
 });
 
+gulp.task('scss_to_css_prod', function() {
+  return gulp.src('app/frontend/styles/*.scss')
+             .pipe(sass())
+             .pipe(autoprefixer())
+             .pipe(gulp.dest('app/frontend/styles/css'));
+});
+
 gulp.task('scss_to_css', function() {
   return gulp.src('app/frontend/styles/*.scss')
-             .pipe(sass({
-               sourcemap: true,
-               sourcemapPath: '..'
-             }))
-             .on('error', function(err) { console.log(err.message); })
-             .pipe(autoprefixer())
+             .pipe(sass())
              .pipe(gulp.dest('app/frontend/styles/css'));
 });
 
@@ -61,7 +63,8 @@ gulp.task('dev_server', ['install', 'scss_to_css'], function() {
   child.spawn('foreman', ['start', 'dev'], { stdio: 'inherit' });
 });
 
-gulp.task('prod_server', ['install', 'minify_js'], function() {
+gulp.task('prod_server', ['install', 'scss_to_css_prod', 'minify_js'],
+          function() {
   child.spawn('foreman', ['start', 'web'], { stdio: 'inherit' });
 });
 
@@ -72,4 +75,3 @@ gulp.task('scss_watch', ['scss_to_css'], function() {
 gulp.task('dolint', function() {
   child.spawn('./node_modules/.bin/jscs', ['./'], { stdio: 'inherit' });
 });
-
