@@ -45,6 +45,9 @@ gulp.task('scss_to_css_prod', function() {
 gulp.task('scss_to_css', function() {
   return gulp.src('app/frontend/styles/*.scss')
              .pipe(sass())
+             .on('error', function(e) {
+                console.log('sass error:', e.message);
+              })
              .pipe(gulp.dest('app/frontend/styles/css'));
 });
 
