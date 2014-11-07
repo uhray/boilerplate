@@ -50,7 +50,7 @@ gulp dev
 
 ## Codebase Organization
 
-The Uhray Boilerplate [root directory](https://github.com/uhray/boilerplate) contains many files and directories related to the application server, configurations, build commands, etc. We'll get into many of these specifics later. The primary file of importance is [server.js](https://github.com/uhray/boilerplate/blob/master/server.js) which is the application server. The real meat of the Uhray boilerplate is within the [app](https://github.com/uhray/boilerplate/tree/master/app) directory, more specifically within its [backend](https://github.com/uhray/boilerplate/tree/master/app/backend) and [frontend](https://github.com/uhray/boilerplate/tree/master/app/frontend) subdirectories.
+The Uhray Boilerplate [root directory](https://github.com/uhray/boilerplate) contains many files and directories related to the application server, configurations, build commands, etc. We'll get into many of these specifics later. The primary file of importance is [server.js](https://github.com/uhray/boilerplate/blob/master/server.js) which is the application server. The real meat of the Uhray Boilerplate is within the [app](https://github.com/uhray/boilerplate/tree/master/app) directory, more specifically within its [backend](https://github.com/uhray/boilerplate/tree/master/app/backend) and [frontend](https://github.com/uhray/boilerplate/tree/master/app/frontend) subdirectories.
 
 ```
 app/
