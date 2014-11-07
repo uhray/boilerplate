@@ -45,7 +45,7 @@ Take a look at the [Uhray Boilerplate Docs](doc/boilerplate.md). This documentat
 
 ## Browser Compatibility
 
-This boilerplate should be ready to go for all evergreen browsers.
+This boilerplate should be compatible with all evergreen browsers.
 
 
 
