@@ -269,7 +269,7 @@ By default, the _layout.html has 3 CSS links.
 
 You can extend the base CSS by adding CSS/SCSS rules to the [main.scss](https://github.com/uhray/boilerplate/blob/master/app/frontend/styles/main.scss) file in the frontend styles directory. 
 
->Note: The difference in file extensions (*.css from _layout.html* vs *.scss from frontend styles directory*) will be resolved during the application's build process. By default, all SCSS files are converted to CSS files with the same base filename. See [Build Options](#build-options) for additional information.
+>Note: The difference in file extensions (*.css from _layout.html* vs *.scss from frontend styles directory*) will be resolved during the application's build process. By default, all SCSS files are converted to CSS files with the same base filename. These converted CSS files will be placed within a /css directory within the /styles directory. See [Build Options](#build-options) for additional information.
 
 The best part about doing static development this way is that when you're ready to build an interactive application, your templates and styling are pretty much complete.
 
@@ -390,7 +390,7 @@ The last thing to note in the code above is the ```clear()``` function which is 
 
 The [styles](https://github.com/uhray/boilerplate/tree/master/app/frontend/styles) directory is meant to house all of your application's custom styling rules. In addition to regular CSS files, Uhray Boilerplate allows you to put SCSS files in this directory. SCSS allows you to do [really cool things](http://sass-lang.com/guide) like use variables in CSS. By default, the [*main.scss*](https://github.com/uhray/boilerplate/blob/master/app/frontend/styles/main.scss) file is linked to all of your frontend pages and static templates, so you can simply extend this file with new CSS or SCSS styling rules. 
 
->Note: During the build process, all SCSS files are converted to CSS files with the same base filename. Also, all CSS files are run through [autoprefixer](https://github.com/postcss/autoprefixer) which automatically adds in any missing vender prefixes (-webit, -moz, -ms). See [Build Options](#build-options) for additional information.
+>Note: During the build process, all SCSS files are converted to CSS files with the same base filename. Also, all CSS files are run through [autoprefixer](https://github.com/postcss/autoprefixer) which automatically adds in any missing vender prefixes (-webit, -moz, -ms). These converted CSS files will be placed within a /css directory within the /styles directory. See [Build Options](#build-options) for additional information.
 
 #### Adding a New Stylesheet
 
