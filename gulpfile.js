@@ -9,7 +9,7 @@ gulp.task('default', ['info']);
 gulp.task('install', ['npm_install', 'bower_clean', 'bower_install']);
 gulp.task('static', ['install', 'scss_to_css', 'static_server', 'scss_watch']);
 gulp.task('dev', ['install', 'scss_to_css', 'dev_server', 'scss_watch']);
-gulp.task('prod', ['install', 'scss_to_css', 'minify_js', 'prod_server']);
+gulp.task('prod', ['install', 'scss_to_css_prod', 'minify_js', 'prod_server']);
 gulp.task('lint', ['dolint']);
 
 // Helper Tasks ----------------------------------------------------------------
@@ -35,18 +35,23 @@ gulp.task('bower_install', ['bower_clean'], function(cb) {
        .on('close', cb);
 });
 
-gulp.task('scss_to_css', ['bower_install'], function() {
+gulp.task('scss_to_css_prod', function() {
   return gulp.src('app/frontend/styles/*.scss')
-             .pipe(sass({
-               sourcemap: true,
-               sourcemapPath: '..'
-             }))
-             .on('error', function(err) { console.log(err.message); })
+             .pipe(sass())
              .pipe(autoprefixer())
              .pipe(gulp.dest('app/frontend/styles/css'));
 });
 
-gulp.task('minify_js', ['scss_to_css'], function(cb) {
+gulp.task('scss_to_css', function() {
+  return gulp.src('app/frontend/styles/*.scss')
+             .pipe(sass())
+             .on('error', function(e) {
+                console.log('sass error:', e.message);
+              })
+             .pipe(gulp.dest('app/frontend/styles/css'));
+});
+
+gulp.task('minify_js', ['bower_install'], function(cb) {
   child.spawn('./node_modules/requirejs/bin/r.js',
               ['-o', 'config/rjs-build.js'],
               { stdio: 'inherit' })
@@ -57,11 +62,12 @@ gulp.task('static_server', ['scss_to_css'], function() {
   child.spawn('foreman', ['start', 'static'], { stdio: 'inherit' });
 });
 
-gulp.task('dev_server', ['scss_to_css'], function() {
+gulp.task('dev_server', ['install', 'scss_to_css'], function() {
   child.spawn('foreman', ['start', 'dev'], { stdio: 'inherit' });
 });
 
-gulp.task('prod_server', ['minify_js'], function() {
+gulp.task('prod_server', ['install', 'scss_to_css_prod', 'minify_js'],
+          function() {
   child.spawn('foreman', ['start', 'web'], { stdio: 'inherit' });
 });
 

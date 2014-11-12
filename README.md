@@ -1,7 +1,9 @@
 Uhray Boilerplate
 ===============
 
-The Uhray boilerplate is a starting point for web application development projects. It was originally inspired by [html5-boilerplate](https://github.com/h5bp/html5-boilerplate), but we shifted the focus to creating dynamic web applications that needed more than the basics of an HTML5 site. We set out to build a collection of tech tools, both internally developed and externally leveraged, that would allow developers to easily and efficiently create modern web applications. We wanted to organize the codebase according to how we typically think about web applications (page-centric, complete separation of frontend and backend, etc). Lastly, we wanted to create a framework with complete transparency and no magic. This gives the developer complete flexibility to do virtually anything he desires, however he chooses, without being pigeonholed or restricted to the confines of typical development frameworks. The end result is the Uhray Boilerplate.
+The Uhray Boilerplate is a starting point for web application development projects. It was originally inspired by [html5-boilerplate](https://github.com/h5bp/html5-boilerplate), but we shifted the focus to creating dynamic web applications that needed more than the basics of an HTML5 site. We set out to build a collection of tech tools that would allow developers to easily and efficiently create modern web applications. We wanted to organize the codebase according to how we typically think about web applications (page-centric, complete separation of frontend and backend, etc). Lastly, we wanted to create a framework with complete transparency and no magic. This gives the developer complete flexibility to do virtually anything he/she desires, however he/she chooses, without being pigeonholed or restricted to the confines of typical development frameworks. The end result is the Uhray Boilerplate.
+
+If you are interested in developing hybrid mobile apps, check out the [Uhray Mobile Boilerplate](https://github.com/uhray/mobile-boilerplate).
 
 ## Features
 
@@ -12,7 +14,7 @@ The Uhray boilerplate is a starting point for web application development projec
 * Ready for [mustache](https://www.npmjs.org/package/mustache-express) for the backend rendering.
 * Uses [ractivejs](https://ractivejs.org) for frontend view rendering.
 * Includes [normalize.css](http://necolas.github.com/normalize.css/) for CSS normalizations and common bug fixes.
-* Built in (but removable) CSS element reset. (see [main.css](app/frontend/styles/main.scss)).
+* Built in (but removable) CSS element reset. (see [main.scss](app/frontend/styles/main.scss)).
 * Frontend JavaScript dependencies managed with [bower](http://bower.io).
 * Built ready for [heroku](https://heroku.com) deployment.
 * Easily extendable to new modules [npm](http://npmjs.org) and [bower](http://bower.io).
@@ -32,18 +34,18 @@ Dependencies:
 ```
 git clone git@github.com:uhray/boilerplate.git
 cd boilerplate
-npm install && bower install
+npm install
 gulp dev
 // Application is now running at http://localhost:5000
 ```
 
 ## Documentation
 
-Take a look at the [Uhray Boilerplate Docs](doc/boilerplate.md). This documentation is bundled with the project, which makes it readily available for offline reading and provides a useful starting point for any documentation you want to write about your project.
+Take a look at the [Uhray Boilerplate Docs](doc/boilerplate.md). This documentation is bundled with the project, which makes it readily available for offline viewing and provides a useful starting point for any documentation you want to write about your web application.
 
 ## Browser Compatibility
 
-This boilerplate should be ready to go for all evergreen browsers.
+This boilerplate should be compatible with all evergreen browsers.
 
 
 
