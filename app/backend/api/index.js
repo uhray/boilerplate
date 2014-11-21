@@ -14,6 +14,7 @@ module.exports = exports = function(app) {
     router: app,
     model: resources.users.Model,
     cors: nconf.get('cors'),
+    verificationOn: false,
     forgotMailer: function(user, code, cb) {
       logger.info('Forgot code for %s: %s', user.username, code);
       cb();

@@ -9,6 +9,8 @@ var crud = require('node-crud'),
     mongoose = require('mongoose'),
     debug = require('debug')('api:users'),
     turnkey = require('turnkey'),
+    ObjectId = mongoose.Schema.Types.ObjectId,
+    Mixed = mongoose.Schema.Types.Mixed,
     Schema, Model;
 
 // Create a Schema & Model -----------------------------------------------------
@@ -57,6 +59,7 @@ crud.entity('/users/:_id').Update()
   // .use(turnkey.loggedIn()) authentication commented out for boilerplate
   .use(turnkey.updatePassword())
   .pipe(cm.parseData()
+          .removes('dates.created')
           .overrides({ 'dates.updated': Date.now }))
   .pipe(cm.updateOne(Model));
 
