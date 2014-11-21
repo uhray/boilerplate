@@ -1,3 +1,5 @@
 {
-  "log_level": "info"
+  "log_level": "info",
+  "MONGO_URL": "",
+  "cors": false
 }

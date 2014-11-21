@@ -6,7 +6,7 @@ var nconf = require('nconf'),
     resources = require('require-dir')('./resources');
 
 module.exports = exports = function(app) {
-  var url = nconf.get('MONGOHQ_URL');
+  var url = nconf.get('MONGO_URL');
 
   // set up auth here //
   turnkey.launch({
@@ -26,7 +26,7 @@ module.exports = exports = function(app) {
   crud.launch(app);
 
   // connect to db
-  if (!url) return logger.warn('No MONGOHQ_URL. Not attaching to db.');
+  if (!url) return logger.warn('No MONGO_URL. Not attaching to db.');
 
   mongoose.connect(url);
   mongoose.connection.on('error', function(e) {
