@@ -18,12 +18,14 @@ gulp.task('info', function() {
   console.log('\nUsage:\t gulp [ install | static | dev | prod | lint ]\n');
 });
 
+gulp.task('heroku', ['bower_install', 'scss_to_css_prod']);
+
 gulp.task('npm_install', function(cb) {
   child.spawn('npm', ['install'], { stdio: 'inherit' })
        .on('close', cb);
 });
 
-gulp.task('bower_clean', ['npm_install'], function(cb) {
+gulp.task('bower_clean', function(cb) {
   child.spawn('./node_modules/bower/bin/bower', ['cache', 'clean'],
               { stdio: 'inherit' })
        .on('close', cb);

@@ -42,11 +42,18 @@ app.listen(nconf.get('PORT'), function() {
     var files = fs.readdirSync(dir)
                   .filter(function(d) { return d[0] != '_'; })
                   .map(function(d) { return d.replace(/\.mustache$/, '') }),
-        _ = ['<body><h1>static pages:</h1><ul>',
-             files.map(function(d) {
-               return util.format('<li><a href="/%s">%s</a></li>', d, d)
-             }).join('\n'),
-             '</body></ul>'];
+        _ = ['<body><style>',
+             'h1 { text-align: center; }',
+             'li { width: 300px; height: 280px; list-style: none; ',
+             ' margin: 10px; float: left; position: relative; }',
+             'h5 { position: absolute; bottom: 0; text-align: center; ',
+             '     width: 100%; }',
+             'li a { display: block; position: absolute; width: 100%;',
+             '       top: 0; bottom: 0; }',
+             'iframe { transform: scale(0.25); transform-origin: 0 0; } ',
+             '</style><h1>Static Pages</h1><ul>',
+             files.map(iframe).join('\n'),
+             '</ul></body>'];
     res.send(_.join('\n'));
   });
 
@@ -68,4 +75,12 @@ function configureMethod(app, method) {
     console.log('%s route:', method, path);
     return m.apply(this, arguments);
   }
+}
+
+function iframe(d) {
+  var uf = util.format.bind(util);
+  return uf('<li><iframe src="/%s" width=1200 height=900 ' +
+            'style="transform: scale(0.25)" ></iframe> ' +
+            '<h5>%s</h5><a href="/%s"></a></li>',
+            d, d.replace('.html', ''), d);
 }
