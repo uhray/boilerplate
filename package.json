@@ -22,17 +22,17 @@
     "require-dir": "^0.1.0",
     "node-crud": "^2.0.2",
     "crud-mongoose": "^1.0.0",
-    "turnkey": "^1.0.0",
+    "turnkey": "^1.0.0"
+  },
+  "devDependencies": {
     "sass": "^0.5.0",
     "gulp": "^3.8.8",
     "gulp-autoprefixer": "^1.0.1",
     "gulp-ruby-sass": "^0.7.1"
-  },
-  "devDependencies": {
     "gulp-jscs": "^1.2.0",
     "jscs": "^1.7.3"
   },
   "scripts": {
-    "postinstall" : "./node_modules/.bin/gulp heroku"
+    "postinstall" : "bower cache clean && bower install"
   }
 }

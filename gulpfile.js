@@ -18,23 +18,21 @@ gulp.task('info', function() {
   console.log('\nUsage:\t gulp [ install | static | dev | prod | lint ]\n');
 });
 
-gulp.task('heroku', ['bower_install', 'scss_to_css_prod']);
+gulp.task('heroku', ['bower_install']);
 
-gulp.task('npm_install', function(cb) {
-  child.spawn('npm', ['install'], { stdio: 'inherit' })
-       .on('close', cb);
+gulp.task('npm_install', function() {
+  return child.spawn('npm', ['install', '--ignore-scripts'],
+                     { stdio: 'inherit' })
 });
 
-gulp.task('bower_clean', function(cb) {
-  child.spawn('./node_modules/bower/bin/bower', ['cache', 'clean'],
-              { stdio: 'inherit' })
-       .on('close', cb);
+gulp.task('bower_clean', function() {
+  return child.spawn('./node_modules/bower/bin/bower', ['cache', 'clean'],
+                     { stdio: 'inherit' })
 });
 
-gulp.task('bower_install', ['bower_clean'], function(cb) {
-  child.spawn('./node_modules/bower/bin/bower', ['install'],
-              { stdio: 'inherit' })
-       .on('close', cb);
+gulp.task('bower_install', ['bower_clean'], function() {
+  return child.spawn('./node_modules/bower/bin/bower', ['install'],
+                     { stdio: 'inherit' });
 });
 
 gulp.task('scss_to_css_prod', function() {
@@ -54,10 +52,9 @@ gulp.task('scss_to_css', function() {
 });
 
 gulp.task('minify_js', ['bower_install'], function(cb) {
-  child.spawn('./node_modules/requirejs/bin/r.js',
-              ['-o', 'config/rjs-build.js'],
-              { stdio: 'inherit' })
-       .on('close', cb);
+  return child.spawn('./node_modules/requirejs/bin/r.js',
+                     ['-o', 'config/rjs-build.js'],
+                     { stdio: 'inherit' });
 });
 
 gulp.task('static_server', ['scss_to_css'], function() {
