@@ -594,7 +594,7 @@ Command: ```gulp dev```. This dev build is for starting the development server w
 
 #### Prod
 
-Command: ```gulp prod```. This prod build is for starting the production server when testing the web application or before deploying the application to Heroku. It does 4 things:
+Command: ```gulp prod```. This prod build is for starting the production server when testing the web application. It does 4 things:
 
  1. Performs a gulp install.
  2. Converts all SCSS files to CSS files & runs [autoprefixer](http://css-tricks.com/autoprefixer/).
