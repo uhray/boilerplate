@@ -18,3 +18,4 @@ newrelic_agent.log
 
 npm-debug.log
 app/frontend/bower/*
+app/frontend/styles/css/*.css.map
