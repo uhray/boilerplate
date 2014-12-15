@@ -8,7 +8,6 @@ require.config({
     rv:          'bower/rv/rv'
   },
   shim: {
-    page:     { exports: 'page' },
     debug:    { exports: 'debug' },
     director: { exports: 'Router' }
   },
