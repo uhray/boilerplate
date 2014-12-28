@@ -57,10 +57,10 @@ crud.entity('/users/:_id').Read()
 
 crud.entity('/users/:_id').Update()
   // .use(turnkey.loggedIn()) authentication commented out for boilerplate
-  .use(turnkey.updatePassword())
   .pipe(cm.parseData()
-          .removes('dates.created')
+          .removes('dates.created', 'turnkey')
           .overrides({ 'dates.updated': Date.now }))
+  .use(turnkey.updatePassword())
   .pipe(cm.updateOne(Model));
 
 crud.entity('/users/:_id').Delete()

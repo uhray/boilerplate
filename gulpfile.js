@@ -51,7 +51,7 @@ gulp.task('scss_to_css', function() {
              .pipe(gulp.dest('app/frontend/styles/css'));
 });
 
-gulp.task('minify_js', ['bower_install'], function(cb) {
+gulp.task('minify_js', ['bower_install'], function() {
   return child.spawn('./node_modules/requirejs/bin/r.js',
                      ['-o', 'config/rjs-build.js'],
                      { stdio: 'inherit' });

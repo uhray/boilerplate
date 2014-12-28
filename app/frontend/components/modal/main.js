@@ -12,13 +12,16 @@ function(Ractive, template) {
     // ...but it should append to it rather than overwriting its contents
     append: true,
 
+    // should have only isolated data
+    isolated: true,
+
     // all Modal instances will share a template (though you can override it
     // on a per-instance basis, if you really want to)
     template: template,
 
-    // the init function will be called as soon as the instance has
+    // the onrender function will be called as soon as the instance has
     // finished rendering
-    init: function() {
+    onrender: function() {
       var self = this, resizeHandler, keyupHandler;
 
       // store references to the background, and to the modal itself
