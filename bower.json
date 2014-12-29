@@ -7,7 +7,7 @@
     "requirejs": "~2.1.14",
     "almond": "~0.2.9",
     "ractive": "~0.6.0",
-    "rv": "git://github.com/ractivejs/rv.git#v0.1.6",
+    "rv": "git://github.com/ractivejs/rv.git#v0.1.8",
     "perfbar": "~0.0.2",
     "debug": "visionmedia/debug#~2.0.0",
     "director": "~1.2.2"
