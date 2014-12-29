@@ -647,7 +647,10 @@ http://sharp-rain-871.herokuapp.com/ | https://git.heroku.com/sharp-rain-871.git
  7. Ensure that at least one instance of the app is running by running:
 
 	 ``` heroku ps:scale web=1```
+	 
+ 8. Make sure Heroku has all necessary environment variables, through the Heroku CLI or through the online interface. 
 
- 8. Check out your app by running:
+ 9. Check out your app by running:
 	
 	 ```heroku open```
+
