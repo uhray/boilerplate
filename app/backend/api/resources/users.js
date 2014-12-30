@@ -39,6 +39,10 @@ crud.entity('/users').Read()
 
 crud.entity('/users').Create()
   .use(turnkey.createPassword())
+  .use(function(d, q, cb) {
+    d.username = d.username && d.username.toLowerCase();
+    cb();
+  })
   .pipe(cm.createNew(Model));
 
 crud.entity('/users').Delete()
