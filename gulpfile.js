@@ -10,6 +10,7 @@ gulp.task('install', ['npm_install', 'bower_clean', 'bower_install']);
 gulp.task('static', ['install', 'scss_to_css', 'static_server', 'scss_watch']);
 gulp.task('dev', ['install', 'scss_to_css', 'dev_server', 'scss_watch']);
 gulp.task('prod', ['install', 'scss_to_css_prod', 'minify_js', 'prod_server']);
+gulp.task('prod_test', ['install', 'prod_watch', 'prod_server']);
 gulp.task('lint', ['dolint']);
 
 // Helper Tasks ----------------------------------------------------------------
@@ -72,6 +73,13 @@ gulp.task('prod_server', ['install', 'scss_to_css_prod', 'minify_js'],
 
 gulp.task('scss_watch', ['scss_to_css'], function() {
   gulp.watch('app/frontend/styles/*.scss', ['scss_to_css']);
+});
+
+gulp.task('prod_watch', function() {
+  gulp.watch('app/frontend/styles/*.scss', ['scss_to_css_prod']);
+  gulp.watch('app/frontend/*/**/*.js', ['minify_js']);
+  gulp.watch('app/frontend/configure.js', ['minify_js']);
+  gulp.watch('app/frontend/router.js', ['minify_js']);
 });
 
 gulp.task('dolint', function() {

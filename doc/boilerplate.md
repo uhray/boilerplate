@@ -601,6 +601,17 @@ Command: ```gulp prod```. This prod build is for starting the production server 
  3. Minifies all JavaScript files.
  4. Starts the production server (*server.js* in prod-mode), hosting the production web app.
 
+#### Prod Test
+
+Command: ```gulp prod_test```. This prod build is for starting the production server when testing the web application and have it re-build the minified js and the css files. It does 6 things:
+
+ 1. Performs a gulp install.
+ 2. Converts all SCSS files to CSS files & runs [autoprefixer](http://css-tricks.com/autoprefixer/).
+ 3. Minifies all JavaScript files.
+ 4. Starts the production server (*server.js* in prod-mode), hosting the production web app.
+ 5. Watches for changes to any SCSS files and auto-converts to CSS on the fly.
+ 6. Watches for changes to any js files and auto-minifies fly.
+
 #### Lint
 
 Command: ```gulp lint```. This lint build is for linting the application's codebase for possible errors. Right now, this only runs the JavaScript linter [jscs](https://www.npmjs.org/package/jscs). See [Linting Docs](#linting) for more information.
