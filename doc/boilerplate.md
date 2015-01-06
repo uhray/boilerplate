@@ -608,6 +608,7 @@ Command: ```gulp lint```. This lint build is for linting the application's codeb
 
 ## Heroku Deployment
 
+#### Setting Up Heroku
  1. If you haven't already, you need to create an account on [Heroku](https://www.heroku.com/)
  2. If you haven't already, you need to [install the Heroku CLI](https://devcenter.heroku.com/articles/getting-started-with-nodejs#set-up).
  3. If you haven't already, you need to login to Heroku on the command line by running: 
@@ -640,6 +641,19 @@ http://sharp-rain-871.herokuapp.com/ | https://git.heroku.com/sharp-rain-871.git
 
 	You not have a git remote called *heroku* that is associated with your local git repository a.k.a. your application.
 
+#### Deploying Code
+
+ 1. Run ```git pull origin master``` to make sure your code is up-to-date
+ 2. Run ```gulp prod```
+ 3. Exit out of the production server
+ 4. Commit code:
+
+	```git commit -am "blah blah blah"```
+
+ 5. Push your code to the GitHub repo:
+ 
+	 ```git push origin master```
+ 
  6. Now deploy your code to Heroku by running: 
 	
 	 ```git push heroku master```
