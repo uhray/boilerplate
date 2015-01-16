@@ -85,7 +85,6 @@ The frontend directory all starts with the [router.js](https://github.com/uhray/
 
 ```
 frontend/
-	ractive-components/
 	images/
 	modules/
 		tools.js
@@ -93,6 +92,7 @@ frontend/
 		home/
 			template.html
 			main.js
+	ractive-plugins/
 	styles/
 	configure.js
 	router.js
