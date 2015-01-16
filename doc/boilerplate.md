@@ -351,41 +351,27 @@ If your page requires a lot of data up-front before you instantiate an Ractive o
 
 
 
-
 ## Routing
 
-After the server has packaged up a backend shell and sent it over to the frontend, the [*router.js*](https://github.com/uhray/boilerplate/blob/master/app/frontend/router.js) file determines what frontend page should be loaded into the shell based on the URL. These routes are setup using [director](https://github.com/flatiron/director). 
+After the server has packaged up a backend shell and sent it over to the frontend, the [*router.js*](../app/frontend/router.js) file determines what frontend page should be loaded into the shell based on the URL. These routes are setup using [director](https://github.com/flatiron/director). 
+
+> Note: We use [requirejs-loader-plugin](https://github.com/uhray/requirejs-loader-plugin) to load all the pages. See [Configuring Frontend](configuring-frontend) for more info.
 
 Below is a barebones example of the *router.js* file.
 ```js
 define(
-['director', 'pages/home/main'],
-function(Director, p$home) {
+['director', 'loader!pages'],
+function(Director, pages) {
 	var routes = {
-	    '/': p$home
+	    '/': pages.home
 	},
-    router = new Director(routes);
-
-	router.configure({
-	    before: clear
-	});
+        router = new Director(routes);
 
 	router.init('/');
-
-	function clear() {
-	  debug('clearing for new page');
-	  var b = document && document.getElementById &&
-	          document.getElementById('body');
-	  if (b && 'innerHTML' in b) b.innerHTML = '';
-	}
 });
 ```
 
-By default, this *router.js* file only has one route set up. It shows that given the ```'/'``` route, the home page *p$home* should be loaded. As you can see in the require.js syntax at the top of this file, *p$home* is actually the Ractive javascript file *main.js* inside the *pages/home* directory. As you know from the [Pages](#Pages) documentation, loading a page's Ractive file will load up and render that page's *template.html* file with the appropriate data within the shell. 
-
-The last thing to note in the code above is the ```clear()``` function which is called by *director* before handling a route. When a user navigates between pages, this function will remove all HTML elements from within the shell's ```<div id="body">``` element thus resulting in the original shell. Then, director loads up the page associated with the new route which embeds new content into that same ```<div id="body">``` element. 
-
-
+By default, this *router.js* file only has one route set up. It shows that given the ```'/'``` route, the home page *page.home* should be loaded. You can see [Configuring Frontend](configuring-frontend) for more info on why `pages.home` is the home "page." the As you know from the [Pages](#Pages) documentation, loading a page's Ractive file will load up and render that page's *template.html* file with the appropriate data within the shell. 
 
 ## Styles
 
