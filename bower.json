@@ -10,6 +10,7 @@
     "rv": "git://github.com/ractivejs/rv.git#v0.1.8",
     "perfbar": "~0.0.2",
     "debug": "visionmedia/debug#~2.0.0",
-    "director": "~1.2.2"
+    "director": "~1.2.2",
+    "requirejs-loader-plugin": "~1.0.0"
   }
 }

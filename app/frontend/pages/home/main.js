@@ -1,10 +1,9 @@
 define(
 [
 'ractive',
-'components/modal/main',
 'rv!./template'
 ],
-function(Ractive, modal, template) {
+function(Ractive, template) {
 
   return function() {
     var ractive = new Ractive({
@@ -19,9 +18,6 @@ function(Ractive, modal, template) {
               var t = this.get('time');
               return t.getHours() + ':' + t.getMinutes() + ':' + t.getSeconds();
             }
-          },
-          components: {
-            modal: modal
           }
         });
 

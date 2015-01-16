@@ -1,13 +1,13 @@
 define(
 [
 'director',
-'pages/home/main',
+'loader!pages',
 'debug'
 ],
-function(Director, p$home, debug) {
+function(Director, pages, debug) {
   var debug = debug('router'),
       routes = {
-        '/': p$home
+        '/': pages.home
       },
       router = new Director(routes);
 
