@@ -423,11 +423,11 @@ The [images](https://github.com/uhray/boilerplate/tree/master/app/frontend/image
 
 ## Ractive-plugins
 
-The [ractive-plugins](../app/frontend/ractive-plugins) directory is broken down into the different types of plugins. Pay attention to the information in each type of plugin's README.md and follow the [ractive documentation](docs.ractivejs.org/latest/plugins) on plugins.
+The [ractive-plugins](../app/frontend/ractive-plugins) directory is broken down into the different types of plugins. Pay attention to the information in each type of plugin's README.md and follow the [ractive documentation](http://docs.ractivejs.org/latest/plugins) on plugins.
 
 ## Modules
 
-The frontend [modules](https://github.com/uhray/boilerplate/tree/master/app/frontend/modules) directory is simply a place to put reusable JavaScript code. The use cases are virtually endless, but here's a simple example.
+The frontend [modules](https://github.com/uhray/boilerplate/tree/master/app/frontend/modules) directory is simply a place to put reusable JavaScript code. The use cases are virtually endless, and by default there are a bunch of useful [tools](../app/frontend/modules/tools.js) but here's a simple example.
 
 #### Example
 
