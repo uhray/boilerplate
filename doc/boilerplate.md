@@ -16,7 +16,7 @@
 * [Routing](#routing)
 * [Styles](#styles)
 * [Images](#images)
-* [Components](#components)
+* [Ractive-Plugins](#ractive-plugins)
 * [Modules](#modules)
 
 **Other Docs**
@@ -81,13 +81,14 @@ The application server is setup to respond to specific requests with a shell. A 
 
 #### Frontend Organization
 
-The frontend directory all starts with the [router.js](https://github.com/uhray/boilerplate/blob/master/app/frontend/router.js) file. After the server sends over a shell to the frontend, the *router.js* file handles which application page should be loaded based on the URL. Each page can utilize components, images, modules or styles. More on this later.
+The frontend directory all starts with the [router.js](https://github.com/uhray/boilerplate/blob/master/app/frontend/router.js) file. After the server sends over a shell to the frontend, the *router.js* file handles which application page should be loaded based on the URL. Each page can utilize images, modules, styles, plugins, bower modules, etc. More on this later.
 
 ```
 frontend/
-	components/
+	ractive-components/
 	images/
 	modules/
+		tools.js
 	pages/
 		home/
 			template.html
@@ -420,67 +421,9 @@ The [images](https://github.com/uhray/boilerplate/tree/master/app/frontend/image
 
 >Note: All images in this directory will be publicly hosted with your application.
 
-## Components
+## Ractive-plugins
 
-#### Basics
-In many cases, you may want to encapsulate some HTML and JavaScript code into a widget that can be easily reused on the frontend within Ractive templates -- think of things like a toggle button, modal, custom select dropdown, slideshow, text editor, etc. Thanks to [Ractive Components](http://docs.ractivejs.org/latest/components), you can achieve this functionality with relative ease. 
-
-#### Setup
-
-Within the Uhray Boilerplate, we setup components in a similar way to pages. Components are stored in the frontend [components](https://github.com/uhray/boilerplate/tree/master/app/frontend/components) directory. Each component is a directory which contains two files:
-
- 1. Ractive Template
- 2. Ractive JavaScript File
-
-However, there are some differences between these files and those from the frontend pages directory, as explained in the example below. 
-
-#### Example
-
-It's probably best to explain the differences between component files and page files via example -- the Uhray Boilerplate comes with one component, a [modal](https://github.com/uhray/boilerplate/tree/master/app/frontend/components/modal). 
-
-First, inside the template, you'll notice some mustache, ```{{>content}}``` that can be confusing if you haven't seen it before. Here is some documentation explaining the uses of the [{{>content}} directive](http://docs.ractivejs.org/latest/components#content) and the related [{{yield}} directive](http://docs.ractivejs.org/latest/components#yield).
-
-Secondly, the Ractive JavaScript file will be extending the base Ractive framework, so you need to use [Ractive.extend()](http://docs.ractivejs.org/latest/ractive-extend). Notice in the [modal's Ractive JavaScript file](https://github.com/uhray/boilerplate/blob/master/app/frontend/components/modal/main.js) how ```Ractive.extend()``` is used. You'll also notice that an ```init``` function is defined. This function will be called as soon as the component is initialized.
-
-Once you've appropriately configured a component, it's ready to be used anywhere in your frontend pages.
-
-In the page directory, where we want to use this modal, we need to define the components that can be used in the page's Ractive JavaScript file, as shown below:
-
-```js
-define(['ractive', 'rv!./template', 'components/modal/main'],
-function(Ractive, template, modal) {
-  return function() {
-    var ractive = new Ractive({
-          el: '#body',
-          template: template,
-          data: { showModal: false )},
-          components: {
-            modal: modal
-          }
-    });
-  }
-});
-```
-
-Now we are free to go ahead and use the modal component in that page's template file as shown below:
-
-```html
-<div class="center">
-	<h1>Welcome to the homepage</h1>
-
-	<label>
-	  show the modal component? <input type="checkbox" checked="{{showModal}}"/>
-	</label>
-	
-	{{#if showModal}}
-		<modal>
-		  <p>This is a modal</p>
-		</modal>
-	{{/showModal}}
-</div>
-```
-
-In the above example, when the checkbox is clicked, the data value showModal becomes ```true```.  When showModal is ```true```, the modal component is displayed. Note how your component basically becomes a custom HTML element. Also note that the content within the modal element (```<p>This is a modal</p>```) is what will populate within the {{>content}} directive from the modal's component template. That's it!
+The [ractive-plugins](../app/frontend/ractive-plugins) directory is broken down into the different types of plugins. Pay attention to the information in each type of plugin's README.md and follow the [ractive documentation](docs.ractivejs.org/latest/plugins) on plugins.
 
 ## Modules
 
