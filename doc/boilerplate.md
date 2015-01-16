@@ -12,6 +12,7 @@
 
 **Frontend Docs**
 * [Static Development](#static-development)
+* [Configuring Frontend](#configuring-frontend)
 * [Pages](#pages)
 * [Routing](#routing)
 * [Styles](#styles)
@@ -286,6 +287,14 @@ Once started, the server should log something like:
 
 Open your browser to the localhost on the specified port (i.e. ```localhost:5200```). You'll be able to see updates to any newly saved static file code simply by refreshing your browser.
 
+## Configuring Frontend
+
+Configuration is locatined in [app/frontend/configure.js](../app/frontend/configure.js).
+
+The frontend is configured via [requirejs](http://requirejs.org/) and is set up nicely to use the [requirejs-loader-plugin](https://github.com/uhray/requirejs-loader-plugin). If there are any questions on how to add new modules, consult either of those two links. Requirejs is very powerful and consequently very complicated, but the loader plugin is supposed to help ease some things.
+
+Also, because of the line in the configure.js file that sets the shim: `router:   ['loader!']`, all things configured with the [requirejs-loader-plugin](https://github.com/uhray/requirejs-loader-plugin) are loaded up before anything starts. This is important for things like extending Ractive.
+
 ## Pages
 
 Each page of the web application is defined as a directory of 2 files within the frontend [pages](https://github.com/uhray/boilerplate/tree/master/app/frontend/pages) directory:
@@ -355,7 +364,7 @@ If your page requires a lot of data up-front before you instantiate an Ractive o
 
 After the server has packaged up a backend shell and sent it over to the frontend, the [*router.js*](../app/frontend/router.js) file determines what frontend page should be loaded into the shell based on the URL. These routes are setup using [director](https://github.com/flatiron/director). 
 
-> Note: We use [requirejs-loader-plugin](https://github.com/uhray/requirejs-loader-plugin) to load all the pages. See [Configuring Frontend](configuring-frontend) for more info.
+> Note: We use [requirejs-loader-plugin](https://github.com/uhray/requirejs-loader-plugin) to load all the pages. See [Configuring Frontend](#configuring-frontend) for more info.
 
 Below is a barebones example of the *router.js* file.
 ```js
@@ -371,7 +380,7 @@ function(Director, pages) {
 });
 ```
 
-By default, this *router.js* file only has one route set up. It shows that given the ```'/'``` route, the home page *page.home* should be loaded. You can see [Configuring Frontend](configuring-frontend) for more info on why `pages.home` is the home "page." the As you know from the [Pages](#Pages) documentation, loading a page's Ractive file will load up and render that page's *template.html* file with the appropriate data within the shell. 
+By default, this *router.js* file only has one route set up. It shows that given the ```'/'``` route, the home page *page.home* should be loaded. You can see [Configuring Frontend](#configuring-frontend) for more info on why `pages.home` is the home "page." the As you know from the [Pages](#Pages) documentation, loading a page's Ractive file will load up and render that page's *template.html* file with the appropriate data within the shell. 
 
 ## Styles
 
