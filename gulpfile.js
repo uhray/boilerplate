@@ -39,6 +39,9 @@ gulp.task('bower_install', ['bower_clean'], function() {
 gulp.task('scss_to_css_prod', function() {
   return gulp.src('app/frontend/styles/*.scss')
              .pipe(sass())
+             .on('error', function(e) {
+                console.log('sass error:', e.message);
+              })
              .pipe(autoprefixer())
              .pipe(gulp.dest('app/frontend/styles/css'));
 });
@@ -83,5 +86,5 @@ gulp.task('prod_watch', function() {
 });
 
 gulp.task('dolint', function() {
-  child.spawn('./node_modules/.bin/jscs', ['./'], { stdio: 'inherit' });
+  return child.spawn('./node_modules/.bin/jscs', ['./'], { stdio: 'inherit' });
 });
