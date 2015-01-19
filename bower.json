@@ -5,7 +5,7 @@
     "html5-boilerplate": "~4.3.0",
     "crud": "^2.0.0",
     "requirejs": "~2.1.14",
-    "almond": "~0.2.9",
+    "almond": "~0.3.0",
     "ractive": "~0.6.0",
     "rv": "git://github.com/ractivejs/rv.git#v0.1.8",
     "perfbar": "~0.0.2",
