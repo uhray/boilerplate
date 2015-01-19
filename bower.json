@@ -3,7 +3,7 @@
   "dependencies": {
     "normalize.css": "~3.0.1",
     "html5-boilerplate": "~4.3.0",
-    "crud": "^2.0.9",
+    "crud": "^2.0.10",
     "requirejs": "~2.1.14",
     "almond": "~0.3.0",
     "ractive": "~0.6.0",
