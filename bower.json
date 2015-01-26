@@ -11,6 +11,6 @@
     "debug": "visionmedia/debug#~2.0.0",
     "director": "~1.2.2",
     "requirejs-loader-plugin": "~1.0.0",
-    "requirejs-ractive": "~0.1.8"
+    "rv": "~0.1.8"
   }
 }
