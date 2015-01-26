@@ -19,7 +19,7 @@ require.config({
     director:    'bower/director/build/director.min',
     loader:      'bower/requirejs-loader-plugin/loader',
     ractive:     'bower/ractive/ractive',
-    rv:          'bower/rv/rv'
+    rv:          'bower/requirejs-ractive/rv'
   },
   shim: {
     debug:    { exports: 'debug' },
