@@ -289,7 +289,7 @@ Open your browser to the localhost on the specified port (i.e. ```localhost:5200
 
 ## Configuring Frontend
 
-Configuration is locatined in [app/frontend/configure.js](../app/frontend/configure.js).
+Configuration is located in [app/frontend/configure.js](../app/frontend/configure.js).
 
 The frontend is configured via [requirejs](http://requirejs.org/) and is set up nicely to use the [requirejs-loader-plugin](https://github.com/uhray/requirejs-loader-plugin). If there are any questions on how to add new modules, consult either of those two links. Requirejs is very powerful and consequently very complicated, but the loader plugin is supposed to help ease some things.
 
