@@ -51,7 +51,7 @@ gulp dev
 
 ## Codebase Organization
 
-The Uhray Boilerplate [root directory](https://github.com/uhray/boilerplate) contains many files and directories related to the application server, configurations, build commands, etc. We'll get into many of these specifics later. The primary file of importance is [server.js](https://github.com/uhray/boilerplate/blob/master/server.js) which is the application server. The real meat of the Uhray Boilerplate is within the [app](https://github.com/uhray/boilerplate/tree/master/app) directory, more specifically within its [backend](https://github.com/uhray/boilerplate/tree/master/app/backend) and [frontend](https://github.com/uhray/boilerplate/tree/master/app/frontend) subdirectories.
+The Uhray Boilerplate [root directory](https://github.com/uhray/boilerplate) contains many files and directories related to the application server, configurations, build commands, etc. We'll get into many of these specifics later. The primary file of importance is [server.js](../server.js) which is the application server. The real meat of the Uhray Boilerplate is within the [app](../app) directory, more specifically within its [backend](../app/backend) and [frontend](../app/frontend) subdirectories.
 
 ```
 app/
@@ -82,7 +82,7 @@ The application server is setup to respond to specific requests with a shell. A 
 
 #### Frontend Organization
 
-The frontend directory all starts with the [router.js](https://github.com/uhray/boilerplate/blob/master/app/frontend/router.js) file. After the server sends over a shell to the frontend, the *router.js* file handles which application page should be loaded based on the URL. Each page can utilize images, modules, styles, plugins, bower modules, etc. More on this later.
+The frontend directory all starts with the [router.js](../app/frontend/router.js) file. After the server sends over a shell to the frontend, the *router.js* file handles which application page should be loaded based on the URL. Each page can utilize images, modules, styles, plugins, bower modules, etc. More on this later.
 
 ```
 frontend/
@@ -99,7 +99,7 @@ frontend/
 	router.js
 ```
 
-The frontend is intentionally designed to be page-centric, meaning that code is organized and structured around each page in the web application. Inside the [pages directory](https://github.com/uhray/boilerplate/tree/master/app/frontend/pages), each page is defined as a directory itself containing 2 files (see *home* above):
+The frontend is intentionally designed to be page-centric, meaning that code is organized and structured around each page in the web application. Inside the [pages directory](../app/frontend/pages), each page is defined as a directory itself containing 2 files (see *home* above):
 
  1. Ractive Template
  2. Ractive JavaScript File
@@ -118,7 +118,7 @@ For more information, check out the [pages documentation](#pages).
 ## Server Configuration
 
 #### Server Setup
-The Uhray Boilerplate was designed for applications running a *Node.js* server with *express.js* as a web application framework. Everything about the server starts with the [server.js](https://github.com/uhray/boilerplate/blob/master/server.js) file. At a high level, this file is responsible for the execution of several tasks:
+The Uhray Boilerplate was designed for applications running a *Node.js* server with *express.js* as a web application framework. Everything about the server starts with the [server.js](../server.js) file. At a high level, this file is responsible for the execution of several tasks:
 
  1. Sets up server-side logging via [winston](https://www.npmjs.org/package/winston), some default [express](http://expressjs.com/4x/api.html#application) app configurations, and middleware.
  2. Starts up the application server.
@@ -130,7 +130,7 @@ You are free to add, modify, or remove pretty much anything you want from *serve
 #### Config Variables
 There are a number of ways to set configuration variables within your application. 
 
-In the [loadConfigs](https://github.com/uhray/boilerplate/blob/master/server.js#L78-L87) function of *server.js*, you will see the following code snippet:
+In the [loadConfigs](../server.js#L78-L87) function of *server.js*, you will see the following code snippet:
 
 ```
 nconf
@@ -159,7 +159,7 @@ This means that command-line arguments will override all other similarly named c
 
 #### API Basics
 
-The backend API directory consists of an [index.js](https://github.com/uhray/boilerplate/blob/master/app/backend/api/index.js) file and a directory of [resources](https://github.com/uhray/boilerplate/tree/master/app/backend/api/resources).
+The backend API directory consists of an [index.js](../app/backend/api/index.js) file and a directory of [resources](../app/backend/api/resources).
 
 ```
 api/
@@ -167,7 +167,7 @@ api/
 	resources/
 ```
 
- When *server.js* is run, it makes a call to [configure the API](https://github.com/uhray/boilerplate/blob/master/server.js#L49). This executes the API's *index.js* file which, by default, does a number of useful things to get applications up and running quickly.
+ When *server.js* is run, it makes a call to [configure the API](../server.js#L49). This executes the API's *index.js* file which, by default, does a number of useful things to get applications up and running quickly.
 
  1. Establishes basic authentication with forgot password functionality for users via [turnkey](https://github.com/uhray/turnkey).
  2. Launches REST API built via [crud](https://github.com/uhray/crud#backend) based on your resources.
@@ -177,7 +177,7 @@ api/
 
 In [REST APIs](http://en.wikipedia.org/wiki/Representational_state_transfer), a resource is defined as "an object with a type, associated data, relationships to other resources, and a set of methods that operate on it." Therefore, a resource is basically an *instance* of a [Mongoose Model](http://mongoosejs.com/docs/models.html) which is defined by a [Mongoose Schema](http://mongoosejs.com/docs/guide.html) along with its associated API entities/routes which are defined using [crud](https://github.com/uhray/crud#backend). 
 
-As an example from the [users.js](https://github.com/uhray/boilerplate/blob/master/app/backend/api/resources/users.js) resource file, we first define the Mongoose Schema for our users.
+As an example from the [users.js](../app/backend/api/resources/users.js) resource file, we first define the Mongoose Schema for our users.
 
 ```js
 Schema = exports.Schema = new mongoose.Schema({
@@ -212,7 +212,7 @@ crud.entity('/users').Create()
 
 #### Creating a New Resource
 
-To create a new resource, simple create a new JavaScript file in the API's [resources](https://github.com/uhray/boilerplate/tree/master/app/backend/api/resources) directory. The file will need to define a [Mongoose Schema](http://mongoosejs.com/docs/guide.html), instantiate a [Mongoose Model](http://mongoosejs.com/docs/models.html), and define the [crud](https://github.com/uhray/crud#backend) API calls associated with that resource. If you're just getting started, check out the [users.js](https://github.com/uhray/boilerplate/blob/master/app/backend/api/resources/users.js) resource as an example.
+To create a new resource, simple create a new JavaScript file in the API's [resources](../app/backend/api/resources) directory. The file will need to define a [Mongoose Schema](http://mongoosejs.com/docs/guide.html), instantiate a [Mongoose Model](http://mongoosejs.com/docs/models.html), and define the [crud](https://github.com/uhray/crud#backend) API calls associated with that resource. If you're just getting started, check out the [users.js](../app/backend/api/resources/users.js) resource as an example.
 
 ## Shells
 
@@ -224,18 +224,18 @@ The advantage to using shells is that you can update data on the frontend as a u
 
 #### Setup
 
-Shells are configured in the [*server.js*](https://github.com/uhray/boilerplate/blob/master/server.js#L52-L60) file. The actual HTML shells are stored in the backend's [shells directory](https://github.com/uhray/boilerplate/tree/master/app/backend/shells). 
+Shells are configured in the [*server.js*](../server.js#L52-L60) file. The actual HTML shells are stored in the backend's [shells directory](../app/backend/shells). 
 
-By default, the Uhray Boilerplace comes with one shell ([*main.html*](https://github.com/uhray/boilerplate/blob/master/app/backend/shells/main.html)) that sets up some basic meta tags, links 3 stylesheets, provides a container for the frontend content to be embedded, and loads the frontend JavaScript code.
+By default, the Uhray Boilerplace comes with one shell ([*main.html*](../app/backend/shells/main.html)) that sets up some basic meta tags, links 3 stylesheets, provides a container for the frontend content to be embedded, and loads the frontend JavaScript code.
 
 #### Adding a New Shell
 
 In order to add a new shell, you need to do 2 things:
 
- 1. Create a new HTML template in the backend's [shells](https://github.com/uhray/boilerplate/tree/master/app/backend/shells) directory. This html file is a template that's computed using [mustache](https://www.npmjs.org/package/mustache-express).
- 2. Add a new route in [*server.js*](https://github.com/uhray/boilerplate/blob/master/server.js) that renders the template you created in step 1.
+ 1. Create a new HTML template in the backend's [shells](../app/backend/shells) directory. This html file is a template that's computed using [mustache](https://www.npmjs.org/package/mustache-express).
+ 2. Add a new route in [*server.js*](../server.js) that renders the template you created in step 1.
 
-> Note: The server.js file first configures the API routes which by default will be ```/api/*```. Next, the server configures the routes for shells specified in the [*server.js*](https://github.com/uhray/boilerplate/blob/master/server.js) file. By default, we just have one route ```/*``` that will catch anything that doesn't match the API routes and render the [main.html](https://github.com/uhray/boilerplate/blob/master/app/backend/shells/main.html) shell. If you add a new shell, you must either define it before our default route, or change our default route  to something that doesn't interfere with your new shell's route.
+> Note: The server.js file first configures the API routes which by default will be ```/api/*```. Next, the server configures the routes for shells specified in the [*server.js*](../server.js) file. By default, we just have one route ```/*``` that will catch anything that doesn't match the API routes and render the [main.html](../app/backend/shells/main.html) shell. If you add a new shell, you must either define it before our default route, or change our default route  to something that doesn't interfere with your new shell's route.
  
 
 <br><br>
@@ -248,7 +248,7 @@ When developing web applications, we find it easiest to implement static front-e
 
 #### Static Page Organization
 
-In addition to the backend and frontend parts of the Boilerplate's app directory, there is also a [static](https://github.com/uhray/boilerplate/tree/master/app/static) directory.
+In addition to the backend and frontend parts of the Boilerplate's app directory, there is also a [static](../app/static) directory.
 
 ```bash
 app/
@@ -269,7 +269,7 @@ By default, the _layout.html has 3 CSS links.
  2. HTML5 Boilerplate's main.css (cross-browser styling)
  3. Uhray Boilerplate's main.css (starting place for your styling rules)
 
-You can extend the base CSS by adding CSS/SCSS rules to the [main.scss](https://github.com/uhray/boilerplate/blob/master/app/frontend/styles/main.scss) file in the frontend styles directory. 
+You can extend the base CSS by adding CSS/SCSS rules to the [main.scss](../app/frontend/styles/main.scss) file in the frontend styles directory. 
 
 >Note: The difference in file extensions (*.css from _layout.html* vs *.scss from frontend styles directory*) will be resolved during the application's build process. By default, all SCSS files are converted to CSS files with the same base filename. These converted CSS files will be placed within a /css directory within the /styles directory. See [Build Options](#build-options) for additional information.
 
@@ -277,7 +277,7 @@ The best part about doing static development this way is that when you're ready 
 
 #### Viewing Static Pages
 
-In the root directory of the Uhray Boilerplate, there is a [*static.js*](https://github.com/uhray/boilerplate/blob/master/static.js) file. This is very similar to the *server.js* file that runs your actual web application, only without any server-side debugging and without some of the express middleware. It's setup to display a list of all your static pages. You can launch the static server by running the following command from the Uhray Boilerplate root directory:
+In the root directory of the Uhray Boilerplate, there is a [*static.js*](../static.js) file. This is very similar to the *server.js* file that runs your actual web application, only without any server-side debugging and without some of the express middleware. It's setup to display a list of all your static pages. You can launch the static server by running the following command from the Uhray Boilerplate root directory:
 
 ``` gulp static```
 
@@ -297,7 +297,7 @@ Also, because of the line in the configure.js file that sets the shim: `router: 
 
 ## Pages
 
-Each page of the web application is defined as a directory of 2 files within the frontend [pages](https://github.com/uhray/boilerplate/tree/master/app/frontend/pages) directory:
+Each page of the web application is defined as a directory of 2 files within the frontend [pages](../app/frontend/pages) directory:
 
 1. Ractive Template
 2. Ractive JavaScript File
@@ -323,9 +323,9 @@ Additionally, you can also define [computed properties](http://docs.ractivejs.or
 To create a new page, you need to do several things:
 
  1. If the new page will need a new shell, see [Adding a New Shell](#adding-a-new-shell) for instructions.
- 2. Create a new directory in the frontend [pages](https://github.com/uhray/boilerplate/tree/master/app/frontend/pages) directory.
- 2. In this directory, create an Ractive Template (example: [*template.html*](https://github.com/uhray/boilerplate/blob/master/app/frontend/pages/home/template.html)).
- 3. In this directory, create an Ractive JavaScript file (example: [*main.js*](https://github.com/uhray/boilerplate/blob/master/app/frontend/pages/home/main.js)).
+ 2. Create a new directory in the frontend [pages](../app/frontend/pages) directory.
+ 2. In this directory, create an Ractive Template (example: [*template.html*](../app/frontend/pages/home/template.html)).
+ 3. In this directory, create an Ractive JavaScript file (example: [*main.js*](../app/frontend/pages/home/main.js)).
  4. Update your [frontend routes](#routing) to define which URLs should load the new page.
 
 #### Integrating MongoDB Data
@@ -334,7 +334,7 @@ When defining the data for your pages in the Ractive JavaScript file, you'll lik
 
 Below is an example of how crud's backend and frontend code work together in your application.
 
-First, in the backend API you recall that we setup resources which included crud entities/routes that defined what should be done given a particular API call. Here was one of them from the [*users.js*](https://github.com/uhray/boilerplate/blob/master/app/backend/api/resources/users.js) resource file. 
+First, in the backend API you recall that we setup resources which included crud entities/routes that defined what should be done given a particular API call. Here was one of them from the [*users.js*](../app/backend/api/resources/users.js) resource file. 
 
 ```js
 // backend
@@ -384,7 +384,7 @@ By default, this *router.js* file only has one route set up. It shows that given
 
 ## Styles
 
-The [styles](https://github.com/uhray/boilerplate/tree/master/app/frontend/styles) directory is meant to house all of your application's custom styling rules. In addition to regular CSS files, Uhray Boilerplate allows you to put SCSS files in this directory. SCSS allows you to do [really cool things](http://sass-lang.com/guide) like use variables in CSS. By default, the [*main.scss*](https://github.com/uhray/boilerplate/blob/master/app/frontend/styles/main.scss) file is linked to all of your frontend pages and static templates, so you can simply extend this file with new CSS or SCSS styling rules. 
+The [styles](../app/frontend/styles) directory is meant to house all of your application's custom styling rules. In addition to regular CSS files, Uhray Boilerplate allows you to put SCSS files in this directory. SCSS allows you to do [really cool things](http://sass-lang.com/guide) like use variables in CSS. By default, the [*main.scss*](../app/frontend/styles/main.scss) file is linked to all of your frontend pages and static templates, so you can simply extend this file with new CSS or SCSS styling rules. 
 
 >Note: During the build process, all SCSS files are converted to CSS files with the same base filename. Also, all CSS files are run through [autoprefixer](https://github.com/postcss/autoprefixer) which automatically adds in any missing vender prefixes (-webit, -moz, -ms). These converted CSS files will be placed within a /css directory within the /styles directory. See [Build Options](#build-options) for additional information.
 
@@ -398,7 +398,7 @@ styles/
 	new_stylesheet.scss
 ```	
 
-Next, you'll have to add a corresponding link tag to the base [_layout.html](https://github.com/uhray/boilerplate/blob/master/app/static/_layout.html) file for static development or the [backend shell](https://github.com/uhray/boilerplate/blob/master/app/backend/shells/main.html) for regular application development.
+Next, you'll have to add a corresponding link tag to the base [_layout.html](../app/static/_layout.html) file for static development or the [backend shell](../app/backend/shells/main.html) for regular application development.
 
 ```
 <link rel="stylesheet" href="/public/styles/css/new_stylesheet.css">
@@ -412,7 +412,7 @@ Here's an introduction to source maps and a tutorial for setting everything up w
 
 ## Images
 
-The [images](https://github.com/uhray/boilerplate/tree/master/app/frontend/images) directory is where you can put all of the images used within your application. By default, we've only included a favicon (*favicon.ico*) which is served via middleware in the [*server.js*](https://github.com/uhray/boilerplate/blob/master/server.js#L30-L31) file.
+The [images](../app/frontend/images) directory is where you can put all of the images used within your application. By default, we've only included a favicon (*favicon.ico*) which is served via middleware in the [*server.js*](../server.js#L30-L31) file.
 
 >Note: All images in this directory will be publicly hosted with your application.
 
@@ -422,7 +422,7 @@ The [ractive-plugins](../app/frontend/ractive-plugins) directory is broken down 
 
 ## Modules
 
-The frontend [modules](https://github.com/uhray/boilerplate/tree/master/app/frontend/modules) directory is simply a place to put reusable JavaScript code. The use cases are virtually endless, and by default there are a bunch of useful [tools](../app/frontend/modules/tools.js) but here's a simple example.
+The frontend [modules](../app/frontend/modules) directory is simply a place to put reusable JavaScript code. The use cases are virtually endless, and by default there are a bunch of useful [tools](../app/frontend/modules/tools.js) but here's a simple example.
 
 #### Example
 
@@ -466,7 +466,7 @@ We also place code that interacts with the shell in this modules directory. We d
 
 #### Backend Package Management
 
-Uhray Boilerplate uses [npm](https://www.npmjs.org/) as a backend package manager. As of now, npm comes bundled with [node](http://nodejs.org/). To add an npm package to your application, all you need to do is add it to the [package.json](https://github.com/uhray/boilerplate/blob/master/package.json) file in the root Uhray Boilerplate directory. You can do this 1 of 2 ways:
+Uhray Boilerplate uses [npm](https://www.npmjs.org/) as a backend package manager. As of now, npm comes bundled with [node](http://nodejs.org/). To add an npm package to your application, all you need to do is add it to the [package.json](../package.json) file in the root Uhray Boilerplate directory. You can do this 1 of 2 ways:
 
  1. Manually edit *package.json* and re-build your application server.
  2. Run ```npm install <package-name> [--save|--save-dev]``` from the command line and re-build your application.
@@ -475,16 +475,16 @@ Uhray Boilerplate uses [npm](https://www.npmjs.org/) as a backend package manage
 
 #### Frontend Package Management
 
-Uhray Boilerplate uses [bower](http://bower.io/) as a frontend package manager. To add a bower package to your application, all you need to do is add it to the [*bower.json*](https://github.com/uhray/boilerplate/blob/master/bower.json) file. You can do this 1 of 2 ways:
+Uhray Boilerplate uses [bower](http://bower.io/) as a frontend package manager. To add a bower package to your application, all you need to do is add it to the [*bower.json*](../bower.json) file. You can do this 1 of 2 ways:
 
  1. Manually edit *bower.json* and re-build your application.
  2. Run ```bower install <package-name> [--save|--save-dev]``` from the command line and re-build your application.
 
->Note: If you wish to include a GitHub module in your application, but it's not on bower, you can still include it by providing the Github HTTPS URL (with ```https://``` replaced with ```git://```) for the desired GitHub repository in the *bower.json* file as shown [here](https://github.com/uhray/boilerplate/blob/master/bower.json#L10).
+>Note: If you wish to include a GitHub module in your application, but it's not on bower, you can still include it by providing the Github HTTPS URL (with ```https://``` replaced with ```git://```) for the desired GitHub repository in the *bower.json* file as shown [here](../bower.json#L10).
 
 #### Require.js
 
-We use *require.js* as a file and module loader on the frontend. The frontend's [configure.js](https://github.com/uhray/boilerplate/blob/master/app/frontend/configure.js) file is the main configuration file for *require.js*.
+We use *require.js* as a file and module loader on the frontend. The frontend's [configure.js](../app/frontend/configure.js) file is the main configuration file for *require.js*.
 
 
 ## Linting
@@ -493,11 +493,11 @@ The Uhray Boilerplate comes with [jscs](https://www.npmjs.org/package/jscs), a J
 
 ```gulp lint```
 
-You can configure specific options for the linter in the [*.jscs.json*](https://github.com/uhray/boilerplate/blob/master/.jscs.json) file in the root Boilerplate directory. A list of available options are [here](https://github.com/jscs-dev/node-jscs#options).
+You can configure specific options for the linter in the [*.jscs.json*](../.jscs.json) file in the root Boilerplate directory. A list of available options are [here](https://github.com/jscs-dev/node-jscs#options).
 
 ## Build Options
 
-Uhray Boilerplate uses [gulp](http://gulpjs.com/) as a build system and comes with several pre-configured build types. You can create, modify, or delete any of these build types from the [gulpfile.js](https://github.com/uhray/boilerplate/blob/master/gulpfile.js) file. You can run any of the following build commands from the root Uhray Boilerplate directory.
+Uhray Boilerplate uses [gulp](http://gulpjs.com/) as a build system and comes with several pre-configured build types. You can create, modify, or delete any of these build types from the [gulpfile.js](../gulpfile.js) file. You can run any of the following build commands from the root Uhray Boilerplate directory.
 
 #### Default
 
@@ -566,7 +566,7 @@ Command: ```gulp lint```. This lint build is for linting the application's codeb
 	 
  4. Ensure your web application is a functioning git repository with a *package.json* and a *Procfile* in the application's root directory.
  
-	>Note: Heroku knows what command to run to start your application by looking in the Procfile for the [*web* command](https://github.com/uhray/boilerplate/blob/master/Procfile#L2). Heroku then uses [foreman](https://github.com/ddollar/foreman) and runs ```foreman start web``` to fire up your application. By default, the web command for the Uhray Boilerplate is ```node server.js PRODUCTION```. You can try running this command to verify that everything is working properly before you deploy.
+	>Note: Heroku knows what command to run to start your application by looking in the Procfile for the [*web* command](../Procfile#L2). Heroku then uses [foreman](https://github.com/ddollar/foreman) and runs ```foreman start web``` to fire up your application. By default, the web command for the Uhray Boilerplate is ```node server.js PRODUCTION```. You can try running this command to verify that everything is working properly before you deploy.
  
  5. Create an app on Heroku from your application's root directory, preparing Heroku to receive your source code. You can do this one of two ways. 
 
