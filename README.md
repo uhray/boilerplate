@@ -30,6 +30,7 @@ Dependencies:
 * [npm](https://www.npmjs.org/) (now comes with node)
 * [bower](http://bower.io/)
 * [gulp](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md#getting-started)
+* [sass](http://sass-lang.com/) - `gem install sass`
 
 ```
 git clone git@github.com:uhray/boilerplate.git
