@@ -8,8 +8,10 @@ function(Ractive, template) {
   return Ractive.components.modal = Ractive.extend({
     isolated: true,
     template: template,
-    onrender: function() {
+    onrender: function(options) {
       var self = this, resizeHandler, keyupHandler;
+
+      this._super(options);
 
       this.outer = this.find('.modal-component-outer');
       this.modal = this.find('.modal-component');
