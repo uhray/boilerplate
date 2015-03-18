@@ -1,7 +1,8 @@
 define(
 [
 'director',
-'loader!pages'
+'loader!pages',
+'loader!'
 ],
 function(Director, pages) {
   var routes = {

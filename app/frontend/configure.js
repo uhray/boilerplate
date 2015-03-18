@@ -9,7 +9,8 @@ require.config({
         modal:        'ractive-plugins/components/modal/main'
       },
       modules: {
-        tools:        'modules/tools'
+        tools:        'modules/tools',
+        polyfills:    'modules/polyfills'
       }
     }
   },
