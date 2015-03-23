@@ -2,7 +2,7 @@ var $buoop = {
   vs: { i:8, f:15, o:12.1, s:6 },
   c:2,
   reminder: 0,
-  test: true, // for testing purposes
+  // test: true, // for testing purposes
   text: '<div class="overlay"></div>' +
         '<div class="text">' +
         '<h1>Browser Update Required</h1>' +
