@@ -25,6 +25,11 @@ module.exports = exports = function(app) {
   crud.configure({ cors: nconf.get('cors') });
   crud.launch(app);
 
+  // all other routes
+  app.get('/api/*', function(req, res) {
+    res.status(404).json({ error: 'Route not found' });
+  });
+
   // connect to db
   if (!url) return logger.warn('No MONGO_URL. Not attaching to db.');
 
