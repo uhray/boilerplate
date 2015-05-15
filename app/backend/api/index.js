@@ -3,6 +3,7 @@ var nconf = require('nconf'),
     logger = require('winston'),
     mongoose = require('mongoose'),
     crud = require('node-crud'),
+    tools = require('./tools'),
     resources = require('require-dir')('./resources');
 
 module.exports = exports = function(app) {
@@ -14,11 +15,9 @@ module.exports = exports = function(app) {
     router: app,
     model: resources.users.Model,
     cors: nconf.get('cors'),
-    verificationOn: false,
-    forgotMailer: function(user, code, cb) {
-      logger.info('Forgot code for %s: %s', user.username, code);
-      cb();
-    }
+    usernameKey: 'email',
+    verificationOn: true,
+    forgotMailer: tools.forgotMailer
   });
 
   // launch crud api

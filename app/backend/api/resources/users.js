@@ -9,6 +9,7 @@ var crud = require('node-crud'),
     mongoose = require('mongoose'),
     debug = require('debug')('api:users'),
     turnkey = require('turnkey'),
+    tools = require('../tools'),
     ObjectId = mongoose.Schema.Types.ObjectId,
     Mixed = mongoose.Schema.Types.Mixed,
     Schema, Model;
@@ -16,9 +17,11 @@ var crud = require('node-crud'),
 // Create a Schema & Model -----------------------------------------------------
 
 Schema = exports.Schema = new mongoose.Schema({
-  firstName: { type: String, required: true },
-  lastName:  { type: String, required: true },
-  username: { type: String, index: true, unique: true },
+  firstName: { type: String },
+  lastName:  { type: String },
+  email:     { type: String, pattern: tools.emailRegex,
+               index: true, unique: true },
+  role:      { type: String, enum: ['user', 'admin'] },
   info: {
     gender: { type: String, enum: ['M', 'F'] },
     age: Number
@@ -34,9 +37,9 @@ Model = exports.Model = mongoose.model('users', Schema);
 // All Users -------------------------------------------------------------------
 
 crud.entity('/users').Read()
-  // .use(turnkey.loggedIn())
-  // authentication commented out for boilerplate
-  .pipe(cm.findAll(Model, ['-turnkey']));
+  .use(turnkey.loggedIn())
+  .pipe(tools.mw.hasRole('admin'))
+  .pipe(cm.findAll(Model, ['-turnkey']))
 
 crud.entity('/users').Create()
   .use(turnkey.createPassword())
@@ -44,7 +47,12 @@ crud.entity('/users').Create()
     d.username = d.username && String(d.username).toLowerCase();
     cb();
   })
-  .pipe(cm.createNew(Model));
+  .pipe(cm.createNew(Model))
+  .pipe(tools.verifyEmail)
+  .pipe(function(d, q, cb) {
+    if ('turnkey' in d) delete d.turnkey;
+    cb();
+  });
 
 crud.entity('/users').Delete()
   // .use(turnkey.loggedIn())
