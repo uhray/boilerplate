@@ -58,7 +58,7 @@ tools.verifyEmail = function(user, q, cb) {
       { subject: 'Account Verification', lines: lines }
     );
   } else if (verified) {
-    logger('Verification turned off.');
+    logger.info('Verification turned off.');
   } else {
     logger.info('Need to verify user: ', user);
   }
