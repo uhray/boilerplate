@@ -2,10 +2,10 @@ define(
 [
 'director',
 'loader!pages',
-'loader!',
-'crud'
+'crud',
+'loader!'
 ],
-function(Director, pages) {
+function(Director, pages, crud) {
   var routes = {
         '/': pages.home
       },
