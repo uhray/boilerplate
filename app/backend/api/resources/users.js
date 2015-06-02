@@ -37,8 +37,7 @@ Model = exports.Model = mongoose.model('users', Schema);
 // All Users -------------------------------------------------------------------
 
 crud.entity('/users').Read()
-  .use(turnkey.loggedIn())
-  .pipe(tools.mw.hasRole('admin'))
+  .use(turnkey.loggedIn({ role: 'admin' }))
   .pipe(cm.findAll(Model, ['-turnkey']))
 
 crud.entity('/users').Create()

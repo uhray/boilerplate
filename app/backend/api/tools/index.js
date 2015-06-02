@@ -13,8 +13,6 @@ var smtpTransport = require('nodemailer-smtp-transport'),
     })),
     tools = exports = module.exports = {};
 
-tools.mw = require('./middleware');
-
 tools.emailRegex = function(d) {
   if (!d) return true;
   return /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(d) &&
