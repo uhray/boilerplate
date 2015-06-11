@@ -73,7 +73,7 @@ crud.entity('/users/:_id').Update()
   // .use(turnkey.loggedIn())
   // authentication commented out for boilerplate
   .pipe(cm.parseData()
-          .removes('dates.created', 'turnkey')
+          .removes('dates.created', 'turnkey', 'email')
           .overrides({ 'dates.updated': Date.now }))
   .use(turnkey.updatePassword())
   .pipe(cm.updateOne(Model));
