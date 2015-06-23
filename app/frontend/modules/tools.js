@@ -1,4 +1,5 @@
-define(function() {
+define(['jquery', 'lodash'],
+function($, _) {
   var tools = {};
 
   // ==============================  METHODS  =================================
@@ -66,7 +67,10 @@ define(function() {
   };
 
   tools.forEach = function(d, fn) {
-    for (var i in d) { fn(i, d[i]); };
+    var i;
+
+    if ('length' in d) for (i = 0; i < d.length; i++) fn(d[i], i);
+    else for (i in d) fn(d[i], i);
   };
 
   tools.set = function() {

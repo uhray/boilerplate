@@ -48,6 +48,11 @@ app.listen(nconf.get('PORT'), function() {
   // Configure api
   api(app);
 
+  // Ping
+  app.get('/ping', function(req, res, next) {
+    res.send('ping');
+  });
+
   // Configure routes for shells
   app.get('/*', function(req, res, next) {
     res.render('main', {

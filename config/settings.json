@@ -3,5 +3,6 @@
   "MONGO_URL": "",
   "cors": false,
   "PUBLIC_URL": "http://127.0.0.1:5000",
-  "EMAIL_SMTP": "smtp.gmail.com"
+  "EMAIL_SMTP": "smtp.gmail.com",
+  "MONGO_URL": "mongodb://localhost/test"
 }

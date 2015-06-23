@@ -1,9 +1,9 @@
 define(
 [
-'ractive',
+'ractive', 'jquery', 'lodash',
 'rv!./template'
 ],
-function(Ractive, template) {
+function(Ractive, $, _, template) {
 
   return function() {
     var ractive;
