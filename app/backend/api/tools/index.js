@@ -30,7 +30,7 @@ tools.forgotMailer = function(user, code, cb) {
 
   if (user.email) {
     tools.sendEmail(user.email, { subject: 'Password Reset', lines: lines });
-  } else  {
+  } else {
     logger.info('Forgot code for %s: %s', user.username, code);
   }
 
@@ -47,7 +47,7 @@ tools.verifyEmail = function(user, q, cb) {
         'Hello,', '',
         'Click <a href="' + url + '">here</a> or go to the link ' +
         'below to verify your account.',
-        '', url,
+        '', url
       ];
 
   if (user.email && !verified) {
