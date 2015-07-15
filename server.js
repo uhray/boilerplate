@@ -28,7 +28,7 @@ if (!__production__) mustache.cache._max = 0;  // turn off mustache caching
 // toplevel middleware
 if (!__production__) app.use(require('morgan')('dev'));
 app.use(require('serve-favicon')(__dirname +
-                                '/app/frontend/images/favicon.ico'));
+                                '/app/frontend/images/favicon/favicon.ico'));
 app.use(require('compression')());
 app.use('/public', require('serve-static')(__dirname + '/app/frontend'));
 app.use(require('cookie-session')({ secret: '__SECRET__' }));
