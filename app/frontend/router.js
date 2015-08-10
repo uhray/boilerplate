@@ -13,5 +13,10 @@ function(Director, pages, crud) {
 
   crud.configure({ base: '/' });
 
+  router.configure({
+    on: function() {
+      crud.cancelAll();
+    }
+  });
   router.init('/');
 });
