@@ -46,6 +46,8 @@ crud.entity('/users').Create()
     d.username = d.username && String(d.username).toLowerCase();
     cb();
   })
+  .pipe(cm.parseData()
+          .removes('dates', 'turnkey'))
   .pipe(cm.createNew(Model))
   .pipe(tools.verifyEmail)
   .pipe(function(d, q, cb) {
