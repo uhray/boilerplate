@@ -20,7 +20,7 @@ Schema = exports.Schema = new mongoose.Schema({
   firstName: { type: String },
   lastName:  { type: String },
   email:     { type: String, pattern: tools.emailRegex,
-               index: true, unique: true },
+               index: true, unique: true, required: true },
   role:      { type: String, enum: ['user', 'admin'] },
   info: {
     gender: { type: String, enum: ['M', 'F'] },
@@ -43,10 +43,11 @@ crud.entity('/users').Read()
 crud.entity('/users').Create()
   .use(turnkey.createPassword())
   .pipe(function(d, q, cb) {
-    d.username = d.username && String(d.username).toLowerCase();
+    d.email = d.email && String(d.email).toLowerCase();
     cb();
   })
   .pipe(cm.parseData().removes('dates'))
+  .use(turnkey.checkResend(tools.verifyEmail))
   .pipe(cm.createNew(Model))
   .pipe(tools.verifyEmail)
   .pipe(function(d, q, cb) {

@@ -61,7 +61,7 @@ tools.verifyEmail = function(user, q, cb) {
     logger.info('Need to verify user: ', user);
   }
 
-  cb();  // no need to modify response information
+  cb && cb();  // no need to modify response information
 };
 
 tools.sendEmail = function(to, d, cb) {
