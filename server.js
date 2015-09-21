@@ -31,7 +31,12 @@ app.use(require('serve-favicon')(__dirname +
                                 '/app/frontend/images/favicon/favicon.ico'));
 app.use(require('compression')());
 app.use('/public', require('serve-static')(__dirname + '/app/frontend'));
-app.use(require('cookie-session')({ secret: '__SECRET__' }));
+if (!nconf.get('SECRET')) {
+  console.log('You must provide a SECRET for the cookiestore in your config.');
+  console.log('nconf.get(\'SECRET\') is null.');
+  process.exit();
+}
+app.use(require('cookie-session')({ secret: nconf.get('SECRET') }));
 app.use(require('body-parser').urlencoded({ extended: true }));
 app.use(require('body-parser').json());
 

@@ -40,3 +40,36 @@ module.exports = exports = function(app) {
     console.log('connected to db.');
   });
 }
+
+// Middleware ------------------------------------------------------------------
+
+tools.mw = {};
+
+tools.mw.queryUser = function() {
+  return function(d, q, cb) {
+    var req = this.request;
+
+    if (!(req && req.user)) return cb('unauthorized');
+
+    // not needed for admins
+    if (req.user.role == 'admin') return cb();
+
+    q.user = String(req.user._id);
+    cb();
+  };
+};
+
+tools.mw.dataUser = function() {
+  return function(d, q, cb) {
+    var req = this.request;
+
+    if (!(req && req.user)) return cb('unauthorized');
+
+    // if an admin specifies otherwise, it can do things on
+    // another user's behalf
+    if (req.user.role == 'admin' && d && d.user) return cb();
+
+    d.user = String(req.user._id);
+    cb();
+  };
+};
