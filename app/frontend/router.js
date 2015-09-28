@@ -14,7 +14,7 @@ function(Director, pages, crud) {
   crud.configure({ base: '/' });
 
   router.configure({
-    on: function() {
+    before: function() {
       crud.cancelAll();
     }
   });

@@ -49,16 +49,3 @@ Take a look at the [Uhray Boilerplate Docs](doc/boilerplate.md). This documentat
 
 This boilerplate should be compatible with all evergreen browsers.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
