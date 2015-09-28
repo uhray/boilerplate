@@ -11,6 +11,13 @@ require.config({
       modules: {
         tools:        'modules/tools',
         polyfills:    'modules/polyfills'
+      },
+      events: {
+        uhray:        'bower/ractive-uhray-events/dist/events.min',
+      },
+      extensions: {
+        validator: 'bower/ractive-extensions-validator/dist/validator.min',
+        crud:      'bower/ractive-extensions-crud/dist/crud.min'
       }
     }
   },
@@ -31,6 +38,7 @@ require.config({
   }
 });
 
-requirejs(['debug', 'router'], function(debug) {
+requirejs(['debug', 'router', 'ractive'], function(debug, router, ractive) {
   window.Debug = debug;  // global "Debug" because chrome overwrites "debug"
+  window.Ractive = ractive;
 });
