@@ -31,6 +31,10 @@ app.use(require('serve-favicon')(__dirname +
                                 '/app/frontend/images/favicon/favicon.ico'));
 app.use(require('compression')());
 app.use('/public', require('serve-static')(__dirname + '/app/frontend'));
+app.use(
+  '/node_modules/ng-admin/build',
+  require('serve-static')(__dirname + '/node_modules/ng-admin/build')
+);
 if (!nconf.get('SECRET')) {
   console.log('You must provide a SECRET for the cookiestore in your config.');
   console.log('nconf.get(\'SECRET\') is null.');
@@ -56,6 +60,11 @@ app.listen(nconf.get('PORT'), function() {
   // Ping
   app.get('/ping', function(req, res, next) {
     res.send('ping');
+  });
+
+  // Ping
+  app.get('/admin', function(req, res, next) {
+    res.render('admin');
   });
 
   // Configure routes for shells

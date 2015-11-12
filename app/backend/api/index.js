@@ -7,7 +7,8 @@ var nconf = require('nconf'),
     resources = require('require-dir')('./resources');
 
 module.exports = exports = function(app) {
-  var url = nconf.get('MONGO_URL');
+  var url = nconf.get('MONGO_URL'),
+      admin;
 
   // set up auth here //
   turnkey.launch({

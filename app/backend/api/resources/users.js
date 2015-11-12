@@ -17,15 +17,10 @@ var crud = require('node-crud'),
 // Create a Schema & Model -----------------------------------------------------
 
 Schema = exports.Schema = new mongoose.Schema({
-  firstName: { type: String },
-  lastName:  { type: String },
+  name:      { type: String },
   email:     { type: String, pattern: tools.emailRegex,
                index: true, unique: true, required: true },
   role:      { type: String, enum: ['user', 'admin'] },
-  info: {
-    gender: { type: String, enum: ['M', 'F'] },
-    age: Number
-  },
   dates: {
     created: { type: Date, default: Date.now },
     updated: { type: Date, default: Date.now }
@@ -37,7 +32,7 @@ Model = exports.Model = mongoose.model('users', Schema);
 // All Users -------------------------------------------------------------------
 
 crud.entity('/users').Read()
-  .use(turnkey.loggedIn({ role: 'admin' }))
+  //.use(turnkey.loggedIn({ role: 'admin' }))
   .pipe(cm.findAll(Model, ['-turnkey']))
 
 crud.entity('/users').Create()
