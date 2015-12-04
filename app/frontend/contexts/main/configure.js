@@ -3,7 +3,7 @@ require.config({
   config: {
     loader: {
       pages: {
-        home:         'pages/home/main'
+        home:         'contexts/main/pages/home/main'
       },
       components: {
         modal:        'ractive-plugins/components/modal/main'
@@ -29,6 +29,7 @@ require.config({
     lodash:      'bower/lodash/lodash.min',
     loader:      'bower/requirejs-loader-plugin/loader',
     ractive:     'bower/ractive/ractive',
+    router:      'contexts/main/router',
     rv:          'bower/rv/rv'
   },
   shim: {

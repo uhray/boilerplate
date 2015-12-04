@@ -22,7 +22,10 @@ winston.exitOnError = false;
 app.set('host', nconf.get('HOST'))
 app.engine('html', mustache);
 app.set('view engine', 'html');
-app.set('views', __dirname + '/app/backend/shells');
+app.set(
+  'views',
+  __dirname + '/app/backend/shells' + (__production__ ? '/_prod' : '')
+);
 if (!__production__) mustache.cache._max = 0;  // turn off mustache caching
 
 // toplevel middleware
@@ -62,6 +65,7 @@ app.listen(nconf.get('PORT'), function() {
   app.get('/*', function(req, res, next) {
     res.render('main', {
       production: __production__,
+      context: 'main',
       locals: JSON.stringify({
         user: req.user || {},
         production: __production__

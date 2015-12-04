@@ -38,12 +38,13 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="">
 
-  <!-- CSS -->
+  <!-- build:css -->
     <link rel="stylesheet"
           href="/public/bower/normalize.css/normalize.css">
     <link rel="stylesheet"
           href="/public/bower/html5-boilerplate/css/main.css">
     <link rel="stylesheet" href="/public/styles/css/main.css">
+  <!-- endbuild -->
 
   <!-- TOP JS -->
     <script type="text/javascript">
@@ -63,15 +64,9 @@
   <!-- BOTTOM JS -->
   <script type="text/javascript"
           src="/public/modules/browserupdate.js"></script>
-  {{#production}}
-    <script type="text/javascript"
-            src="/public/main-built.js"></script>
-  {{/production}}
-  {{^production}}
-    <script type="text/javascript"
-            src="/public/bower/requirejs/require.js"
-            data-main="/public/configure.js"></script>
-  {{/production}}
+  <script type="text/javascript"
+          src="/public/bower/requirejs/require.js"
+          data-main="/public/contexts/{{context}}/configure.js"></script>
 </body>
 
 </html>

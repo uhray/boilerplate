@@ -21,18 +21,25 @@
     "nodemailer-smtp-transport": "^1.0.3",
     "require-dir": "^0.1.0",
     "requirejs": "^2.1.14",
+    "run-sequence": "^1.1.5",
     "serve-favicon": "2.0.1",
     "serve-static": "^1.1.0",
-    "turnkey": "^1.0.22",
+    "turnkey": "^1.0.26",
     "winston": "^0.7.3"
   },
   "devDependencies": {
-    "sass": "^0.5.0",
     "gulp": "^3.8.8",
+    "gulp-assets-grabber": "^1.0.0",
     "gulp-autoprefixer": "^1.0.1",
-    "gulp-ruby-sass": "^0.7.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-foreach": "^0.1.0",
+    "gulp-html-replace": "^1.5.5",
     "gulp-jscs": "^1.2.0",
-    "jscs": "1.7.3"
+    "gulp-minify-css": "^1.2.2",
+    "gulp-replace": "^0.5.4",
+    "gulp-ruby-sass": "^0.7.1",
+    "jscs": "1.7.3",
+    "sass": "^0.5.0"
   },
   "scripts": {
     "postinstall": "bower cache clean && bower install"
