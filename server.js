@@ -36,7 +36,10 @@ app.use(require('compression')());
 app.use('/public', require('serve-static')(__dirname + '/app/frontend'));
 if (!nconf.get('SECRET')) {
   console.log('You must provide a SECRET for the cookiestore in your config.');
-  console.log('nconf.get(\'SECRET\') is null.');
+  console.log('Add a secret one of three ways:');
+  console.log('  1. Command `SECRET=thisSecret gulp dev`');
+  console.log('  2. Put "SECRET=thisSecret" in the .env file');
+  console.log('  3. Add \'"SECRET": "thisSecret"\' to config/settings.json');
   process.exit();
 }
 app.use(require('cookie-session')({ secret: nconf.get('SECRET') }));
