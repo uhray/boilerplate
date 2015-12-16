@@ -11,7 +11,6 @@
 
 
 **Frontend Docs**
-* [Static Development](#static-development)
 * [Configuring Frontend](#configuring-frontend)
 * [Pages](#pages)
 * [Routing](#routing)
@@ -171,7 +170,7 @@ api/
 
  1. Establishes basic authentication with forgot password functionality for users via [turnkey](https://github.com/uhray/turnkey).
  2. Launches REST API built via [crud](https://github.com/uhray/crud#backend) based on your resources.
- 3. Connects to your MongoDB if the [config variable](#config-variables) 'MONGOHQ_URL' is set to the URL where your MongoDB instance is hosted.
+ 3. Connects to your MongoDB if the [config variable](#config-variables) 'MONGO_URL' is set to the URL where your MongoDB instance is hosted.
 
 #### Resources
 
@@ -241,52 +240,6 @@ In order to add a new shell, you need to do 2 things:
 <br><br>
 # FRONTEND DOCS
 
-## Static Development
-
-#### Basics
-When developing web applications, we find it easiest to implement static front-end pages with hard-coded data to establish the look and feel of the web app's pages without worrying about any backend development. The Uhray Boilerplate provides an easy way to code and host these frontend pages during static development. If this approach does not fit your workflow, feel free to disregard this entire section -- it's exclusively for convenience.
-
-#### Static Page Organization
-
-In addition to the backend and frontend parts of the Boilerplate's app directory, there is also a [static](../app/static) directory.
-
-```bash
-app/
-	backend/
-	frontend/
-	static/
-		_layout.html
-		home.html
-```
-
-The *_layout.html* file is an HTML skeleton that has some basic meta tag information and several CSS links. By default, every other HTML page in the static directory, like home.html, will extend the *_layout.html* file. 
-
-#### Static Page Styling (CSS/SCSS)
-
-By default, the _layout.html has 3 CSS links. 
-
- 1. Normalize.css (common fixes for consistent browser compatibility)
- 2. HTML5 Boilerplate's main.css (cross-browser styling)
- 3. Uhray Boilerplate's main.css (starting place for your styling rules)
-
-You can extend the base CSS by adding CSS/SCSS rules to the [main.scss](../app/frontend/styles/main.scss) file in the frontend styles directory. 
-
->Note: The difference in file extensions (*.css from _layout.html* vs *.scss from frontend styles directory*) will be resolved during the application's build process. By default, all SCSS files are converted to CSS files with the same base filename. These converted CSS files will be placed within a /css directory within the /styles directory. See [Build Options](#build-options) for additional information.
-
-The best part about doing static development this way is that when you're ready to build an interactive application, your templates and styling are pretty much complete.
-
-#### Viewing Static Pages
-
-In the root directory of the Uhray Boilerplate, there is a [*static.js*](../static.js) file. This is very similar to the *server.js* file that runs your actual web application, only without any server-side debugging and without some of the express middleware. It's setup to display a list of all your static pages. You can launch the static server by running the following command from the Uhray Boilerplate root directory:
-
-``` gulp static```
-
-Once started, the server should log something like:
-
-```21:48:47 static.1 | App listening on port 5200```
-
-Open your browser to the localhost on the specified port (i.e. ```localhost:5200```). You'll be able to see updates to any newly saved static file code simply by refreshing your browser.
-
 ## Configuring Frontend
 
 Configuration is located in [app/frontend/configure.js](../app/frontend/configure.js).
@@ -322,11 +275,10 @@ Additionally, you can also define [computed properties](http://docs.ractivejs.or
 
 To create a new page, you need to do several things:
 
- 1. If the new page will need a new shell, see [Adding a New Shell](#adding-a-new-shell) for instructions.
- 2. Create a new directory in the frontend [pages](../app/frontend/pages) directory.
- 2. In this directory, create an Ractive Template (example: [*template.html*](../app/frontend/pages/home/template.html)).
- 3. In this directory, create an Ractive JavaScript file (example: [*main.js*](../app/frontend/pages/home/main.js)).
- 4. Update your [frontend routes](#routing) to define which URLs should load the new page.
+ 1. Create a new directory in the frontend [pages](../app/frontend/pages) directory.
+ 1. In this directory, create an Ractive Template (example: [*template.html*](../app/frontend/pages/home/template.html)).
+ 1. In this directory, create an Ractive JavaScript file (example: [*main.js*](../app/frontend/pages/home/main.js)).
+ 1. Update your [frontend routes](#routing) to define which URLs should load the new page.
 
 #### Integrating MongoDB Data
 
@@ -384,7 +336,7 @@ By default, this *router.js* file only has one route set up. It shows that given
 
 ## Styles
 
-The [styles](../app/frontend/styles) directory is meant to house all of your application's custom styling rules. In addition to regular CSS files, Uhray Boilerplate allows you to put SCSS files in this directory. SCSS allows you to do [really cool things](http://sass-lang.com/guide) like use variables in CSS. By default, the [*main.scss*](../app/frontend/styles/main.scss) file is linked to all of your frontend pages and static templates, so you can simply extend this file with new CSS or SCSS styling rules. 
+The [styles](../app/frontend/styles) directory is meant to house all of your application's custom styling rules. In addition to regular CSS files, Uhray Boilerplate allows you to put SCSS files in this directory. SCSS allows you to do [really cool things](http://sass-lang.com/guide) like use variables in CSS. By default, the [*main.scss*](../app/frontend/styles/main.scss) file is linked to all of your frontend pages, so you can simply extend this file with new CSS or SCSS styling rules. 
 
 >Note: During the build process, all SCSS files are converted to CSS files with the same base filename. Also, all CSS files are run through [autoprefixer](https://github.com/postcss/autoprefixer) which automatically adds in any missing vender prefixes (-webit, -moz, -ms). These converted CSS files will be placed within a /css directory within the /styles directory. See [Build Options](#build-options) for additional information.
 
@@ -398,7 +350,7 @@ styles/
 	new_stylesheet.scss
 ```	
 
-Next, you'll have to add a corresponding link tag to the base [_layout.html](../app/static/_layout.html) file for static development or the [backend shell](../app/backend/shells/main.html) for regular application development.
+Next, you'll have to add a corresponding link tag to the [backend shell](../app/backend/shells/main.html).
 
 ```
 <link rel="stylesheet" href="/public/styles/css/new_stylesheet.css">
@@ -422,7 +374,7 @@ The [ractive-plugins](../app/frontend/ractive-plugins) directory is broken down 
 
 ## Modules
 
-The frontend [modules](../app/frontend/modules) directory is simply a place to put reusable JavaScript code. The use cases are virtually endless, and by default there are a bunch of useful [tools](../app/frontend/modules/tools.js) but here's a simple example.
+The frontend [modules](../app/frontend/modules) directory is simply a place to put reusable JavaScript code. The use cases are virtually endless, and by default there are some useful [tools](../app/frontend/modules/tools.js) but here's a simple example.
 
 #### Example
 
@@ -434,7 +386,7 @@ First you create a JavaScript file in the modules directory, say *tools.js* beca
 // tools.js
 define([], function() {
 	var tools = {};
-	tools.display_name = function(title, firstname, lastname) {
+	tools.displayName = function(title, firstname, lastname) {
 		return title + " " + firstname + " " + lastname;
 	};
 	return tools;
@@ -447,7 +399,7 @@ Now, on any frontend JavaScript page, you can require this *tools.js* file via r
 define(['crud','modules/tools'], 
 function(crud, tools) {
 	crud('/users', '53b705826000a64d08ae5f94').read(function(e, user) {
-		var name = tools.display_name(user.title, user.first, user.last);
+		var name = tools.displayName(user.title, user.first, user.last);
 		// do whatever you want with name
 	});
 });
@@ -503,57 +455,35 @@ Uhray Boilerplate uses [gulp](http://gulpjs.com/) as a build system and comes wi
 
 Command: ```gulp```. This default build command will simply display the available build types.
 
-#### Install
-
-Command: ```gulp install```. This install build does 3 things:
-
- 1. Installs npm packages from *package.json*.
- 2. Cleans out bower cache.
- 3. Installs bower packages from *bower.json*.
-
-
-#### Static
-
-Command: ```gulp static```. This static build is for starting the static server when developing static application pages as documented in [Static Development](#static-development). It does 4 things:
-
- 1. Performs a gulp install.
- 2. Converts all SCSS files to CSS files & runs [autoprefixer](http://css-tricks.com/autoprefixer/).
- 3. Starts the static server (*static.js*), hosting all static pages.
- 4. Watches for changes to any SCSS files and auto-converts to CSS on the fly.
-
 #### Dev
 
 Command: ```gulp dev```. This dev build is for starting the development server when working on the interactive web application. It does 4 things:
 
- 1. Performs a gulp install.
- 2. Converts all SCSS files to CSS files & runs [autoprefixer](http://css-tricks.com/autoprefixer/).
- 3. Starts the development server (*server.js* in dev-mode), hosting the web app.
- 4. Watches for changes to any SCSS files and auto-converts to CSS on the fly.
+ 1. Ensures bower and node modules are all installed.
+ 1. Converts all SCSS files to CSS files.
+ 1. Starts the development server (*server.js* in dev-mode), hosting the web app.
+ 1. Watches for changes to any SCSS files and auto-converts to CSS on the fly.
+
+#### Build
+
+Command: ```gulp build```. This prod build is for starting the production server when testing the web application. It does the following things:
+
+ 1. Ensures bower and node modules are all installed.
+ 1. Converts all SCSS files to CSS files & runs [autoprefixer](http://css-tricks.com/autoprefixer/).
+ 1. Minifies all JavaScript contexts and places them into `app/frontend/contexts/_prod/`.
+ 1. Creates css files for each shell and places them into `app/frontend/styles/css/_prod/`.
+ 1. Creates production shells that point at minified js and css and places them in `app/backend/shells/_prod/`.
 
 #### Prod
 
-Command: ```gulp prod```. This prod build is for starting the production server when testing the web application. It does 4 things:
+Command: ```gulp prod```. This prod build is for starting the production server when testing the web application. It does the following things:
 
- 1. Performs a gulp install.
- 2. Converts all SCSS files to CSS files & runs [autoprefixer](http://css-tricks.com/autoprefixer/).
- 3. Minifies all JavaScript files.
- 4. Starts the production server (*server.js* in prod-mode), hosting the production web app.
-
-#### Prod Test
-
-Command: ```gulp prod_test```. This prod build is for starting the production server when testing the web application and have it re-build the minified js and the css files. It does 6 things:
-
- 1. Performs a gulp install.
- 2. Converts all SCSS files to CSS files & runs [autoprefixer](http://css-tricks.com/autoprefixer/).
- 3. Minifies all JavaScript files.
- 4. Starts the production server (*server.js* in prod-mode), hosting the production web app.
- 5. Watches for changes to any SCSS files and auto-converts to CSS on the fly.
- 6. Watches for changes to any js files and auto-minifies fly.
+ 1. Runs `gulp build`.
+ 1. Starts the production server (*server.js* in prod-mode), hosting the production web app.
 
 #### Lint
 
 Command: ```gulp lint```. This lint build is for linting the application's codebase for possible errors. Right now, this only runs the JavaScript linter [jscs](https://www.npmjs.org/package/jscs). See [Linting Docs](#linting) for more information.
-
 
 ## Heroku Deployment
 
