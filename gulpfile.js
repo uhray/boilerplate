@@ -21,7 +21,7 @@ gulp.task('lint', ['dolint']);
 // Helper Tasks ----------------------------------------------------------------
 
 gulp.task('info', function() {
-  console.log('\nUsage:\t gulp [ static | dev | prod | lint ]\n');
+  console.log('\nUsage:\t gulp [ dev | prod | lint ]\n');
 });
 
 gulp.task('heroku', ['bower_install']);
