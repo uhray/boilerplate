@@ -13,7 +13,7 @@ require.config({
         polyfills:    'modules/polyfills'
       },
       events: {
-        uhray:        'bower/ractive-uhray-events/dist/events.min',
+        uhray:        'bower/ractive-uhray-events/dist/events.min'
       },
       extensions: {
         validator: 'bower/ractive-extensions-validator/dist/validator.min',
