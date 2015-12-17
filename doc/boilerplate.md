@@ -399,6 +399,66 @@ By default, this *router.js* file only has one route set up. It shows that given
 
 ### Adding a Context
 
+There are really two steps to adding a context:
+
+  1. Create the new directory and files
+ 
+
+  To add a new context, we recommend just using the [uhray bp cli](https://github.com/uhray/bp). The cli at this point is pretty bare, but it makes this arduous task really simple. After instally the cli, go to the root directory of your boilerplate project and run the following:
+
+  ```
+bp context --name newcontextname
+  ```
+
+  Your new context files are now placed into [app/frontend/contexts](../app/frontend/contexts). 
+
+  To be more educational, I'll explain what it's actually adding:
+  
+    * configure.js - this configures the context. [read more](#configuring-a-context)
+    * router.js - this routes the context. [read more](#routing-a-context)
+    * pages - these are the pages for the context. It adds a default one called "home"
+    
+  It's also important to notice that the [configure.js](../app/frontend/contexts/main/configure.js) file must specify file paths relative to the [app/frontend](../app/frontend) directory. So the name of the context matters. The cli takes care of setting that for you.
+
+  2. Tell the [server.js](../server.js) file to load this context whenever is appropriate. There can be no rule for how to do this, because it depend why/when you want this context used. If you look at the [server.js](../server.js) where it's "configuring routes for shells", you'll see that the shell is told which context to load. Modify logic here to load a shell with your new context.
+
+Example:
+
+Create new context:
+
+```
+bp context --name loggedOut
+```
+
+Use context if user is not logged out:
+
+server.js:
+```js
+// server.js
+
+// ...
+
+  // Configure routes for shells
+  app.get('/*', function(req, res, next) {
+    var context = 'loggedOut';
+    
+    if (req.user && req.user._id) {  // logged  in
+      context = 'main';
+    }
+    
+    res.render('main', {
+      production: __production__,
+      context: context,
+      locals: JSON.stringify({
+        user: req.user || {},
+        production: __production__
+      })
+    });
+  });
+
+// ...
+```
+
 ## Styles
 
 The [styles](../app/frontend/styles) directory is meant to house all of your application's custom styling rules. In addition to regular CSS files, Uhray Boilerplate allows you to put SCSS files in this directory. SCSS allows you to do [really cool things](http://sass-lang.com/guide) like use variables in CSS. By default, the [*main.scss*](../app/frontend/styles/main.scss) file is linked to all of your frontend pages, so you can simply extend this file with new CSS or SCSS styling rules. 
