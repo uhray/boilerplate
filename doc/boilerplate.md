@@ -402,13 +402,8 @@ By default, this *router.js* file only has one route set up. It shows that given
 There are really two steps to adding a context:
 
   1. Create the new directory and files
- 
 
-    To add a new context, we recommend just using the [uhray bp cli](https://github.com/uhray/bp). The cli at this point is pretty bare, but it makes this arduous task really simple. After installing the cli, go to the root directory of your boilerplate project and run the following:
-
-```
-bp context --name newcontextname
-```
+    To add a new context, we recommend just using the [uhray bp cli](https://github.com/uhray/bp). The cli at this point is pretty bare, but it makes this arduous task really simple. After installing the cli, go to the root directory of your boilerplate project and run the following: `bp context --name newcontextname`
 
     Your new context files are now placed into [app/frontend/contexts](../app/frontend/contexts). 
 
