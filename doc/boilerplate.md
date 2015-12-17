@@ -70,12 +70,11 @@ backend/
 		index.js
 	shells/
 ```
-
-API
+<a href="#backend-org-api" name="backend-org-api">#</a> API
 
 By default, the Uhray Boilerplate is set up for use with a [MongoDB](http://www.mongodb.org/) database and [Mongoose](http://mongoosejs.com/) for database connectivity and querying. It also comes ready for the creation of a REST API built on top of [crud](https://github.com/uhray/crud#backend) and [crud-mongoose](https://github.com/uhray/crud-mongoose), modules developed by Uhray that allow a developer to easily setup database resources for interactivity within the application. Each resource directory establishes the schema, instantiates a model, and defines the API routes for interacting with that resource.
 
-Shells
+<a href="#backend-org-shells" name="backend-org-shells">#</a> Shells
 
 The application server is setup to respond to specific requests with a shell. A shell is simply a skeleton of HTML/CSS that is sent to the client-side and immediately displayed before the frontend takes care of loading the remaining elements/data into the main body of the page. The advantage to using shells is that you can update data on the frontend when a user navigates between pages without re-requesting the content or re-rendering the entire view. The end result is a faster, more seamless user experience and lighter server load. 
 
@@ -85,28 +84,28 @@ The frontend directory all starts with the [router.js](../app/frontend/router.js
 
 ```
 frontend/
-	images/
+	contexts/
+		main/
+			router.js
+			configure.js
+			pages/
+			home/
+				template.html
+				main.js
 	modules/
 		tools.js
-	pages/
-		home/
-			template.html
-			main.js
 	ractive-plugins/
 	styles/
-	configure.js
-	router.js
 ```
 
-The frontend is intentionally designed to be page-centric, meaning that code is organized and structured around each page in the web application. Inside the [pages directory](../app/frontend/pages), each page is defined as a directory itself containing 2 files (see *home* above):
+The frontend is context-centric. Each context (above `main` is the single context) is a [single page application](https://en.wikipedia.org/wiki/Single-page_application). When a visitor requests a url from ther server, they will be served back one [shell](#backend-org-api). That shell wraps a single page application, or a `context`. Once the shell and context are loaded, there are no more page loads unless you need to switch context or shell. The context is configured by its [configure.js](../app/frontend/contexts/configure.js) file.
+
+Each context itself is intentionally designed to be page-centric, meaning that code is organized and structured around each page in the web application. For example, if you had a context for a logged out user, you may have pages for "login", "forgot password", "sign up", and "reset password". The pages are routed in the [router.js](../app/frontend/contexts/router.js) file. Inside the context's [pages directory](../app/frontend/contexts/main/pages), each page is defined as a directory itself containing 2 files (see *home* above):
 
  1. Ractive Template
  2. Ractive JavaScript File
 
 For more information, check out the [pages documentation](#pages).
-
-
-
 
 
 <br>
