@@ -80,7 +80,7 @@ The application server is setup to respond to specific requests with a shell. A 
 
 #### Frontend Organization
 
-The frontend directory all starts with the [router.js](../app/frontend/router.js) file. After the server sends over a shell to the frontend, the *router.js* file handles which application page should be loaded based on the URL. Each page can utilize images, modules, styles, plugins, bower modules, etc. More on this later.
+See below for the starting directory structure:
 
 ```
 frontend/
@@ -105,7 +105,7 @@ Each context itself is intentionally designed to be page-centric, meaning that c
  1. Ractive Template
  2. Ractive JavaScript File
 
-For more information, check out the [pages documentation](#pages).
+Each page can utilize images, modules, styles, plugins, bower modules, etc. More on this later. For more information, check out the [pages documentation](#pages).
 
 
 <br>
