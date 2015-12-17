@@ -80,7 +80,7 @@ The application server is setup to respond to specific requests with a shell. A 
 
 #### Frontend Organization
 
-See below for the starting directory structure:
+The frontend directory all starts with the [router.js](../app/frontend/router.js) file. After the server sends over a shell to the frontend, the *router.js* file handles which application page should be loaded based on the URL. Each page can utilize images, modules, styles, plugins, bower modules, etc. More on this later.
 
 ```
 frontend/
@@ -98,14 +98,14 @@ frontend/
 	styles/
 ```
 
-The frontend is context-centric. Each context (above `main` is the single context) is a [single page application](https://en.wikipedia.org/wiki/Single-page_application). When a visitor requests a url from ther server, they will be served back one [shell](#backend-org-api). That shell wraps a single page application, or a `context`. Once the shell and context are loaded, there are no more page loads unless you need to switch context or shell. The context is configured by its [configure.js](../app/frontend/contexts/configure.js) file.
+The frontend is context-centric. Each context (above `main` is the single context) is a [single page application](https://en.wikipedia.org/wiki/Single-page_application). When a visitor requests a url from the server, they will be served back one [shell](#backend-org-shells). That shell wraps a single page application, or a `context`. Once the shell and context are loaded, there are no more page loads unless you need to switch the context or shell (the context may use AJAX to query for data from the API, but no full page loads). The context is configured by its [configure.js](../app/frontend/contexts/main/configure.js) file.
 
 Each context itself is intentionally designed to be page-centric, meaning that code is organized and structured around each page in the web application. For example, if you had a context for a logged out user, you may have pages for "login", "forgot password", "sign up", and "reset password". The pages are routed in the [router.js](../app/frontend/contexts/router.js) file. Inside the context's [pages directory](../app/frontend/contexts/main/pages), each page is defined as a directory itself containing 2 files (see *home* above):
 
  1. Ractive Template
  2. Ractive JavaScript File
 
-Each page can utilize images, modules, styles, plugins, bower modules, etc. More on this later. For more information, check out the [pages documentation](#pages).
+For more information, check out the [pages documentation](#pages).
 
 
 <br>
