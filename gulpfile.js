@@ -16,12 +16,13 @@ var gulp = require('gulp'),
 gulp.task('default', ['info']);
 gulp.task('dev', ['doDev']);
 gulp.task('prod', ['doProd']);
+gulp.task('build', ['prod-build']);
 gulp.task('lint', ['dolint']);
 
 // Helper Tasks ----------------------------------------------------------------
 
 gulp.task('info', function() {
-  console.log('\nUsage:\t gulp [ dev | prod | lint ]\n');
+  console.log('\nUsage:\t gulp [ dev | prod | lint | build ]\n');
 });
 
 gulp.task('heroku', ['bower_install']);
