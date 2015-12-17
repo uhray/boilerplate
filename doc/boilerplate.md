@@ -222,9 +222,53 @@ The advantage to using shells is that you can update data on the frontend as a u
 
 #### Setup
 
-Shells are configured in the [*server.js*](../server.js#L52-L60) file. The actual HTML shells are stored in the backend's [shells directory](../app/backend/shells). 
+Shells are configured in the [*server.js*](../server.js#L68-L77) file. The actual HTML shells are stored in the backend's [shells directory](../app/backend/shells). 
 
 By default, the Uhray Boilerplace comes with one shell ([*main.html*](../app/backend/shells/main.html)) that sets up some basic meta tags, links 3 stylesheets, provides a container for the frontend content to be embedded, and loads the frontend JavaScript code.
+
+#### Structure
+
+Take a look at the [main.html](../app/backend/shells/main.html) shell packaged with the boilerplate. It's a basic HTML file and generally you can do whatever you want here. That being said, there are three important concepts to understand:
+
+  * *CSS compiling* - The [gulp build](#build) command joins and minifies all CSS into a single file for faster loads. This is great, but you'll need to tell it what CSS files to include. Example here:
+
+  ```html
+  <!-- build:css -->
+    <link rel="stylesheet"
+          href="/public/bower/normalize.css/normalize.css">
+    <link rel="stylesheet"
+          href="/public/bower/html5-boilerplate/css/main.css">
+    <link rel="stylesheet" href="/public/styles/css/main.css">  
+  <!-- endbuild -->
+  ```
+  
+  * *Inside of Shell* - The shell is a wrapper for the single page application, the context. The context makes up a single inside-part of the shell. This is identified by the div#body tag. Example:
+
+  ```html
+  <div id="body">
+
+    <!-- context takes over here -->
+
+  </div>	
+  ```
+
+	> Note: If you're curious how it knows to insert everyting into the div#body, read on: As mentioned previously, the boilerplate is not supposed to contain magic. The codebase is fully contained in these files and you can technically change and do whatever you want. Each page in a context, see [this one](../app/frontend/contexts/main/pages/home/main.js) for example, tells the Ractive page where to place to content in the *el* value.
+	
+  * *Choosing the context* - The context is chosen by telling the shell which javascript to load. This javascript should contain the code for the full context. By default we have the following line at the bottom of the shell to load the configure.js file via requirejs:
+
+  ```html
+    <script type="text/javascript"
+          src="/public/bower/requirejs/require.js"
+          data-main="/public/contexts/{{context}}/configure.js"></script>
+  ```
+  
+  It's important to see here, that the context is chosen by the variable `{{context}}` in the shell. This is set in the `server.js` file, which handles the full server routing. See [here](https://github.com/uhray/boilerplate/blob/master/server.js#L68). You'll need to carefully set which routes of the server (or logic based on logged in or logged out) should load which combination of shell and context.
+  
+  It was carefully desiged this way to give the developers full control over the user experience. You may need logic (Is this user logged in? Is it an admin user or a regular user?) or you may need to just route different shells/contexts based on the url requested by the user. It's up to you.
+  
+  Each shell can be used for multiple contexts. Example: You have a shell that includes a header and a footer. The context will fit in the middle. You could have a context for whether the user is logged in, which includes the active application, and a context for if the user is logged out, which includes login/sign up/forgot password/etc.
+  
+  Each context can be used for multiple shells. We see this as less common, but why restrict it? Example: You may want to wrap a context with completely different css to give a different look and feel depending on the domain (think white labelling).
 
 #### Adding a New Shell
 
