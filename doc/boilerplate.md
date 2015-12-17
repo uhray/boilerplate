@@ -11,10 +11,11 @@
 
 
 **Frontend Docs**
-* [Static Development](#static-development)
-* [Configuring Frontend](#configuring-frontend)
-* [Pages](#pages)
-* [Routing](#routing)
+* [Contexts](#contexts)
+  * [Configuring a Context](#configuring-a-context)
+  * [Pages](#pages)
+  * [Routing a Context](#routing-a-context)
+  * [Adding a Context](#adding-a-context)
 * [Styles](#styles)
 * [Images](#images)
 * [Ractive-Plugins](#ractive-plugins)
@@ -71,43 +72,42 @@ backend/
 		index.js
 	shells/
 ```
-
-API
+<a href="#backend-org-api" name="backend-org-api">#</a> API
 
 By default, the Uhray Boilerplate is set up for use with a [MongoDB](http://www.mongodb.org/) database and [Mongoose](http://mongoosejs.com/) for database connectivity and querying. It also comes ready for the creation of a REST API built on top of [crud](https://github.com/uhray/crud#backend) and [crud-mongoose](https://github.com/uhray/crud-mongoose), modules developed by Uhray that allow a developer to easily setup database resources for interactivity within the application. Each resource directory establishes the schema, instantiates a model, and defines the API routes for interacting with that resource.
 
-Shells
+<a href="#backend-org-shells" name="backend-org-shells">#</a> Shells
 
 The application server is setup to respond to specific requests with a shell. A shell is simply a skeleton of HTML/CSS that is sent to the client-side and immediately displayed before the frontend takes care of loading the remaining elements/data into the main body of the page. The advantage to using shells is that you can update data on the frontend when a user navigates between pages without re-requesting the content or re-rendering the entire view. The end result is a faster, more seamless user experience and lighter server load. 
 
 #### Frontend Organization
 
-The frontend directory all starts with the [router.js](../app/frontend/router.js) file. After the server sends over a shell to the frontend, the *router.js* file handles which application page should be loaded based on the URL. Each page can utilize images, modules, styles, plugins, bower modules, etc. More on this later.
+See below for the starting directory structure:
 
 ```
 frontend/
-	images/
+	contexts/
+		main/
+			router.js
+			configure.js
+			pages/
+			home/
+				template.html
+				main.js
 	modules/
 		tools.js
-	pages/
-		home/
-			template.html
-			main.js
 	ractive-plugins/
 	styles/
-	configure.js
-	router.js
 ```
 
-The frontend is intentionally designed to be page-centric, meaning that code is organized and structured around each page in the web application. Inside the [pages directory](../app/frontend/pages), each page is defined as a directory itself containing 2 files (see *home* above):
+The frontend is context-centric. Each context (above `main` is the single context) is a [single page application](https://en.wikipedia.org/wiki/Single-page_application). When a visitor requests a url from ther server, they will be served back one [shell](#backend-org-shells). That shell wraps a single page application, or a `context`. Once the shell and context are loaded, there are no more page loads unless you need to switch context or shell (the context may need to load data from the API with AJAX, but no full page loads within a shell/context pairing). The context is configured by its [configure.js](../app/frontend/contexts/main/configure.js) file.
+
+Each context itself is intentionally designed to be page-centric, meaning that code is organized and structured around each page in the web application. For example, if you had a context for a logged out user, you may have pages for "login", "forgot password", "sign up", and "reset password". The pages are routed in the [router.js](../app/frontend/contexts/router.js) file. Inside the context's [pages directory](../app/frontend/contexts/main/pages), each page is defined as a directory itself containing 2 files (see *home* above):
 
  1. Ractive Template
  2. Ractive JavaScript File
 
-For more information, check out the [pages documentation](#pages).
-
-
-
+Each page can utilize images, modules, styles, plugins, bower modules, etc. More on this later. For more information, check out the [pages documentation](#pages).
 
 
 <br>
@@ -171,7 +171,7 @@ api/
 
  1. Establishes basic authentication with forgot password functionality for users via [turnkey](https://github.com/uhray/turnkey).
  2. Launches REST API built via [crud](https://github.com/uhray/crud#backend) based on your resources.
- 3. Connects to your MongoDB if the [config variable](#config-variables) 'MONGOHQ_URL' is set to the URL where your MongoDB instance is hosted.
+ 3. Connects to your MongoDB if the [config variable](#config-variables) 'MONGO_URL' is set to the URL where your MongoDB instance is hosted.
 
 #### Resources
 
@@ -224,9 +224,53 @@ The advantage to using shells is that you can update data on the frontend as a u
 
 #### Setup
 
-Shells are configured in the [*server.js*](../server.js#L52-L60) file. The actual HTML shells are stored in the backend's [shells directory](../app/backend/shells). 
+Shells are configured in the [*server.js*](../server.js#L68-L77) file. The actual HTML shells are stored in the backend's [shells directory](../app/backend/shells). 
 
 By default, the Uhray Boilerplace comes with one shell ([*main.html*](../app/backend/shells/main.html)) that sets up some basic meta tags, links 3 stylesheets, provides a container for the frontend content to be embedded, and loads the frontend JavaScript code.
+
+#### Structure
+
+Take a look at the [main.html](../app/backend/shells/main.html) shell packaged with the boilerplate. It's a basic HTML file and generally you can do whatever you want here. That being said, there are three important concepts to understand:
+
+  * *CSS compiling* - The [gulp build](#build) command joins and minifies all CSS into a single file for faster loads. This is great, but you'll need to tell it what CSS files to include. Example here:
+
+  ```html
+  <!-- build:css -->
+    <link rel="stylesheet"
+          href="/public/bower/normalize.css/normalize.css">
+    <link rel="stylesheet"
+          href="/public/bower/html5-boilerplate/css/main.css">
+    <link rel="stylesheet" href="/public/styles/css/main.css">  
+  <!-- endbuild -->
+  ```
+  
+  * *Inside of Shell* - The shell is a wrapper for the single page application, the context. The context makes up a single inside-part of the shell. This is identified by the div#body tag. Example:
+
+  ```html
+  <div id="body">
+
+    <!-- context takes over here -->
+
+  </div>	
+  ```
+
+	> Note: If you're curious how it knows to insert everyting into the div#body, read on: As mentioned previously, the boilerplate is not supposed to contain magic. The codebase is fully contained in these files and you can technically change and do whatever you want. Each page in a context, see [this one](../app/frontend/contexts/main/pages/home/main.js) for example, tells the Ractive page where to place to content in the *el* value.
+	
+  * *Choosing the context* - The context is chosen by telling the shell which javascript to load. This javascript should contain the code for the full context. By default we have the following line at the bottom of the shell to load the configure.js file via requirejs:
+
+  ```html
+    <script type="text/javascript"
+          src="/public/bower/requirejs/require.js"
+          data-main="/public/contexts/{{context}}/configure.js"></script>
+  ```
+  
+  It's important to see here, that the context is chosen by the variable `{{context}}` in the shell. This is set in the `server.js` file, which handles the full server routing. See [here](https://github.com/uhray/boilerplate/blob/master/server.js#L68). You'll need to carefully set which routes of the server (or logic based on logged in or logged out) should load which combination of shell and context.
+  
+  It was carefully desiged this way to give the developers full control over the user experience. You may need logic (Is this user logged in? Is it an admin user or a regular user?) or you may need to just route different shells/contexts based on the url requested by the user. It's up to you.
+  
+  Each shell can be used for multiple contexts. Example: You have a shell that includes a header and a footer. The context will fit in the middle. You could have a context for whether the user is logged in, which includes the active application, and a context for if the user is logged out, which includes login/sign up/forgot password/etc.
+  
+  Each context can be used for multiple shells. We see this as less common, but why restrict it? Example: You may want to wrap a context with completely different css to give a different look and feel depending on the domain (think white labelling).
 
 #### Adding a New Shell
 
@@ -241,68 +285,40 @@ In order to add a new shell, you need to do 2 things:
 <br><br>
 # FRONTEND DOCS
 
-## Static Development
+## Contexts
 
-#### Basics
-When developing web applications, we find it easiest to implement static front-end pages with hard-coded data to establish the look and feel of the web app's pages without worrying about any backend development. The Uhray Boilerplate provides an easy way to code and host these frontend pages during static development. If this approach does not fit your workflow, feel free to disregard this entire section -- it's exclusively for convenience.
+We're going to be redundant here, but it's very important to understand "contexts". 
 
-#### Static Page Organization
+See the file structure of a context:
 
-In addition to the backend and frontend parts of the Boilerplate's app directory, there is also a [static](../app/static) directory.
-
-```bash
-app/
-	backend/
-	frontend/
-	static/
-		_layout.html
-		home.html
+```
+main/   # this is the context titled "main"
+	router.js
+	configure.js
+	pages/
+		home/
+			template.html
+			main.js
 ```
 
-The *_layout.html* file is an HTML skeleton that has some basic meta tag information and several CSS links. By default, every other HTML page in the static directory, like home.html, will extend the *_layout.html* file. 
+Each context (above `main` is the single context) is a [single page application](https://en.wikipedia.org/wiki/Single-page_application). When a visitor requests a url from ther server, they will be served back one [shell](#backend-org-shells). That shell wraps a single page application, or a `context`. Once the shell and context are loaded, there are no more page loads unless you need to switch context or shell (the context may need to load data from the API with AJAX, but no full page loads within a shell/context pairing). The context is configured by its [configure.js](../app/frontend/contexts/main/configure.js) file.
 
-#### Static Page Styling (CSS/SCSS)
+### Configuring a Context
 
-By default, the _layout.html has 3 CSS links. 
-
- 1. Normalize.css (common fixes for consistent browser compatibility)
- 2. HTML5 Boilerplate's main.css (cross-browser styling)
- 3. Uhray Boilerplate's main.css (starting place for your styling rules)
-
-You can extend the base CSS by adding CSS/SCSS rules to the [main.scss](../app/frontend/styles/main.scss) file in the frontend styles directory. 
-
->Note: The difference in file extensions (*.css from _layout.html* vs *.scss from frontend styles directory*) will be resolved during the application's build process. By default, all SCSS files are converted to CSS files with the same base filename. These converted CSS files will be placed within a /css directory within the /styles directory. See [Build Options](#build-options) for additional information.
-
-The best part about doing static development this way is that when you're ready to build an interactive application, your templates and styling are pretty much complete.
-
-#### Viewing Static Pages
-
-In the root directory of the Uhray Boilerplate, there is a [*static.js*](../static.js) file. This is very similar to the *server.js* file that runs your actual web application, only without any server-side debugging and without some of the express middleware. It's setup to display a list of all your static pages. You can launch the static server by running the following command from the Uhray Boilerplate root directory:
-
-``` gulp static```
-
-Once started, the server should log something like:
-
-```21:48:47 static.1 | App listening on port 5200```
-
-Open your browser to the localhost on the specified port (i.e. ```localhost:5200```). You'll be able to see updates to any newly saved static file code simply by refreshing your browser.
-
-## Configuring Frontend
-
-Configuration is located in [app/frontend/configure.js](../app/frontend/configure.js).
+Configuration is located in [app/frontend/[context]/configure.js](../app/frontend/contexts/main/configure.js).
 
 The frontend is configured via [requirejs](http://requirejs.org/) and is set up nicely to use the [requirejs-loader-plugin](https://github.com/uhray/requirejs-loader-plugin). If there are any questions on how to add new modules, consult either of those two links. Requirejs is very powerful and consequently very complicated, but the loader plugin is supposed to help ease some things.
 
 Also, because of the line in the configure.js file that sets the shim: `router:   ['loader!']`, all things configured with the [requirejs-loader-plugin](https://github.com/uhray/requirejs-loader-plugin) are loaded up before anything starts. This is important for things like extending Ractive.
 
-## Pages
+### Pages
 
-Each page of the web application is defined as a directory of 2 files within the frontend [pages](../app/frontend/pages) directory:
+Each page of the web application is defined as a directory of 2 files within the context's [pages](../app/frontend/contexts/main/pages) directory:
 
 1. Ractive Template
 2. Ractive JavaScript File
 
-The page that is loaded and displayed to the user depends on the URL. See [Routing](#routing) for additional information.
+The page that is loaded and displayed to the user depends on the URL. See [Routing](#routing-a-context) for additional information.
 
 #### Ractive Template
 
@@ -322,11 +338,12 @@ Additionally, you can also define [computed properties](http://docs.ractivejs.or
 
 To create a new page, you need to do several things:
 
- 1. If the new page will need a new shell, see [Adding a New Shell](#adding-a-new-shell) for instructions.
- 2. Create a new directory in the frontend [pages](../app/frontend/pages) directory.
- 2. In this directory, create an Ractive Template (example: [*template.html*](../app/frontend/pages/home/template.html)).
- 3. In this directory, create an Ractive JavaScript file (example: [*main.js*](../app/frontend/pages/home/main.js)).
- 4. Update your [frontend routes](#routing) to define which URLs should load the new page.
+ 1. Create a new directory in the context's [pages](../app/frontend/contexts/main/pages) directory.
+ 1. In this directory, create an Ractive Template (example: [*template.html*](../app/frontend/contexts/main/pages/home/template.html)).
+ 1. In this directory, create an Ractive JavaScript file (example: [*main.js*](../app/frontend/contexts/main/pages/home/main.js)).
+ 1. Edit the context's [configure.js](../app/frontend/contexts/main/configure.js) file to ensure requirejs loads the page.
+ 1. Update your [frontend routes](#routing-a-context) to define which URLs should load the new page.
+ 
 
 #### Integrating MongoDB Data
 
@@ -356,15 +373,12 @@ crud('/users', '53b705826000a64d08ae5f94');
 
 The above code will call the appropriate API route and it's callback function will be called where ```e``` is any error that occurred and ```d``` will contain the user's data (user with _id of ```53b705826000a64d08ae5f94```) that can then be used in your application.
 
-If your page requires a lot of data up-front before you instantiate an Ractive object,  we strongly recommend using [asyc](https://github.com/caolan/async). Async provides several operations for easily working with asynchronous JavaScript without needing to create a web of nested callback functions. After using async to retrieve all the data you need, you can then instantiate an Ractive object that uses the retrieved data.
 
+### Routing a Context
 
+After the server has packaged up a backend shell and sent it over to the frontend, the context's [*router.js*](../app/frontend/contexts/main/router.js) file determines what frontend page should be loaded into the shell based on the URL. These routes are setup using [director](https://github.com/flatiron/director). 
 
-## Routing
-
-After the server has packaged up a backend shell and sent it over to the frontend, the [*router.js*](../app/frontend/router.js) file determines what frontend page should be loaded into the shell based on the URL. These routes are setup using [director](https://github.com/flatiron/director). 
-
-> Note: We use [requirejs-loader-plugin](https://github.com/uhray/requirejs-loader-plugin) to load all the pages. See [Configuring Frontend](#configuring-frontend) for more info.
+> Note: We use [requirejs-loader-plugin](https://github.com/uhray/requirejs-loader-plugin) to load all the pages. See [Configuring A Context](#configuring-a-context) for more info.
 
 Below is a barebones example of the *router.js* file.
 ```js
@@ -380,11 +394,74 @@ function(Director, pages) {
 });
 ```
 
-By default, this *router.js* file only has one route set up. It shows that given the ```'/'``` route, the home page *page.home* should be loaded. You can see [Configuring Frontend](#configuring-frontend) for more info on why `pages.home` is the home "page." the As you know from the [Pages](#Pages) documentation, loading a page's Ractive file will load up and render that page's *template.html* file with the appropriate data within the shell. 
+By default, this *router.js* file only has one route set up. It shows that given the ```'/'``` route, the home page *page.home* should be loaded. You can see [Configuring A Context](#configuring-a-context) for more info on why `pages.home` is the home "page." As you know from the [Pages](#Pages) documentation, loading a page's Ractive file will load up and render that page's *template.html* file with the appropriate data within the shell. 
+
+
+### Adding a Context
+
+There are really two steps to adding a context:
+
+  1. Create the new directory and files
+ 
+
+  To add a new context, we recommend just using the [uhray bp cli](https://github.com/uhray/bp). The cli at this point is pretty bare, but it makes this arduous task really simple. After instally the cli, go to the root directory of your boilerplate project and run the following:
+
+  ```
+bp context --name newcontextname
+  ```
+
+  Your new context files are now placed into [app/frontend/contexts](../app/frontend/contexts). 
+
+  To be more educational, I'll explain what it's actually adding:
+  
+    * configure.js - this configures the context. [read more](#configuring-a-context)
+    * router.js - this routes the context. [read more](#routing-a-context)
+    * pages - these are the pages for the context. It adds a default one called "home"
+    
+  It's also important to notice that the [configure.js](../app/frontend/contexts/main/configure.js) file must specify file paths relative to the [app/frontend](../app/frontend) directory. So the name of the context matters. The cli takes care of setting that for you.
+
+  2. Tell the [server.js](../server.js) file to load this context whenever is appropriate. There can be no rule for how to do this, because it depend why/when you want this context used. If you look at the [server.js](../server.js) where it's "configuring routes for shells", you'll see that the shell is told which context to load. Modify logic here to load a shell with your new context.
+
+Example:
+
+Create new context:
+
+```
+bp context --name loggedOut
+```
+
+Use context if user is not logged out:
+
+server.js:
+```js
+// server.js
+
+// ...
+
+  // Configure routes for shells
+  app.get('/*', function(req, res, next) {
+    var context = 'loggedOut';
+    
+    if (req.user && req.user._id) {  // logged  in
+      context = 'main';
+    }
+    
+    res.render('main', {
+      production: __production__,
+      context: context,
+      locals: JSON.stringify({
+        user: req.user || {},
+        production: __production__
+      })
+    });
+  });
+
+// ...
+```
 
 ## Styles
 
-The [styles](../app/frontend/styles) directory is meant to house all of your application's custom styling rules. In addition to regular CSS files, Uhray Boilerplate allows you to put SCSS files in this directory. SCSS allows you to do [really cool things](http://sass-lang.com/guide) like use variables in CSS. By default, the [*main.scss*](../app/frontend/styles/main.scss) file is linked to all of your frontend pages and static templates, so you can simply extend this file with new CSS or SCSS styling rules. 
+The [styles](../app/frontend/styles) directory is meant to house all of your application's custom styling rules. In addition to regular CSS files, Uhray Boilerplate allows you to put SCSS files in this directory. SCSS allows you to do [really cool things](http://sass-lang.com/guide) like use variables in CSS. By default, the [*main.scss*](../app/frontend/styles/main.scss) file is linked to all of your frontend pages, so you can simply extend this file with new CSS or SCSS styling rules. 
 
 >Note: During the build process, all SCSS files are converted to CSS files with the same base filename. Also, all CSS files are run through [autoprefixer](https://github.com/postcss/autoprefixer) which automatically adds in any missing vender prefixes (-webit, -moz, -ms). These converted CSS files will be placed within a /css directory within the /styles directory. See [Build Options](#build-options) for additional information.
 
@@ -398,7 +475,7 @@ styles/
 	new_stylesheet.scss
 ```	
 
-Next, you'll have to add a corresponding link tag to the base [_layout.html](../app/static/_layout.html) file for static development or the [backend shell](../app/backend/shells/main.html) for regular application development.
+Next, you'll have to add a corresponding link tag to the [backend shell](../app/backend/shells/main.html).
 
 ```
 <link rel="stylesheet" href="/public/styles/css/new_stylesheet.css">
@@ -422,7 +499,7 @@ The [ractive-plugins](../app/frontend/ractive-plugins) directory is broken down 
 
 ## Modules
 
-The frontend [modules](../app/frontend/modules) directory is simply a place to put reusable JavaScript code. The use cases are virtually endless, and by default there are a bunch of useful [tools](../app/frontend/modules/tools.js) but here's a simple example.
+The frontend [modules](../app/frontend/modules) directory is simply a place to put reusable JavaScript code. The use cases are virtually endless, and by default there are some useful [tools](../app/frontend/modules/tools.js) but here's a simple example.
 
 #### Example
 
@@ -434,7 +511,7 @@ First you create a JavaScript file in the modules directory, say *tools.js* beca
 // tools.js
 define([], function() {
 	var tools = {};
-	tools.display_name = function(title, firstname, lastname) {
+	tools.displayName = function(title, firstname, lastname) {
 		return title + " " + firstname + " " + lastname;
 	};
 	return tools;
@@ -447,7 +524,7 @@ Now, on any frontend JavaScript page, you can require this *tools.js* file via r
 define(['crud','modules/tools'], 
 function(crud, tools) {
 	crud('/users', '53b705826000a64d08ae5f94').read(function(e, user) {
-		var name = tools.display_name(user.title, user.first, user.last);
+		var name = tools.displayName(user.title, user.first, user.last);
 		// do whatever you want with name
 	});
 });
@@ -503,57 +580,35 @@ Uhray Boilerplate uses [gulp](http://gulpjs.com/) as a build system and comes wi
 
 Command: ```gulp```. This default build command will simply display the available build types.
 
-#### Install
-
-Command: ```gulp install```. This install build does 3 things:
-
- 1. Installs npm packages from *package.json*.
- 2. Cleans out bower cache.
- 3. Installs bower packages from *bower.json*.
-
-
-#### Static
-
-Command: ```gulp static```. This static build is for starting the static server when developing static application pages as documented in [Static Development](#static-development). It does 4 things:
-
- 1. Performs a gulp install.
- 2. Converts all SCSS files to CSS files & runs [autoprefixer](http://css-tricks.com/autoprefixer/).
- 3. Starts the static server (*static.js*), hosting all static pages.
- 4. Watches for changes to any SCSS files and auto-converts to CSS on the fly.
-
 #### Dev
 
 Command: ```gulp dev```. This dev build is for starting the development server when working on the interactive web application. It does 4 things:
 
- 1. Performs a gulp install.
- 2. Converts all SCSS files to CSS files & runs [autoprefixer](http://css-tricks.com/autoprefixer/).
- 3. Starts the development server (*server.js* in dev-mode), hosting the web app.
- 4. Watches for changes to any SCSS files and auto-converts to CSS on the fly.
+ 1. Ensures bower and node modules are all installed.
+ 1. Converts all SCSS files to CSS files.
+ 1. Starts the development server (*server.js* in dev-mode), hosting the web app.
+ 1. Watches for changes to any SCSS files and auto-converts to CSS on the fly.
+
+#### Build
+
+Command: ```gulp build```. This prod build is for starting the production server when testing the web application. It does the following things:
+
+ 1. Ensures bower and node modules are all installed.
+ 1. Converts all SCSS files to CSS files & runs [autoprefixer](http://css-tricks.com/autoprefixer/).
+ 1. Minifies all JavaScript contexts and places them into `app/frontend/contexts/_prod/`.
+ 1. Creates css files for each shell and places them into `app/frontend/styles/css/_prod/`.
+ 1. Creates production shells that point at minified js and css and places them in `app/backend/shells/_prod/`.
 
 #### Prod
 
-Command: ```gulp prod```. This prod build is for starting the production server when testing the web application. It does 4 things:
+Command: ```gulp prod```. This prod build is for starting the production server when testing the web application. It does the following things:
 
- 1. Performs a gulp install.
- 2. Converts all SCSS files to CSS files & runs [autoprefixer](http://css-tricks.com/autoprefixer/).
- 3. Minifies all JavaScript files.
- 4. Starts the production server (*server.js* in prod-mode), hosting the production web app.
-
-#### Prod Test
-
-Command: ```gulp prod_test```. This prod build is for starting the production server when testing the web application and have it re-build the minified js and the css files. It does 6 things:
-
- 1. Performs a gulp install.
- 2. Converts all SCSS files to CSS files & runs [autoprefixer](http://css-tricks.com/autoprefixer/).
- 3. Minifies all JavaScript files.
- 4. Starts the production server (*server.js* in prod-mode), hosting the production web app.
- 5. Watches for changes to any SCSS files and auto-converts to CSS on the fly.
- 6. Watches for changes to any js files and auto-minifies fly.
+ 1. Runs `gulp build`.
+ 1. Starts the production server (*server.js* in prod-mode), hosting the production web app.
 
 #### Lint
 
 Command: ```gulp lint```. This lint build is for linting the application's codebase for possible errors. Right now, this only runs the JavaScript linter [jscs](https://www.npmjs.org/package/jscs). See [Linting Docs](#linting) for more information.
-
 
 ## Heroku Deployment
 
@@ -616,4 +671,3 @@ http://sharp-rain-871.herokuapp.com/ | https://git.heroku.com/sharp-rain-871.git
  9. Check out your app by running:
 	
 	 ```heroku open```
-
