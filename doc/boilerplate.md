@@ -11,9 +11,11 @@
 
 
 **Frontend Docs**
-* [Configuring Frontend](#configuring-frontend)
-* [Pages](#pages)
-* [Routing](#routing)
+* [Contexts](#contexts)
+  * [Configuring a Context](#configuring-a-context)
+  * [Pages](#pages)
+  * [Routing a Context](#routing-a-context)
+  * [Adding a Context](#adding-a-context)
 * [Styles](#styles)
 * [Images](#images)
 * [Ractive-Plugins](#ractive-plugins)
@@ -283,22 +285,40 @@ In order to add a new shell, you need to do 2 things:
 <br><br>
 # FRONTEND DOCS
 
-## Configuring Frontend
+## Contexts
 
-Configuration is located in [app/frontend/configure.js](../app/frontend/configure.js).
+We're going to be redundant here, but it's very important to understand "contexts". 
+
+See the file structure of a context:
+
+```
+main/   # this is the contexted titled "main"
+	router.js
+	configure.js
+	pages/
+		home/
+			template.html
+			main.js
+```
+
+Each context (above `main` is the single context) is a [single page application](https://en.wikipedia.org/wiki/Single-page_application). When a visitor requests a url from ther server, they will be served back one [shell](#backend-org-shell). That shell wraps a single page application, or a `context`. Once the shell and context are loaded, there are no more page loads unless you need to switch context or shell (the context may need to load data from the API with AJAX, but no full page loads within a shell/context pairing). The context is configured by its [configure.js](../app/frontend/contexts/main/configure.js) file.
+
+### Configuring a Context
+
+Configuration is located in [app/frontend/[context]/configure.js](../app/frontend/contexts/main/configure.js).
 
 The frontend is configured via [requirejs](http://requirejs.org/) and is set up nicely to use the [requirejs-loader-plugin](https://github.com/uhray/requirejs-loader-plugin). If there are any questions on how to add new modules, consult either of those two links. Requirejs is very powerful and consequently very complicated, but the loader plugin is supposed to help ease some things.
 
 Also, because of the line in the configure.js file that sets the shim: `router:   ['loader!']`, all things configured with the [requirejs-loader-plugin](https://github.com/uhray/requirejs-loader-plugin) are loaded up before anything starts. This is important for things like extending Ractive.
 
-## Pages
+### Pages
 
-Each page of the web application is defined as a directory of 2 files within the frontend [pages](../app/frontend/pages) directory:
+Each page of the web application is defined as a directory of 2 files within the context's [pages](../app/frontend/contexts/main/pages) directory:
 
 1. Ractive Template
 2. Ractive JavaScript File
 
-The page that is loaded and displayed to the user depends on the URL. See [Routing](#routing) for additional information.
+The page that is loaded and displayed to the user depends on the URL. See [Routing](#routing-a-context) for additional information.
 
 #### Ractive Template
 
@@ -318,10 +338,12 @@ Additionally, you can also define [computed properties](http://docs.ractivejs.or
 
 To create a new page, you need to do several things:
 
- 1. Create a new directory in the frontend [pages](../app/frontend/pages) directory.
- 1. In this directory, create an Ractive Template (example: [*template.html*](../app/frontend/pages/home/template.html)).
- 1. In this directory, create an Ractive JavaScript file (example: [*main.js*](../app/frontend/pages/home/main.js)).
- 1. Update your [frontend routes](#routing) to define which URLs should load the new page.
+ 1. Create a new directory in the context's [pages](../app/frontend/contexts/main/pages) directory.
+ 1. In this directory, create an Ractive Template (example: [*template.html*](../app/frontend/contexts/main/pages/home/template.html)).
+ 1. In this directory, create an Ractive JavaScript file (example: [*main.js*](../app/frontend/contexts/main/pages/home/main.js)).
+ 1. Edit the context's [configure.js](../app/frontend/contexts/main/configure.js) file to ensure requirejs loads the page.
+ 1. Update your [frontend routes](#routing-a-context) to define which URLs should load the new page.
+ 
 
 #### Integrating MongoDB Data
 
@@ -351,15 +373,12 @@ crud('/users', '53b705826000a64d08ae5f94');
 
 The above code will call the appropriate API route and it's callback function will be called where ```e``` is any error that occurred and ```d``` will contain the user's data (user with _id of ```53b705826000a64d08ae5f94```) that can then be used in your application.
 
-If your page requires a lot of data up-front before you instantiate an Ractive object,  we strongly recommend using [asyc](https://github.com/caolan/async). Async provides several operations for easily working with asynchronous JavaScript without needing to create a web of nested callback functions. After using async to retrieve all the data you need, you can then instantiate an Ractive object that uses the retrieved data.
 
+### Routing a Context
 
+After the server has packaged up a backend shell and sent it over to the frontend, the context's [*router.js*](../app/frontend/contexts/main/router.js) file determines what frontend page should be loaded into the shell based on the URL. These routes are setup using [director](https://github.com/flatiron/director). 
 
-## Routing
-
-After the server has packaged up a backend shell and sent it over to the frontend, the [*router.js*](../app/frontend/router.js) file determines what frontend page should be loaded into the shell based on the URL. These routes are setup using [director](https://github.com/flatiron/director). 
-
-> Note: We use [requirejs-loader-plugin](https://github.com/uhray/requirejs-loader-plugin) to load all the pages. See [Configuring Frontend](#configuring-frontend) for more info.
+> Note: We use [requirejs-loader-plugin](https://github.com/uhray/requirejs-loader-plugin) to load all the pages. See [Configuring A Context](#configuring-a-context) for more info.
 
 Below is a barebones example of the *router.js* file.
 ```js
@@ -375,7 +394,10 @@ function(Director, pages) {
 });
 ```
 
-By default, this *router.js* file only has one route set up. It shows that given the ```'/'``` route, the home page *page.home* should be loaded. You can see [Configuring Frontend](#configuring-frontend) for more info on why `pages.home` is the home "page." the As you know from the [Pages](#Pages) documentation, loading a page's Ractive file will load up and render that page's *template.html* file with the appropriate data within the shell. 
+By default, this *router.js* file only has one route set up. It shows that given the ```'/'``` route, the home page *page.home* should be loaded. You can see [Configuring A Context](#configuring-a-context) for more info on why `pages.home` is the home "page." As you know from the [Pages](#Pages) documentation, loading a page's Ractive file will load up and render that page's *template.html* file with the appropriate data within the shell. 
+
+
+### Adding a Context
 
 ## Styles
 
