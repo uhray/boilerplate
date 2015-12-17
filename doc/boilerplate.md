@@ -98,7 +98,7 @@ frontend/
 	styles/
 ```
 
-The frontend is context-centric. Each context (above `main` is the single context) is a [single page application](https://en.wikipedia.org/wiki/Single-page_application). When a visitor requests a url from ther server, they will be served back one [shell](#backend-org-api). That shell wraps a single page application, or a `context`. Once the shell and context are loaded, there are no more page loads unless you need to switch context or shell. The context is configured by its [configure.js](../app/frontend/contexts/configure.js) file.
+The frontend is context-centric. Each context (above `main` is the single context) is a [single page application](https://en.wikipedia.org/wiki/Single-page_application). When a visitor requests a url from ther server, they will be served back one [shell](#backend-org-shell). That shell wraps a single page application, or a `context`. Once the shell and context are loaded, there are no more page loads unless you need to switch context or shell (the context may need to load data from the API with AJAX, but no full page loads within a shell/context pairing). The context is configured by its [configure.js](../app/frontend/contexts/main/configure.js) file.
 
 Each context itself is intentionally designed to be page-centric, meaning that code is organized and structured around each page in the web application. For example, if you had a context for a logged out user, you may have pages for "login", "forgot password", "sign up", and "reset password". The pages are routed in the [router.js](../app/frontend/contexts/router.js) file. Inside the context's [pages directory](../app/frontend/contexts/main/pages), each page is defined as a directory itself containing 2 files (see *home* above):
 
