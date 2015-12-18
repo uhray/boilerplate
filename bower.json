@@ -3,7 +3,7 @@
   "dependencies": {
     "normalize.css": "~3.0.1",
     "html5-boilerplate": "~4.3.0",
-    "crud": "^2.0.11",
+    "crud": "^2.1.0",
     "requirejs": "~2.1.14",
     "almond": "~0.3.0",
     "ractive": "~0.7.0",
@@ -15,6 +15,6 @@
     "lodash": "~3.9.3",
     "ractive-uhray-events": "~1.0.0",
     "ractive-extensions-validator": "~2.0.3",
-    "ractive-extensions-crud": "~1.0.8"
+    "ractive-extensions-crud": "~1.1.0"
   }
 }
