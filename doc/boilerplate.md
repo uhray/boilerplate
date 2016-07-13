@@ -376,7 +376,7 @@ The above code will call the appropriate API route and it's callback function wi
 
 ### Routing a Context
 
-After the server has packaged up a backend shell and sent it over to the frontend, the context's [*router.js*](../app/frontend/contexts/main/router.js) file determines what frontend page should be loaded into the shell based on the URL. These routes are setup using [director](https://github.com/flatiron/director). 
+After the server has packaged up a backend shell and sent it over to the frontend, the context's [router.js](../app/frontend/contexts/main/router.js) file determines what frontend page should be loaded into the shell based on the URL. These routes are setup using [director](https://github.com/flatiron/director). 
 
 > Note: We use [requirejs-loader-plugin](https://github.com/uhray/requirejs-loader-plugin) to load all the pages. See [Configuring A Context](#configuring-a-context) for more info.
 
@@ -396,7 +396,7 @@ function(Director, pages) {
 
 By default, this *router.js* file only has one route set up. It shows that given the ```'/'``` route, the home page *page.home* should be loaded. You can see [Configuring A Context](#configuring-a-context) for more info on why `pages.home` is the home "page." As you know from the [Pages](#Pages) documentation, loading a page's Ractive file will load up and render that page's *template.html* file with the appropriate data within the shell. 
 
-> Note: This frontend routing makes use of the URL hash (`#`) using [Director](https://github.com/flatiron/director). Therefore, any frontend references to navigate to a different page (without needing to change shell/context) should start with the `#` in the URL (e.g. `href="#/page2"`). It's easy to get mixed up when working on the frontend since you set up these frontend routes in [*router.js*](../app/frontend/contexts/main/router.js) without including the hash, as shown in the code example above. All URL references without the leading `#` will make a request to the server and be managed by the [*server.js*](../server.js) file.
+> Note: This frontend routing makes use of the URL hash (`#`) using [director](https://github.com/flatiron/director). Therefore, any frontend reference to navigate to a different page (without needing to change shell/context) should start with the `#` in the URL (e.g. `href="#/page2"`). It's easy to get mixed up when working on the frontend since you set up these frontend routes in [router.js](../app/frontend/contexts/main/router.js) without including the hash, as shown in the code example above. All URL references without the leading `#` will make a request to the server and be managed by the [server.js](../server.js) file.
 
 
 ### Adding a Context
