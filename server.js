@@ -24,7 +24,7 @@ app.engine('html', mustache);
 app.set('view engine', 'html');
 app.set(
   'views',
-  '/app/backend/shells' + (__production__ ? '/_prod' : '')
+  __dirname + '/app/backend/shells' + (__production__ ? '/_prod' : '')
 );
 if (!__production__) mustache.cache._max = 0;  // turn off mustache caching
 
@@ -66,7 +66,7 @@ app.listen(nconf.get('PORT'), function() {
 
   // Configure routes for shells
   app.get('/*', function(req, res, next) {
-    res.render('main', {
+    res.render('main.html', {
       production: __production__,
       context: 'main',
       locals: JSON.stringify({
