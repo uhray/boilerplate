@@ -24,7 +24,7 @@ app.engine('html', mustache);
 app.set('view engine', 'html');
 app.set(
   'views',
-  __dirname + '/backend/shells' + (__production__ ? '/_prod' : '')
+  __dirname + '/app/backend/shells' + (__production__ ? '/_prod' : '')
 );
 if (!__production__) mustache.cache._max = 0;  // turn off mustache caching
 
