@@ -9,6 +9,7 @@ var gulp = require('gulp'),
     concat = require('gulp-concat'),
     foreach = require('gulp-foreach'),
     path = require('path'),
+    uglify = require('gulp-uglify'),
     minifyCSS = require('gulp-minify-css');
 
 // Top Level Commands ----------------------------------------------------------
@@ -130,12 +131,19 @@ gulp.task('join_css', function() {
             return d.replace('\/public', 'app/frontend');
           }))
           .pipe(minifyCSS())
+          .pipe(replace(/url\((["'])?.*?\/bower/g, 'url($1/public/bower'))
           .pipe(concat(name + '.css'))
           .pipe(gulp.dest('app/frontend/styles/css/_prod'))
       }));
 });
 
-gulp.task('minify_js', function() {
+gulp.task('minify_js', ['join_js'], function() {
+  return gulp.src('app/frontend/contexts/_prod/*.js')
+             .pipe(uglify({ compress: { unused: false } }))
+             .pipe(gulp.dest('app/frontend/contexts/_prod'));
+});
+
+gulp.task('join_js', function() {
   return gulp.src('app/frontend/contexts/*/configure.js')
       .pipe(foreach(function(stream, file) {
         var name = file.history[file.history.length - 1]

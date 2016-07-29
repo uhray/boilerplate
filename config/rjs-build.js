@@ -3,5 +3,6 @@
     name: 'bower/almond/almond',
     wrap: true,
     exclude: [ ],
-    stubModules: [ 'rv' ]
+    stubModules: [ 'rv' ],
+    optimize: 'none'
 })

@@ -10,6 +10,7 @@ var crud = require('node-crud'),
     debug = require('debug')('api:users'),
     turnkey = require('turnkey'),
     tools = require('../tools'),
+    _ = require('lodash'),
     ObjectId = mongoose.Schema.Types.ObjectId,
     Mixed = mongoose.Schema.Types.Mixed,
     Schema, Model;
@@ -17,15 +18,9 @@ var crud = require('node-crud'),
 // Create a Schema & Model -----------------------------------------------------
 
 Schema = exports.Schema = new mongoose.Schema({
-  firstName: { type: String },
-  lastName:  { type: String },
-  email:     { type: String, pattern: tools.emailRegex,
+  email:     { type: String, validate: tools.emailRegex,
                index: true, unique: true, required: true },
-  role:      { type: String, enum: ['user', 'admin'] },
-  info: {
-    gender: { type: String, enum: ['M', 'F'] },
-    age: Number
-  },
+  role:      { type: String, enum: ['user', 'admin'], default: 'user' },
   dates: {
     created: { type: Date, default: Date.now },
     updated: { type: Date, default: Date.now }
@@ -43,7 +38,9 @@ crud.entity('/users').Read()
 crud.entity('/users').Create()
   .use(turnkey.createPassword())
   .pipe(function(d, q, cb) {
+    var role = _.get(this, 'request.user.role');
     d.email = d.email && String(d.email).toLowerCase();
+    if (role != 'admin') delete d.role;
     cb();
   })
   .pipe(cm.parseData().removes('dates'))
@@ -55,25 +52,28 @@ crud.entity('/users').Create()
     cb();
   });
 
-crud.entity('/users').Delete()
-  // .use(turnkey.loggedIn())
-  // authentication commented out for boilerplate
-  .pipe(cm.removeAll(Model));
-
 crud.entity('/users').on('error', function(method, e) {
   debug('%s error: %j', method, e);
 });
 
 // One User --------------------------------------------------------------------
 
+crud.entity('/users/me').Read()
+  .use(turnkey.loggedIn())
+  .pipe(function(d, q, cb) {
+    q._id = _.get(this, 'request.user._id');
+    cb();
+  })
+  .pipe(cm.findOne(Model, ['-turnkey']));
+
 crud.entity('/users/:_id').Read()
-  // .use(turnkey.loggedIn())
-  // authentication commented out for boilerplate
+  .use(turnkey.loggedIn())
+  .pipe(tools.mw.queryUser(true))
   .pipe(cm.findOne(Model, ['-turnkey']));
 
 crud.entity('/users/:_id').Update()
-  // .use(turnkey.loggedIn())
-  // authentication commented out for boilerplate
+  .use(turnkey.loggedIn())
+  .pipe(tools.mw.queryUser(true))
   .pipe(cm.parseData()
           .removes('dates.created', 'turnkey', 'email')
           .overrides({ 'dates.updated': Date.now }))
@@ -81,8 +81,8 @@ crud.entity('/users/:_id').Update()
   .pipe(cm.updateOne(Model));
 
 crud.entity('/users/:_id').Delete()
-  // .use(turnkey.loggedIn())
-  // authentication commented out for boilerplate
+  .use(turnkey.loggedIn())
+  .pipe(tools.mw.queryUser(true))
   .pipe(cm.removeOne(Model));
 
 crud.entity('/users/:_id').on('error', function(method, e) {
