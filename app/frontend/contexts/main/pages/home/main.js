@@ -1,9 +1,9 @@
 define(
 [
 'ractive', 'jquery', 'lodash',
-'rv!./template'
+'rv!./template', 'crud'
 ],
-function(Ractive, $, _, template) {
+function(Ractive, $, _, template, crud) {
 
   return function() {
     var ractive;
@@ -30,7 +30,5 @@ function(Ractive, $, _, template) {
     setInterval(function() {
       ractive.set('time', new Date());
     }, 1000);
-
   }
-
 });

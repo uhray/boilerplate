@@ -1,0 +1,40 @@
+<br/>
+<br/>
+<div class="jumbotron col-sm-12">
+  <div class="text-center col-sm-offset-4 col-sm-4">
+    <h2 style="margin-top: 0">Forgot Password?</h2>
+    <br>
+    {{#if error}}
+      <div class="alert alert-danger alert-dismissible fade in" role="alert">
+        <button type="button" class="close" data-dismiss="alert">
+          <span>&times;</span>
+        </button>
+        Incorrect <b>email</b>.
+      </div>
+    {{/if}}
+
+    {{#if message}}
+      <div class="alert alert-success fade in" role="alert">
+        You have been sent a reset email.
+      </div>
+    {{/if}}
+
+    <form action="javascript:;"
+          on-submit="validator"
+          on-validatorSuccess="crud-create:'/turnkey/forgot',{{user}}"
+          on-crudCreateSuccess="forgot"
+          on-crudCreateFailure="failedForgot">
+      <div class="input-group">
+        <span class="input-group-addon"> <i class="fa fa-envelope fa-fw"></i></span>
+        <input type="text" class="form-control input-lg" placeholder="Email"
+               value="{{user.email}}"
+               validator="email">
+      </div>
+      <br>
+      <button type="submit" class="btn btn-block btn-primary btn-lg">Submit</button>
+      <div style="padding-top: 12px">
+        <a class="link-color-grey" href="#/"><i class="fa fa-long-arrow-left"></i> Back to Login</a>
+      </div>
+    </form>
+  </div>
+</div>

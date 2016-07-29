@@ -68,7 +68,7 @@ app.listen(nconf.get('PORT'), function() {
   app.get('/*', function(req, res, next) {
     res.render('main', {
       production: __production__,
-      context: 'main',
+      context: req.user && req.user._id ? 'main' : 'login',
       locals: JSON.stringify({
         user: req.user || {},
         production: __production__

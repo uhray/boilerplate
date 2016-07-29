@@ -3,7 +3,9 @@ require.config({
   config: {
     loader: {
       pages: {
-        home:         'contexts/main/pages/home/main'
+        home:         'contexts/login/pages/home/main',
+        reset:        'contexts/login/pages/reset/main',
+        forgot:       'contexts/login/pages/forgot/main'
       },
       components: {
         modal:        'ractive-plugins/components/modal/main'
@@ -29,13 +31,15 @@ require.config({
     jquery:      'bower/jquery/dist/jquery.min',
     lodash:      'bower/lodash/lodash.min',
     loader:      'bower/requirejs-loader-plugin/loader',
+    moment:      'bower/moment/min/moment.min',
     ractive:     'bower/ractive/ractive',
-    router:      'contexts/main/router',
+    router:      'contexts/login/router',
     rv:          'bower/rv/rv'
   },
   shim: {
     debug:    { exports: 'debug' },
     director: { exports: 'Router' },
+    bootstrap: ['jquery'],
     router:   ['loader!']
   }
 });

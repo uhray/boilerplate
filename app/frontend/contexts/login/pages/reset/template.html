@@ -1,0 +1,31 @@
+<br/>
+<br/>
+<div class="jumbotron col-sm-12">
+  <div class="text-center col-sm-offset-4 col-sm-4">
+    <h2 style="margin-top:0">Reset Password</h2>
+    <br>
+    {{#if error}}
+      <div class="alert alert-danger alert-dismissible fade in" role="alert">
+        <button type="button" class="close" data-dismiss="alert">
+          <span>&times;</span>
+        </button>
+        Invalid code or password.
+      </div>
+    {{/if}}
+    <form action="javascript:;"
+          on-submit="validator"
+          on-validatorSuccess="doUpdate">
+      <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-asterisk fa-fw"></i></span>
+        <input type="password" class="form-control input-lg"
+               placeholder="New Password"
+               validator-message="Minimum 8 characters"
+               value="{{user.password}}"
+               name="password"
+               validator="string,8">
+      </div>
+      <br>
+      <button type="submit" class="btn btn-block btn-primary btn-lg">Login</button>
+    </form>
+  </div>
+</div>
