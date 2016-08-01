@@ -1,16 +1,22 @@
-<div class="center">
-<h1>Welcome to the homepage</h1>
-<div>The current time is
-  <span>{{timestamp}}<span>
-</div>
-<label>
-  show the modal component? <input type="checkbox" checked="{{showModal}}"/>
-</label>
-{{#showModal}}
-<modal>
-  <h1>Welcome</h1>
-  <p>This is a modal.</p>
-  <p>To exit, hit ESC or click outside this box</p>
-</modal>
-{{/showModal}}
+<div class="center text-center col-sm-offset-4 col-sm-4">
+  <h1>Welcome to the homepage</h1>
+  <br>
+  <div>The current time is
+    <span>{{timestamp}}<span>
+  </div>
+  <br>
+  <label>
+    show the modal component? <input type="checkbox" checked="{{showModal}}"/>
+  </label>
+  <br>
+  <br>
+  <a href="/turnkey/logout" type="button"
+     class="btn btn-default">Logout</a>
+  {{#showModal}}
+  <modal>
+    <h1>Welcome</h1>
+    <p>This is a modal.</p>
+    <p>To exit, hit ESC or click outside this box</p>
+  </modal>
+  {{/showModal}}
 </div>

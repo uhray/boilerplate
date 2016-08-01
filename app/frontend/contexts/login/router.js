@@ -8,7 +8,10 @@ define(
 ],
 function(Director, pages, crud, Ractive) {
   var routes = {
-        '/': pages.home
+        '/': pages.login,
+        '/signup': pages.signup,
+        '/reset/:id': pages.reset,
+        '/forgot': pages.forgot
       },
       router = new Director(routes);
 
@@ -20,6 +23,7 @@ function(Director, pages, crud, Ractive) {
   });
 
   router.configure({
+    notfound: pages.home,
     before: function() {
       crud.cancelAll();
     }

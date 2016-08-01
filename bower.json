@@ -14,7 +14,9 @@
     "jquery": "~2.1.4",
     "lodash": "~3.9.3",
     "ractive-uhray-events": "~1.0.0",
-    "ractive-extensions-validator": "~2.0.3",
-    "ractive-extensions-crud": "~1.1.0"
+    "ractive-extensions-validator": "~3.0.2",
+    "ractive-extensions-crud": "~1.1.0",
+    "bootstrap-sass": "^3.3.7",
+    "font-awesome": "fontawesome#^4.6.3"
   }
 }

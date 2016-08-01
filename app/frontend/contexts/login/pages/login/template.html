@@ -1,0 +1,47 @@
+<br/>
+<br/>
+<div class="jumbotron col-sm-12">
+  <div class="text-center col-sm-offset-4 col-sm-4">
+    <h2 style="margin-top:0"><b>Login</b> or
+      <a href="#/signup">Signup</a>
+    </h2>
+    <br>
+    <div class="clearfix"></div>
+    {{#if error}}
+      <div class="alert alert-danger alert-dismissible fade in" role="alert">
+        <button type="button" class="close" data-dismiss="alert">
+          <span>&times;</span>
+        </button>
+        Incorrect <b>email</b> or <b>password</b>.
+      </div>
+      <div class="clearfix"></div>
+    {{/if}}
+    <form action="javascript:;"
+          on-submit="validator"
+          on-validatorSuccess="crud-create:'/turnkey/login',{{user}}"
+          on-crudCreateSuccess="login"
+          on-crudCreateFailure="failedLogin">
+      <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-envelope fa-fw"></i></span>
+        <input type="text"
+               class="form-control input-lg"
+               placeholder="Email"
+               value="{{user.email}}"
+               name="email"
+               validator="email">
+      </div>
+      <br>
+      <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-asterisk fa-fw"></i></span>
+        <input type="password" class="form-control input-lg" placeholder="Password"
+               value="{{user.password}}" name="password"
+               validator="required">
+      </div>
+      <br>
+      <button type="submit" class="btn btn-block btn-primary btn-lg">Submit</button>
+      <div style="padding-top: 12px;">
+        <a class="link-color-grey" href="#/forgot">Forgot Password?</a>
+      </div>
+    </form>
+  </div>
+</div>
