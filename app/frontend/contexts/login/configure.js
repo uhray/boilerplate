@@ -3,7 +3,8 @@ require.config({
   config: {
     loader: {
       pages: {
-        home:         'contexts/login/pages/home/main',
+        home:         'contexts/login/pages/login/main',
+        signup:       'contexts/login/pages/signup/main',
         reset:        'contexts/login/pages/reset/main',
         forgot:       'contexts/login/pages/forgot/main'
       },

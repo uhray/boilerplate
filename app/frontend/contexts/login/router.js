@@ -7,7 +7,8 @@ define(
 ],
 function(Director, pages, crud) {
   var routes = {
-        '/': pages.home,
+        '/': pages.login,
+        '/signup': pages.signup,
         '/reset/:id': pages.reset,
         '/forgot': pages.forgot
       },
