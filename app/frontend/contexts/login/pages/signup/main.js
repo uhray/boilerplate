@@ -4,7 +4,6 @@ define(
 ],
 function(Ractive, $, _, bootstrap, template) {
 
-  y = Ractive;
   return function() {
     var ractive;
 
@@ -18,15 +17,21 @@ function(Ractive, $, _, bootstrap, template) {
       }
     });
 
-    ractive.on('failedLogin', function() {
+    ractive.on('failedLogin', function(event) {
       this.set('error', false);
 
       // time to reset hidden div
-      setTimeout(function() { ractive.set('error', true); });
+      setTimeout(function() {
+        ractive.set({
+          error: true,
+          takenEmail: /E11000/.test(event.error)
+        });
+      });
     });
 
-    ractive.on('login', function() {
-      window.location = '/';
+    ractive.on('success', function(event) {
+      console.log(event);
+      ractive.set({ error: null, success: true });
     });
   }
 });

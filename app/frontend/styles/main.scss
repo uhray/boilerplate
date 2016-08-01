@@ -5,13 +5,17 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 
 /* VARIABLES */
 
-$icon-font-path: '../../bower/bootstrap-sass/assets/fonts/bootstrap/' !default;
-
 /* COLORS */
+
+/* DEFAULTS */
+
+$icon-font-path: '../../bower/bootstrap-sass/assets/fonts/bootstrap/' !default;
+$ractive-validator-red: #B94A48 !default;
 
 /* IMPORT */
 
 @import 'browserupdate';
+@import '../bower/ractive-extensions-validator/lib/style';
 @import '../bower/bootstrap-sass/assets/stylesheets/bootstrap';
 
 /* BOX SIZING */
@@ -23,3 +27,10 @@ $icon-font-path: '../../bower/bootstrap-sass/assets/fonts/bootstrap/' !default;
 }
 
 /* STYLES */
+
+
+// Validator + Bootstrap Integration
+
+.validator-child-invalid.validator-parent-orient-inline .input-group-addon {
+  border-color: $ractive-validator-red;
+}

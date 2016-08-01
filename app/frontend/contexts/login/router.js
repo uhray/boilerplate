@@ -3,9 +3,10 @@ define(
 'director',
 'loader!pages',
 'crud',
-'loader!'
+'ractive',
+'loader!extensions'
 ],
-function(Director, pages, crud) {
+function(Director, pages, crud, Ractive) {
   var routes = {
         '/': pages.login,
         '/signup': pages.signup,
@@ -15,6 +16,11 @@ function(Director, pages, crud) {
       router = new Director(routes);
 
   crud.configure({ base: '/' });
+
+  Ractive.prototype.validatorDefaultOptions({
+    orientation: 'inline',
+    insertMode: 'append'
+  });
 
   router.configure({
     notfound: pages.home,
