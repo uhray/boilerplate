@@ -75,4 +75,3 @@ crud.entity('/posts/:_id').Delete()
 crud.entity('/posts/:_id').on('error', function(method, e) {
   debug('one | %s error: %j', method, e);
 });
-
