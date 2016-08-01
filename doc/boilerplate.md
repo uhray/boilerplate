@@ -131,7 +131,7 @@ The Uhray Boilerplate was designed for applications running a *Node.js* server w
 
 You are free to add, modify, or remove pretty much anything you want from *server.js* to suit your needs.
 
-#### Config Variables
+#### Setting Config Variables
 There are a number of ways to set configuration variables within your application. 
 
 In the [loadConfigs](../server.js#L78-L87) function of *server.js*, you will see the following code snippet:
@@ -158,6 +158,37 @@ Ex: ``` { "PORT": 9123 } ```
 Ex: ``` nconf.set('PORT', '9123')```
 
 This means that command-line arguments will override all other similarly named config variables. Environment variables will be overwritten by command-line arguments but will overwrite everything else. So on and so forth.
+
+**We generally set config variables** by placing them in a `.env` file at the root of the boilerplate. This file will be used by our gulp process to host servers. For example, a file like this may work:
+
+```
+PORT=1234
+MONGO_URL=mongodb://localhost/test
+SECRET=mySecret
+```
+
+#### Boilerplate Config Variables
+
+By default, the boilerplate comes with a number of configurations you can use. They are listed below:
+
+  * `MONGO_URL` - Database string for the API. Example: `MONGO_URL=mongodb://localhost/test`
+  * `SECRET` - Required to encrypt session variables with who is logged in. Example: `SECRET=MySecret`
+  * `cors` - Sets API routes to allow cross-site scripting. Example: `cors=true`
+  * `PUBLIC_URL` - Used for many utilities like email functionality to link users back to the public facing URL. Example: `PUBLIC_URL=http://127.0.0.1:5000`
+  * `PORT` - Port to launch the server on. Example: `PORT=3000`
+  * Email Configs: There are two methods for emailing built into the boilerplate. First, is standard email via SMTP Authentication. The second is via [Postmark](http://postmarkapp.com). By default, we use the standard email tools unless the Postmark configurations are set.
+
+    * `FROM_EMAIL` - Both email types use this to decide the from email address. Example: `FROM_EMAIL=team@uhray.com`.
+
+    * SMTP Email Configurations:
+
+    	* `EMAIL_SMTP` - SMTP URL to use. Example: `EMAIL_SMTP=smtp.gmail.com`
+    	* `EMAIL_UNAME` - Username to email from. Example: `EMAIL_UNAME=team@uhray.com`
+    	* `EMAIL_PW` - Password to email from. Example: `EMAIL_PW=mypassword`
+    	
+    * Postmark Configurations
+    
+    	* `POSTMARK_API_TOKEN` - API token provided by postmark. Example: `POSTMARK_API_TOKEN=fdjas-dfasd-fds-dfs`
 
 ## API
 
