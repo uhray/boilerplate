@@ -46,7 +46,7 @@ Dependencies:
 git clone git@github.com:uhray/boilerplate.git
 cd boilerplate
 npm install
-gulp dev
+SECRET=mySecret gulp dev
 # Application is now running at http://localhost:5000
 ```
 
