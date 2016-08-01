@@ -4,7 +4,7 @@ define(
 'loader!pages',
 'crud',
 'ractive',
-'loader!extensions'
+'loader!'
 ],
 function(Director, pages, crud, Ractive) {
   var routes = {
