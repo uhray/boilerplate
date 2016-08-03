@@ -95,9 +95,25 @@ frontend/
 			router.js
 			configure.js
 			pages/
-			home/
-				template.html
-				main.js
+				home/
+					template.html
+					main.js
+		login
+			router.js
+			configure.js
+			pages/
+				forgot/
+					template.html
+					main.js				
+				login/
+					template.html
+					main.js
+				signup/
+					template.html
+					main.js
+				reset/
+					template.html
+					main.js
 	modules/
 		tools.js
 	ractive-plugins/
