@@ -98,7 +98,7 @@ frontend/
 				home/
 					template.html
 					main.js
-		login
+		login/
 			router.js
 			configure.js
 			pages/
