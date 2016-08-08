@@ -74,6 +74,10 @@ crud.entity('/users/:_id').Read()
 crud.entity('/users/:_id').Update()
   .use(turnkey.loggedIn())
   .pipe(tools.mw.queryUser(true))
+  .pipe(function(d, q, cb) {
+    var role = _.get(this, 'request.user.role');
+    if (role != admin) delete d.role;
+  })
   .pipe(cm.parseData()
           .removes('dates.created', 'turnkey', 'email')
           .overrides({ 'dates.updated': Date.now }))
