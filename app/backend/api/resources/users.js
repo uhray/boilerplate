@@ -76,7 +76,7 @@ crud.entity('/users/:_id').Update()
   .pipe(tools.mw.queryUser(true))
   .pipe(function(d, q, cb) {
     var role = _.get(this, 'request.user.role');
-    if (role != admin) delete d.role;
+    if (role != 'admin') delete d.role;
     cb();
   })
   .pipe(cm.parseData()
