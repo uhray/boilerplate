@@ -65,6 +65,17 @@ app.listen(nconf.get('PORT'), function() {
   });
 
   // Configure routes for shells
+  app.get('/angular', function(req, res, next) {
+    res.render('angular', {
+      production: __production__,
+      context: req.user && req.user._id ? 'angular' : 'login',
+      locals: JSON.stringify({
+        user: req.user || {},
+        production: __production__
+      })
+    });
+  });
+
   app.get('/*', function(req, res, next) {
     res.render('main', {
       production: __production__,
