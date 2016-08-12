@@ -53,6 +53,8 @@ SECRET=mySecret gulp dev
 
 The application will by default try to connect to the MongoDB at mongodb://localhost/test. If you do not have a database running there, the API will not work. If you wish to change the location, see [Server Configuration](#server-configuration).
 
+If you want to see your api docs, run `gulp swagger`.
+
 
 ## Codebase Organization
 

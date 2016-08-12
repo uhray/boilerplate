@@ -58,7 +58,7 @@ crud.entity('/users').on('error', function(method, e) {
 
 // One User --------------------------------------------------------------------
 
-crud.entity('/users/me').Read()
+crud.entity('/users/me').Read({ description: 'Get logged in user.' })
   .use(turnkey.loggedIn())
   .pipe(function(d, q, cb) {
     q._id = _.get(this, 'request.user._id');

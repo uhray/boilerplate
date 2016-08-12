@@ -23,10 +23,14 @@ gulp.task('lint', ['dolint']);
 // Helper Tasks ----------------------------------------------------------------
 
 gulp.task('info', function() {
-  console.log('\nUsage:\t gulp [ dev | prod | lint | build ]\n');
+  console.log('\nUsage:\t gulp [ dev | prod | lint | build | swagger ]\n');
 });
 
 gulp.task('heroku', ['bower_install']);
+
+gulp.task('swagger', function() {
+  require('./scripts/swagger');
+});
 
 gulp.task('install', function(cb) {
   runSequence(
