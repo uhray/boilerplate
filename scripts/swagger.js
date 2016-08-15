@@ -32,7 +32,11 @@ swagger.definitions = {};
 _.each(resources, function(d, k) {
   var props = {}
       def = { title: k, type: 'object', properties: props,
-              required: [] }
+              required: [] };
+
+  // If the resource does not have a mongoose model, then
+  // there should be no associated swagger definitions.
+  if (!(d && d.Model)) return;
 
   swagger.definitions[k] = def;
 
@@ -43,34 +47,39 @@ _.each(resources, function(d, k) {
 
   function handleObj(def, props, schema) {
     _.each(schema, function(val, key) {
-      var info = {};
+      var info = {}, tmp;
 
       if (key == 'id') return;  // remove mongoose' virtual types
       if (key == '__v') return;  // remove mongoose' virtual types
 
-      if (val instanceof Array) info.type = 'array';
-      else {
-        info.type = val.type || val;
-        if (info.type === Array) info.type = 'array';
-        else if (info.type === String) info.type = 'string';
-        else if (info.type === Number) info.type = 'number';
-        else if (info.type === Date) {
-          info.type = 'string';
-          info.format = 'dateTime';
-        } else if (info.type === ObjectId) {
-          info.type = 'string';
-          info.format = 'ObjectId';
-          info.description = 'Mongo DB ObjectID'
+      info.type = val.type || val;
+
+      if (info.type instanceof Array) {
+        tmp = info.type;
+        info.type = 'array';
+        if (tmp.length) {
+          tmp = { type: 'object', required: [], properties: {} };
+          handleObj(tmp, tmp.properties, { items: (val.type || val)[0] });
+          info.items = tmp.properties.items;
         }
-        else if (info.type === Mixed) {
-          info.type = 'object';
-          info.description = 'Mixed Object';
-        } else if (typeof (info.type) == 'object' && _.size(info.type)) {
-          info = { type: 'object', properties: {}, required: [] };
-          handleObj(info, info.properties, val.type || val);
-        } else {
-          return log('Do not know type: ', val);
-        }
+      } else if (info.type === Array) info.type = 'array';
+      else if (info.type === String) info.type = 'string';
+      else if (info.type === Number) info.type = 'number';
+      else if (info.type === Date) {
+        info.type = 'string';
+        info.format = 'dateTime';
+      } else if (info.type === ObjectId) {
+        info.type = 'string';
+        info.format = 'ObjectId';
+        info.description = 'Mongo DB ObjectID'
+      } else if (info.type === Mixed) {
+        info.type = 'object';
+        info.description = 'Mixed Object';
+      } else if (typeof (info.type) == 'object' && _.size(info.type)) {
+        info = { type: 'object', properties: {}, required: [] };
+        handleObj(info, info.properties, val.type || val);
+      } else {
+        return log('Do not know type: ', val);
       }
 
       if (val.required) def.required.push(key);
@@ -107,12 +116,6 @@ _.each(crud._entities, function(d, r) {
     m.description = lookup[method] + ' ' + route.replace(/^\//, '');
     res.description = 'Data Response.';
 
-    // Get params
-    //m.parameters = {};
-
-    // Get security
-    //m.security = [];
-
     _.each(info._chain, function(fn) {
       if (fn.name == 'findAll' && fn.Model) {
         res.schema = standardResponse(true, fn.Model);
@@ -132,6 +135,9 @@ _.each(crud._entities, function(d, r) {
         m.parameters = oneObjectParameters(route);
       }
     });
+
+    // Finish up path parameters
+    pathParameters(route, m);
 
     // Allow merging of other options
     _.merge(m, info._options);
@@ -247,4 +253,24 @@ function bodyParameters(model) {
   }
 
   return [p];
+}
+
+function pathParameters(route, method) {
+  var matches = route.match(/({.*?})/g);
+
+  if (_.get(matches, 'length') && !method.parameters) method.parameters = [];
+
+  _.each(matches, function(name) {
+    name = name.replace('{', '').replace('}', '');
+
+    if (_.find(method.parameters, { name: name })) return;
+
+    method.parameters.push({
+      name: name,
+      in: 'path',
+      required: true,
+      type: 'string',
+      description: 'Path parameter for which {' + name + '}'
+    });
+  });
 }
