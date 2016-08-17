@@ -9,7 +9,7 @@ var nconf = loadConfigs(require('nconf')),
     ObjectId = mongoose.Schema.Types.ObjectId,
     Mixed = mongoose.Schema.Types.Mixed,
     fs = require('fs'),
-    editor = require("swagger-editor-server"),
+    editor = require('swagger-editor-server'),
     log = debug('bp');
 
 swagger.swagger = '2.0';
@@ -23,14 +23,14 @@ swagger.host = nconf.get('PUBLIC_URL').replace(/.*\/\//, '');
 swagger.basePath = '/api';
 
 swagger.schemes = ['http', 'https'];
-swagger.consumes = [ 'application/json' ];
-swagger.produces = [ 'application/json' ];
+swagger.consumes = ['application/json'];
+swagger.produces = ['application/json'];
 
 // definitions -----------------
 swagger.definitions = {};
 
 _.each(resources, function(d, k) {
-  var props = {}
+  var props = {},
       def = { title: k, type: 'object', properties: props,
               required: [] };
 
@@ -88,7 +88,6 @@ _.each(resources, function(d, k) {
 
       props[key] = info;
     });
-
 
     if (def.required.length == 0) delete def.required;
   }
