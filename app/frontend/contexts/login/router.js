@@ -23,7 +23,7 @@ function(Director, pages, crud, Ractive) {
   });
 
   router.configure({
-    notfound: pages.home,
+    notfound: pages.login,
     before: function() {
       crud.cancelAll();
     }
