@@ -229,9 +229,9 @@ function standardResponse(array, model) {
       };
     }
   } else if (model.definitionName) {
-      obj.properties.data = {
-        $ref: '#/definitions/' + model.definitionName
-      }
+    obj.properties.data = {
+      $ref: '#/definitions/' + model.definitionName
+    }
   } else {
     obj.properties.data = { type: 'object' };
   }
