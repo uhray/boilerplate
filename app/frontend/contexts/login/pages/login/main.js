@@ -4,7 +4,6 @@ define(
 ],
 function(Ractive, $, _, bootstrap, template) {
 
-  y = Ractive;
   return function() {
     var ractive;
 
