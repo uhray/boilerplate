@@ -29,7 +29,7 @@
     "serve-static": "^1.1.0",
     "swagger-editor": "^2.10.3",
     "swagger-editor-server": "^1.0.0",
-    "turnkey": "2.0.0",
+    "turnkey": "^2.0.1",
     "winston": "^0.7.3"
   },
   "devDependencies": {
