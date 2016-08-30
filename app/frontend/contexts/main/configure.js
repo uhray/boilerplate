@@ -22,7 +22,6 @@ require.config({
     }
   },
   paths: {
-    bootstrap:   'bower/bootstrap-sass/assets/javascripts/bootstrap.min',
     crud:        'bower/crud/dist/crud',
     debug:       'bower/debug/dist/debug',
     director:    'bower/director/build/director.min',

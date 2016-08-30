@@ -12,7 +12,6 @@ require.config({
   },
   paths: {
     angular:     'bower/angular/angular',
-    bootstrap:   'bower/bootstrap-sass/assets/javascripts/bootstrap.min',
     crud:        'bower/crud/dist/crud',
     debug:       'bower/debug/dist/debug',
     jquery:      'bower/jquery/dist/jquery.min',

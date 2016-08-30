@@ -15,7 +15,6 @@
     "ractive-uhray-events": "~1.0.0",
     "ractive-extensions-validator": "~3.0.2",
     "ractive-extensions-crud": "~1.1.0",
-    "bootstrap-sass": "^3.3.7",
     "font-awesome": "fontawesome#^4.6.3",
     "angular": "^1.5.8",
     "text": "^2.0.15",
