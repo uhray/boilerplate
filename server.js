@@ -5,6 +5,7 @@ var nconf = loadConfigs(require('nconf')),
     __production__ = !!~process.argv.indexOf('PRODUCTION'),
     mustache =  require('mustache-express')(),
     winston = require('winston'),
+    _ = require('lodash'),
     app = express();
 
 // ============================== CONFIGURE APP ============================= //
@@ -34,6 +35,10 @@ app.use(require('serve-favicon')(__dirname +
                                 '/app/frontend/images/favicon/favicon.ico'));
 app.use(require('compression')());
 app.use('/public', require('serve-static')(__dirname + '/app/frontend'));
+app.use('/public/*', function(req, res) {
+  res.status(404).send('file not found');
+});
+
 if (!nconf.get('SECRET')) {
   console.log('You must provide a SECRET for the cookiestore in your config.');
   console.log('Add a secret one of three ways:');
@@ -76,10 +81,35 @@ app.listen(nconf.get('PORT'), function() {
     });
   });
 
-  app.get('/*', function(req, res, next) {
-    res.render('main', {
+  app.get('/styleguide', function(req, res, next) {
+    res.render('styleguide', {
       production: __production__,
-      context: req.user && req.user._id ? 'main' : 'login',
+      context: 'styleguide',
+      locals: JSON.stringify({
+        user: req.user || {},
+        production: __production__
+      })
+    });
+  });
+
+  app.get('/login', function(req, res, next) {
+    if (_.get(req, 'user._id')) return res.redirect('/');
+
+    res.render('login', {
+      production: __production__,
+      context: 'login',
+      locals: JSON.stringify({
+        user: req.user || {},
+        production: __production__
+      })
+    });
+  });
+
+  app.get('/*', function(req, res, next) {
+
+    res.render((req.user && req.user._id ? 'main' : 'home'), {
+      production: __production__,
+      context: req.user && req.user._id ? 'main' : 'home',
       locals: JSON.stringify({
         user: req.user || {},
         production: __production__

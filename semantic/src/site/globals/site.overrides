@@ -1,0 +1,15 @@
+/*******************************
+         Site Overrides
+*******************************/
+
+@text-colors: blue, green, orange, pink, purple, red, teal, yellow, black, grey, white;
+.ui.text {
+    .-(@i: length(@text-colors)) when (@i > 0) {
+        @c: extract(@text-colors, @i);
+        &.@{c} { color: @@c }
+        .-((@i - 1));
+    }.-;
+}
+
+.ui.text.primary { color: @primaryColor; }
+.ui.text.secondary { color: @secondaryColor }

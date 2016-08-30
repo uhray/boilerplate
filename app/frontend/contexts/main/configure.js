@@ -27,7 +27,7 @@ require.config({
     debug:       'bower/debug/dist/debug',
     director:    'bower/director/build/director.min',
     jquery:      'bower/jquery/dist/jquery.min',
-    lodash:      'bower/lodash/lodash.min',
+    lodash:      'bower/lodash/dist/lodash.min',
     loader:      'bower/requirejs-loader-plugin/loader',
     ractive:     'bower/ractive/ractive',
     router:      'contexts/main/router',

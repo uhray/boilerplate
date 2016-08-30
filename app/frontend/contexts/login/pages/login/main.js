@@ -1,8 +1,8 @@
 define(
 [
-'ractive', 'jquery', 'lodash', 'bootstrap', 'rv!./template'
+'ractive', 'jquery', 'lodash', 'crud', 'rv!./template'
 ],
-function(Ractive, $, _, bootstrap, template) {
+function(Ractive, $, _, crud, template) {
 
   return function() {
     var ractive;
@@ -17,15 +17,16 @@ function(Ractive, $, _, bootstrap, template) {
       }
     });
 
-    ractive.on('failedLogin', function() {
-      this.set('error', false);
+    ractive.on('doSubmit', function() {
 
-      // time to reset hidden div
-      setTimeout(function() { ractive.set('error', true); });
-    });
+      if (this.get('loading')) return;
+      this.set({ loading: true, error: false });
 
-    ractive.on('login', function() {
-      window.location = '/';
+      crud('/turnkey/login').create(this.get('user'), function(e, d) {
+        ractive.set('loading', false);
+        if (e) ractive.set('error', true);
+        else window.location = '/';
+      });
     });
   }
 });

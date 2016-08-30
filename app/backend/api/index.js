@@ -17,7 +17,8 @@ module.exports = exports = function(app) {
     cors: nconf.get('cors'),
     usernameKey: 'email',
     verificationOn: true,
-    forgotMailer: tools.forgotMailer
+    forgotMailer: tools.forgotMailer,
+    verifyRedirect: '/login'
   });
 
   // launch crud api

@@ -1,31 +1,35 @@
-<br/>
-<br/>
-<div class="jumbotron col-sm-12">
-  <div class="text-center col-sm-offset-4 col-sm-4">
-    <h2 style="margin-top:0">Reset Password</h2>
-    <br>
+
+  <div class="column">
+    <h2 class="ui blue header">
+      <span class="Logo Logo--x-large"></span>
+    </h2>
     {{#if error}}
-      <div class="alert alert-danger alert-dismissible fade in" role="alert">
-        <button type="button" class="close" data-dismiss="alert">
-          <span>&times;</span>
-        </button>
+      <div class="ui error message u-text-align--left">
         Invalid code or password.
       </div>
     {{/if}}
-    <form action="javascript:;"
+    <form class="ui large form"
+          action="javascript:;"
           on-submit="validator"
-          on-validatorSuccess="doUpdate">
-      <div class="input-group">
-        <span class="input-group-addon"><i class="fa fa-asterisk fa-fw"></i></span>
-        <input type="password" class="form-control input-lg"
-               placeholder="New Password"
-               validator-message="Minimum 8 characters"
-               value="{{user.password}}"
-               name="password"
-               validator="string,8">
+          on-validatorSuccess="doSubmit">
+      <div class="ui stacked segment">
+        <h3 class="ui blue header"> Reset Your Password </h3>
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="lock icon"></i>
+            <input type="password" name="password" placeholder="Password"
+                   value="{{user.password}}"
+                   validator="string,8">
+          </div>
+        </div>
+        <button type="submit"
+                class="ui fluid large primary submit button {{#if loading}}loading{{/if}}">
+          Submit
+        </button>
       </div>
-      <br>
-      <button type="submit" class="btn btn-block btn-primary btn-lg">Login</button>
+
+      <div class="ui error message"></div>
+
     </form>
+
   </div>
-</div>

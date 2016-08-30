@@ -1,8 +1,8 @@
 define(
 [
-'ractive', 'jquery', 'lodash', 'bootstrap', 'rv!./template'
+'ractive', 'jquery', 'lodash', 'crud', 'rv!./template'
 ],
-function(Ractive, $, _, bootstrap, template) {
+function(Ractive, $, _, crud, template) {
 
   return function() {
     var ractive;
@@ -17,18 +17,19 @@ function(Ractive, $, _, bootstrap, template) {
       }
     });
 
-    ractive.on('forgot', function() {
-      this.set('user.email', '');
-      this.set('message', true);
-      this.set('error', null);
-    });
+    ractive.on('doSubmit', function() {
 
-    ractive.on('failedForgot', function() {
-      this.set('error', false);
-      this.set('message', false);
+      if (this.get('loading')) return;
+      this.set({ loading: true, error: false, message: false });
 
-      // time to reset hidden div
-      setTimeout(function() { ractive.set('error', true); });
+      crud('/turnkey/forgot').create(this.get('user'), function(e, d) {
+        ractive.set('loading', false);
+        if (e) ractive.set('error', true);
+        else {
+          ractive.set('user.email', '');
+          ractive.set('message', true);
+        }
+      });
     });
   }
 });

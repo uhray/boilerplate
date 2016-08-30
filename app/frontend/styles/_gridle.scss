@@ -1,0 +1,47 @@
+
+@import "../bower/gridle/sass/gridle/_gridle";
+
+// setting up the grid
+@include gridle_setup((
+  context : 16,           // number of columns in your grid
+  column-width : null,    // by default it's percentage based depending on the context but you can specify a column width yourself
+  gutter-width : 2rem,    // size of the gutters
+  gutter-height : 1rem,      // size of top and bottom gutters
+  gutter-top    : 1rem,      // size of top gutter
+  gutter-bottom : 1rem,      // size of bottom gutter
+  gutter-left   : 1rem,   // size of left gutter
+  gutter-right  : 1rem,   // size of right gutter
+  direction : ltr,        // direction
+  dir-attribute : false,  // if need to generate support for dir="rtl" in order to set part of layout direction
+  states-classes : false, // if we need to generate the states classes
+  name-multiplicator : 1, // if 5, generate gr-5, gr-10, etc...
+  classes-prefix : ''     // the prefix used for all classes 
+));
+
+@include gridle_register_state(mobile, (
+  max-width : 400px
+));
+
+@include gridle_register_state(tablet, (
+  min-width : 401px,
+  max-width : 768px
+));
+
+@include gridle_register_state(laptop, (
+  min-width : 769px,
+  max-width : 992px
+));
+
+@include gridle_register_state(desktop, (
+  min-width : 993px
+));
+
+@include gridle_init();
+@include gridle_generate_classes();
+
+[class*="gr-"] {  // Defaults to 16 wide for mobile and tablet
+  @include gridle_state(mobile tablet) {
+    @include gridle_grid(16);
+  }
+}
+

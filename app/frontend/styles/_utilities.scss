@@ -1,0 +1,77 @@
+
+/* Utility classes
+   ========================================================================== */
+
+/**
+ * Setting these variables to `true` will render utility classes in your output
+ * CSS file, allowing you to use them directly in your markup. Use with care:
+ * enabling these will naturally add (significant) weight to that CSS file.
+ *
+ * Utility classes apply a single value to a single property, no matter what
+ * (using `!important`). They should be used sparingly — in most cases a
+ * component should define its own variants and stay completely self-contained.
+ * Try to only use utility classes to quickly test out ideas or for early stage
+ * ‘sketching’ in the browser.
+ */
+
+$u-classes-background:           true;
+$u-classes-border-radius:        true;
+$u-classes-border:               true;
+$u-classes-box-sizing:           true;
+$u-classes-clear:                true;
+$u-classes-display:              true;
+$u-classes-flex-align-content:   true;
+$u-classes-flex-align-items:     true;
+$u-classes-flex-align-self:      true;
+$u-classes-flex-basis:           true;
+$u-classes-flex-direction:       true;
+$u-classes-flex-grow:            true;
+$u-classes-flex-justify-content: true;
+$u-classes-flex-shrink:          true;
+$u-classes-flex-wrap:            true;
+$u-classes-flexbox:              true;
+$u-classes-float:                true;
+$u-classes-font-family:          true;
+$u-classes-font-size:            true;
+$u-classes-font-weight:          true;
+$u-classes-height-width:         true;
+$u-classes-interaction:          true;
+$u-classes-letter-spacing:       true;
+$u-classes-line-height:          true;
+$u-classes-list-item-spacing:    true;
+$u-classes-list-style:           true;
+$u-classes-margin:               true;
+$u-classes-opacity:              true;
+$u-classes-overflow:             true;
+$u-classes-padding:              true;
+$u-classes-positioning:          true;
+$u-classes-text-color:           true;
+$u-classes-text-decoration:      true;
+$u-classes-text-formatting:      true;
+$u-classes-vertical-align:       true;
+$u-classes-z-index:              true;
+
+
+/* Project-specific aliases
+   ========================================================================== */
+
+/**
+ * We create friendly global aliases for our CSS values to improve the authoring
+ * experience. But it's also possible to define local aliases for a particular
+ * project. This is useful for defining a different default `font-size` or
+ * `line-height` and being able to refer to them throughout your codebase as
+ * `default` rather than `large` or `x-small`.
+ */
+
+/* Leave quotes empty if this project doesn't have custom aliases */
+$project: "";
+
+@import 'utilities/_utilities'
+
+/* Custom Utilties
+   ========================================================================== */
+
+/**
+ * These should always start with `.u-` and should apply !important tags
+ **/
+

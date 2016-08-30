@@ -1,8 +1,8 @@
 define(
 [
-'ractive', 'jquery', 'lodash', 'bootstrap', 'rv!./template'
+'ractive', 'jquery', 'lodash', 'crud', 'rv!./template'
 ],
-function(Ractive, $, _, bootstrap, template) {
+function(Ractive, $, _, crud, template) {
 
   return function() {
     var ractive;
@@ -17,21 +17,19 @@ function(Ractive, $, _, bootstrap, template) {
       }
     });
 
-    ractive.on('failedLogin', function(event) {
-      this.set('error', false);
+    ractive.on('doSubmit', function() {
 
-      // time to reset hidden div
-      setTimeout(function() {
-        ractive.set({
+      if (this.get('loading')) return;
+      this.set({ loading: true, error: false, success: false });
+
+      crud('/api/users').create(this.get('user'), function(e, d) {
+        ractive.set('loading', false);
+        if (e) ractive.set({
           error: true,
-          takenEmail: /E11000/.test(event.error)
+          takenEmail: /E11000/.test(String(e))
         });
+        else ractive.set('success', true);
       });
-    });
-
-    ractive.on('success', function(event) {
-      console.log(event);
-      ractive.set({ error: null, success: true });
     });
   }
 });

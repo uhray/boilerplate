@@ -1,40 +1,46 @@
-<br/>
-<br/>
-<div class="jumbotron col-sm-12">
-  <div class="text-center col-sm-offset-4 col-sm-4">
-    <h2 style="margin-top: 0">Forgot Password?</h2>
-    <br>
+
+  <div class="column">
+    <h2 class="ui blue header">
+      <span class="Logo Logo--x-large"></span>
+    </h2>
     {{#if error}}
-      <div class="alert alert-danger alert-dismissible fade in" role="alert">
-        <button type="button" class="close" data-dismiss="alert">
-          <span>&times;</span>
-        </button>
+      <div class="ui error message u-text-align--left">
         Incorrect <b>email</b>.
       </div>
     {{/if}}
 
     {{#if message}}
-      <div class="alert alert-success fade in" role="alert">
+      <div class="ui success message u-text-align--left">
         You have been sent a reset email.
       </div>
     {{/if}}
 
-    <form action="javascript:;"
+    <form class="ui large form"
+          action="javascript:;"
           on-submit="validator"
-          on-validatorSuccess="crud-create:'/turnkey/forgot',{{user}}"
-          on-crudCreateSuccess="forgot"
-          on-crudCreateFailure="failedForgot">
-      <div class="input-group">
-        <span class="input-group-addon"> <i class="fa fa-envelope fa-fw"></i></span>
-        <input type="text" class="form-control input-lg" placeholder="Email"
-               value="{{user.email}}"
-               validator="email">
+          on-validatorSuccess="doSubmit">
+
+      <div class="ui stacked segment">
+        <h3 class="ui blue header"> Forgot Password </h3>
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="user icon"></i>
+            <input type="text" name="email" placeholder="E-mail address"
+                   value="{{user.email}}"
+                   validator="email">
+          </div>
+        </div>
+        <button type="submit"
+                class="ui fluid large primary submit button {{#if loading}}loading{{/if}}">
+           Submit
+        </button>
       </div>
-      <br>
-      <button type="submit" class="btn btn-block btn-primary btn-lg">Submit</button>
-      <div style="padding-top: 12px">
-        <a class="link-color-grey" href="#/"><i class="fa fa-long-arrow-left"></i> Back to Login</a>
-      </div>
+
+      <div class="ui error message"></div>
+
     </form>
+
+    <div class="ui message">
+      <a href="#/login">Back to Log In</a>
+    </div>
   </div>
-</div>

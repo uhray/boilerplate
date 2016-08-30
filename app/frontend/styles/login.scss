@@ -1,0 +1,25 @@
+
+/* IMPORT */
+
+@import 'browserupdate';
+@import 'includes';
+@import '../bower/ractive-extensions-validator/lib/style';
+
+/* STYLES */
+
+body {
+  background-color: #DADADA;
+}
+
+body > .grid {
+  height: 100%;
+}
+
+.image {
+  margin-top: -100px;
+}
+
+.column {
+  max-width: 450px;
+}
+

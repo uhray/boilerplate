@@ -1,0 +1,80 @@
+/**
+ * Note: scales, aliases and maps live in _utility-values.scss
+ */
+
+
+/* Mixins
+   ========================================================================== */
+
+/**
+ * Example usage:
+ * `@include margin(default);`
+ * `@include margin(default large);`
+ * `@include padding(default large x-large xx-small);`
+ * `@include margin(x-large small, !important);`
+ * `@include margin-left(large);`
+ * `@include margin-bottom(xx-large, !important);`
+ */
+
+/**
+ * This mixin allows us to use shorthand values for the `margin` property.
+ *
+ * The mixin runs through our spacing values, given in the first argument, then
+ * creates another list of the mappings of those spacing values, which it then
+ * feeds to the `margin` property.
+ */
+
+@mixin margin($values, $important: null) {
+  $valueList: ();
+
+  @for $i from 1 through length($values) {
+    $value: map-get($spacing-values, nth($values, $i));
+    $valueList: append($valueList, $value, space);
+  }
+
+  margin: $valueList $important;
+}
+
+@mixin margin-bottom($value, $important: null) {
+  margin-bottom: map-get($spacing-values, $value) $important;
+}
+
+@mixin margin-left($value, $important: null) {
+  margin-left: map-get($spacing-values, $value) $important;
+}
+
+@mixin margin-right($value, $important: null) {
+  margin-right: map-get($spacing-values, $value) $important;
+}
+
+@mixin margin-top($value, $important: null) {
+  margin-top: map-get($spacing-values, $value) $important;
+}
+
+
+/* Utility classes
+   ========================================================================== */
+
+@if $u-classes-margin == true {
+
+  @each $spacing-size, $spacing-value in $spacing-values {
+
+    .u-margin--#{$spacing-size} {
+      margin: $spacing-value !important;
+    }
+    .u-margin-bottom--#{$spacing-size} {
+      margin-bottom: $spacing-value !important;
+    }
+    .u-margin-left--#{$spacing-size} {
+      margin-left: $spacing-value !important;
+    }
+    .u-margin-right--#{$spacing-size} {
+      margin-right: $spacing-value !important;
+    }
+    .u-margin-top--#{$spacing-size} {
+      margin-top: $spacing-value !important;
+    }
+
+  }
+
+}

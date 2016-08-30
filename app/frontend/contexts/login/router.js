@@ -4,6 +4,7 @@ define(
 'loader!pages',
 'crud',
 'ractive',
+'semantic',
 'loader!'
 ],
 function(Director, pages, crud, Ractive) {
@@ -19,11 +20,12 @@ function(Director, pages, crud, Ractive) {
 
   Ractive.prototype.validatorDefaultOptions({
     orientation: 'inline',
-    insertMode: 'append'
+    insertMode: 'append',
+    styleMode: 'semantic'
   });
 
   router.configure({
-    notfound: pages.login,
+    notfound: pages.home,
     before: function() {
       crud.cancelAll();
     }

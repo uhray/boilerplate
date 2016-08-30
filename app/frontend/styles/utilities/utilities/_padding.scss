@@ -1,0 +1,80 @@
+/**
+ * Note: scales, aliases and maps live in _utility-values.scss
+ */
+
+
+/* Mixins
+   ========================================================================== */
+
+/**
+ * Example usage:
+ * `@include padding(default);`
+ * `@include padding(default large);`
+ * `@include padding(default large x-large xx-small);`
+ * `@include padding(x-large small, !important);`
+ * `@include padding-left(large);`
+ * `@include padding-bottom(xx-large, !important);`
+ */
+
+/**
+ * This mixin allows us to use shorthand values for the `padding` property.
+ *
+ * The mixin runs through our spacing values, given in the first argument, then
+ * creates another list of the mappings of those spacing values, which it then
+ * feeds to the `padding` property.
+ */
+
+@mixin padding($values, $important: null) {
+  $valueList: ();
+
+  @for $i from 1 through length($values) {
+    $value: map-get($spacing-values, nth($values, $i));
+    $valueList: append($valueList, $value, space);
+  }
+
+  padding: $valueList $important;
+}
+
+@mixin padding-bottom($value, $important: null) {
+  padding-bottom: map-get($spacing-values, $value) $important;
+}
+
+@mixin padding-left($value, $important: null) {
+  padding-left: map-get($spacing-values, $value) $important;
+}
+
+@mixin padding-right($value, $important: null) {
+  padding-right: map-get($spacing-values, $value) $important;
+}
+
+@mixin padding-top($value, $important: null) {
+  padding-top: map-get($spacing-values, $value) $important;
+}
+
+
+/* Utility classes
+   ========================================================================== */
+
+@if $u-classes-padding == true {
+
+  @each $spacing-size, $spacing-value in $spacing-values {
+
+    .u-padding--#{$spacing-size} {
+      padding: $spacing-value !important;
+    }
+    .u-padding-bottom--#{$spacing-size} {
+      padding-bottom: $spacing-value !important;
+    }
+    .u-padding-left--#{$spacing-size} {
+      padding-left: $spacing-value !important;
+    }
+    .u-padding-right--#{$spacing-size} {
+      padding-right: $spacing-value !important;
+    }
+    .u-padding-top--#{$spacing-size} {
+      padding-top: $spacing-value !important;
+    }
+
+  }
+
+}

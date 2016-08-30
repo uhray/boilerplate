@@ -10,7 +10,9 @@ var gulp = require('gulp'),
     foreach = require('gulp-foreach'),
     path = require('path'),
     uglify = require('gulp-uglify'),
-    minifyCSS = require('gulp-minify-css');
+    minifyCSS = require('gulp-minify-css'),
+    fs = require('fs'),
+    _ = require('lodash');
 
 // Top Level Commands ----------------------------------------------------------
 
@@ -66,21 +68,15 @@ gulp.task('bower_install', function(cb) {
 });
 
 gulp.task('scss_to_css_prod', function() {
-  return gulp.src('app/frontend/styles/[^_]*.scss')
-             .pipe(sass())
-             .on('error', function(e) {
-                console.log('sass error:', e.message);
-              })
+  return sass('app/frontend/styles/[^_]*.scss')
+             .on('error', sass.logError)
              .pipe(autoprefixer())
              .pipe(gulp.dest('app/frontend/styles/css'));
 });
 
 gulp.task('scss_to_css', function() {
-  return gulp.src('app/frontend/styles/[^_]*.scss')
-             .pipe(sass())
-             .on('error', function(e) {
-                console.log('sass error:', e.message);
-              })
+  return sass('app/frontend/styles/[^_]*.scss')
+             .on('error', sass.logError)
              .pipe(gulp.dest('app/frontend/styles/css'));
 });
 
@@ -94,6 +90,7 @@ gulp.task('prod-server', function() {
 
 gulp.task('scss_watch', function() {
   gulp.watch('app/frontend/styles/*.scss', ['scss_to_css']);
+  gulp.watch('app/frontend/styles/**/*.scss', ['scss_to_css']);
 });
 
 gulp.task('prod_watch', function() {
@@ -133,6 +130,19 @@ gulp.task('join_css', function() {
         return stream
           .pipe(assets.css('css', function(d) {
             return d.replace('\/public', 'app/frontend');
+          }))
+          .pipe(foreach(function(stream, file) {
+            var p = _.last(file.history);
+
+            if (!p) return stream;
+
+            p = p.replace(/^\/?app\/frontend/, '/public');
+            p = p.replace(path.basename(p), '');
+
+            return stream.pipe(replace(
+              /url\((["'])?((\.\/)|(.)([a-zA-Z0-9]+\/))/g,
+              'url($1' + p + '$4$5'
+            ))
           }))
           .pipe(minifyCSS())
           .pipe(replace(/url\((["'])?.*?\/bower/g, 'url($1/public/bower'))
@@ -174,6 +184,7 @@ gulp.task('join_js', function() {
 gulp.task('prod-build', function(cb) {
   runSequence(
     'install',
+    'semantic',
     'scss_to_css_prod',
     'minify_js',
     'join_css',
@@ -188,6 +199,53 @@ gulp.task('dev-build', function(cb) {
     'scss_to_css',
     cb
   );
+});
+
+gulp.task('semantic', function(cb) {
+  runSequence(
+    'semantic-build',
+    'semantic-to-scss',
+    cb
+  )
+});
+
+gulp.task('semantic-build', function(cb) {
+  child.spawn('gulp', ['build'], { cwd: __dirname + '/semantic' })
+    .on('close', cb);
+});
+
+gulp.task('semantic-to-scss', function(cb) {
+  var css = String(fs.readFileSync(
+        __dirname + '/app/frontend/semantic/components/site.min.css'
+      )),
+      many = /ui\.text\.([a-zA-Z0-9]+){color:#([a-zA-Z0-9]+)}/g,
+      one = /ui\.text\.([a-zA-Z0-9]+){color:#([a-zA-Z0-9]+)}/,
+      many2 = /ui\.text\.([a-zA-Z0-9]+),\.ui\.text\.[a-zA-Z0-9]+{color:#([a-zA-Z0-9]+)}/g,
+      one2 = /ui\.text\.([a-zA-Z0-9]+),\.ui\.text\.[a-zA-Z0-9]+{color:#([a-zA-Z0-9]+)}/,
+      str = '// Colors imported from Semantic-UI\n\n';
+
+  (css.match(many) || []).forEach(function(m) {
+    var a = m.match(one);
+    if (!a) return;
+
+    str += '$' + a[1] + ': #' + a[2] + ' !default;\n';
+    str += '$color--' + a[1] + ': #' + a[2] + ' !default;\n';
+  });
+
+  (css.match(many2) || []).forEach(function(m) {
+    var a = m.match(one2);
+    if (!a) return;
+
+    str += '$' + a[1] + ': #' + a[2] + ' !default;\n';
+    str += '$color--' + a[1] + ': #' + a[2] + ' !default;\n';
+  });
+
+  fs.writeFileSync(
+    __dirname + '/app/frontend/styles/_semantic.scss',
+    str
+  );
+
+  return setTimeout(cb);
 });
 
 gulp.task('doDev', function(cb) {

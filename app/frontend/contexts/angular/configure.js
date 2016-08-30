@@ -16,7 +16,7 @@ require.config({
     crud:        'bower/crud/dist/crud',
     debug:       'bower/debug/dist/debug',
     jquery:      'bower/jquery/dist/jquery.min',
-    lodash:      'bower/lodash/lodash.min',
+    lodash:      'bower/lodash/dist/lodash.min',
     loader:      'bower/requirejs-loader-plugin/loader',
     router:      'contexts/angular/router',
     text:        'bower/text/text'

@@ -14,6 +14,8 @@
     "app/frontend/bower/**",
     "app/frontend/main-built.js",
     "config/**",
-    "app/frontend/contexts/_prod/**"
+    "app/frontend/contexts/_prod/**",
+    "app/frontend/semantic/**",
+    "semantic/**"
   ]
 }

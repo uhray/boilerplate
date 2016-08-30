@@ -1,58 +1,64 @@
-<br/>
-<br/>
-<div class="jumbotron col-sm-12">
-  <div class="text-center col-sm-offset-4 col-sm-4">
-    <h2 style="margin-top:0">
-      <a href="#/">Login</a>
-      or <b>Signup</b>
+
+  <div class="column">
+    <h2 class="ui blue header">
+      <span class="Logo Logo--x-large"></span>
     </h2>
-    <br>
-    <div class="clearfix"></div>
     {{#if error}}
-      <div class="alert alert-danger alert-dismissible fade in" role="alert">
-        <button type="button" class="close" data-dismiss="alert">
-          <span>&times;</span>
-        </button>
+      <div class="ui error message u-text-align--left">
         {{#if takenEmail}}
           <b>Failure:</b> Email has already been taken.
         {{else}}
           An error occured.
         {{/if}}
       </div>
-      <div class="clearfix"></div>
     {{/if}}
     {{#if success}}
-      <div class="alert alert-success alert-dismissible fade in" role="alert">
-        <button type="button" class="close" data-dismiss="alert">
-          <span>&times;</span>
-        </button>
+      <div class="ui success message u-text-align--left">
         <b>Success!</b> You have been emailed a confirmation link.
       </div>
-      <div class="clearfix"></div>
     {{/if}}
-    <form action="javascript:;"
+    <form class="ui large form"
+          action="javascript:;"
           on-submit="validator"
-          on-validatorSuccess="crud-create:'/api/users',{{user}}"
-          on-crudCreateSuccess="success"
-          on-crudCreateFailure="failedLogin">
-      <div class="input-group">
-        <span class="input-group-addon"><i class="fa fa-envelope fa-fw"></i></span>
-        <input type="text"
-               class="form-control input-lg"
-               placeholder="Email"
-               value="{{user.email}}"
-               name="email"
-               validator="email">
+          on-validatorSuccess="doSubmit">
+
+      <div class="ui stacked segment">
+        <h3 class="ui blue header"> Sign Up </h3>
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="user icon"></i>
+            <input type="text" name="email" placeholder="E-mail address"
+                   value="{{user.email}}"
+                   validator="email">
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="lock icon"></i>
+            <input type="password" name="password" placeholder="Password"
+                   id="password1"
+                   value="{{user.password}}"
+                   validator="string,8">
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="lock icon"></i>
+            <input type="password" name="password" placeholder="Confirm Password"
+                   value="{{user.password1}}"
+                   validator="samevalue,#password1">
+          </div>
+        </div>
+        <button type="submit" class="ui fluid large primary submit button {{#if loading}}loading{{/if}}">
+          Sign Up
+        </button>
       </div>
-      <br>
-      <div class="input-group">
-        <span class="input-group-addon"><i class="fa fa-asterisk fa-fw"></i></span>
-        <input type="password" class="form-control input-lg" placeholder="Password"
-               value="{{user.password}}" name="password"
-               validator="required">
-      </div>
-      <br>
-      <button type="submit" class="btn btn-block btn-primary btn-lg">Submit</button>
+
+      <div class="ui error message"></div>
+
     </form>
+
+    <div class="ui message">
+      Already have an account? <a href="#/login">Log In</a>
+    </div>
   </div>
-</div>

@@ -3,7 +3,7 @@ require.config({
   config: {
     loader: {
       pages: {
-        login:         'contexts/login/pages/login/main',
+        home:         'contexts/login/pages/login/main',
         signup:       'contexts/login/pages/signup/main',
         reset:        'contexts/login/pages/reset/main',
         forgot:       'contexts/login/pages/forgot/main'
@@ -25,23 +25,23 @@ require.config({
     }
   },
   paths: {
-    bootstrap:   'bower/bootstrap-sass/assets/javascripts/bootstrap.min',
     crud:        'bower/crud/dist/crud',
     debug:       'bower/debug/dist/debug',
     director:    'bower/director/build/director.min',
     jquery:      'bower/jquery/dist/jquery.min',
-    lodash:      'bower/lodash/lodash.min',
+    lodash:      'bower/lodash/dist/lodash.min',
     loader:      'bower/requirejs-loader-plugin/loader',
     moment:      'bower/moment/min/moment.min',
     ractive:     'bower/ractive/ractive',
     router:      'contexts/login/router',
-    rv:          'bower/rv/rv'
+    rv:          'bower/rv/rv',
+    semantic:    'semantic/semantic.min'
   },
   shim: {
     debug:    { exports: 'debug' },
     director: { exports: 'Router' },
-    bootstrap: ['jquery'],
-    router:   ['loader!']
+    router:   ['loader!'],
+    semantic: ['jquery']
   }
 });
 

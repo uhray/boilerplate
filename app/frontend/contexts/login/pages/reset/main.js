@@ -1,9 +1,9 @@
 define(
 [
-'ractive', 'jquery', 'lodash', 'bootstrap', 'rv!./template',
+'ractive', 'jquery', 'lodash', 'rv!./template',
 'crud'
 ],
-function(Ractive, $, _, bootstrap, template, crud) {
+function(Ractive, $, _, template, crud) {
 
   return function(code) {
     var ractive;
@@ -18,12 +18,12 @@ function(Ractive, $, _, bootstrap, template, crud) {
       }
     });
 
-    ractive.on('doUpdate', function() {
-      if (ractive.get('submitting')) return;
-      ractive.set('submitting', true);
+    ractive.on('doSubmit', function() {
+      if (ractive.get('loading')) return;
+      ractive.set('loading', true);
 
       crud('/turnkey/reset').update(this.get('user'), function(e) {
-        ractive.set('submitting', false);
+        ractive.set('loading', false);
         if (e) {
           ractive.set('error', false);
           // time to reset hidden div
