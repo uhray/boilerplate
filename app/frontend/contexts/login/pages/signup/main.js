@@ -18,13 +18,15 @@ function(Ractive, $, _, bootstrap, template) {
     });
 
     ractive.on('failedLogin', function(event) {
+      var em = event.error && event.error.message || event.error;
+      
       this.set('error', false);
 
       // time to reset hidden div
       setTimeout(function() {
         ractive.set({
           error: true,
-          takenEmail: /E11000/.test(event.error)
+          takenEmail: /E11000/.test(String(em))
         });
       });
     });
