@@ -39,6 +39,11 @@
 @include gridle_init();
 @include gridle_generate_classes();
 
+@include gridle_generate_custom_class(('gr-third', '@', '%state')) {
+	@include gridle_grid(4);
+  width: 33.33333%;
+}
+
 [class*="gr-"] {  // Defaults to 16 wide for mobile and tablet
   @include gridle_state(mobile tablet) {
     @include gridle_grid(16);

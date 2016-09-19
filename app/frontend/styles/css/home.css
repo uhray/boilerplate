@@ -3505,7 +3505,7 @@ th {
 .row, .row-reverse {
   zoom: 1; }
 
-.gr-0, .gr-1, .gr-2, .gr-3, .gr-4, .gr-5, .gr-6, .gr-7, .gr-8, .gr-9, .gr-10, .gr-11, .gr-12, .gr-13, .gr-14, .gr-15, .gr-16 {
+.gr-0, .gr-1, .gr-2, .gr-3, .gr-4, .gr-5, .gr-6, .gr-7, .gr-8, .gr-9, .gr-10, .gr-11, .gr-12, .gr-13, .gr-14, .gr-15, .gr-16, .gr-third {
   display: inline-block;
   min-height: 1px;
   float: left;
@@ -3570,7 +3570,7 @@ th {
   .row\@mobile, .row-reverse\@mobile {
     zoom: 1; } }
 @media screen and (max-width: 400px) {
-  .gr-0\@mobile, .gr-1\@mobile, .gr-2\@mobile, .gr-3\@mobile, .gr-4\@mobile, .gr-5\@mobile, .gr-6\@mobile, .gr-7\@mobile, .gr-8\@mobile, .gr-9\@mobile, .gr-10\@mobile, .gr-11\@mobile, .gr-12\@mobile, .gr-13\@mobile, .gr-14\@mobile, .gr-15\@mobile, .gr-16\@mobile, [class*="gr-"] {
+  .gr-0\@mobile, .gr-1\@mobile, .gr-2\@mobile, .gr-3\@mobile, .gr-4\@mobile, .gr-5\@mobile, .gr-6\@mobile, .gr-7\@mobile, .gr-8\@mobile, .gr-9\@mobile, .gr-10\@mobile, .gr-11\@mobile, .gr-12\@mobile, .gr-13\@mobile, .gr-14\@mobile, .gr-15\@mobile, .gr-16\@mobile, .gr-third\@mobile, [class*="gr-"] {
     display: inline-block;
     min-height: 1px;
     float: left;
@@ -3634,7 +3634,7 @@ th {
   .row\@tablet, .row-reverse\@tablet {
     zoom: 1; } }
 @media screen and (min-width: 401px) and (max-width: 768px) {
-  .gr-0\@tablet, .gr-1\@tablet, .gr-2\@tablet, .gr-3\@tablet, .gr-4\@tablet, .gr-5\@tablet, .gr-6\@tablet, .gr-7\@tablet, .gr-8\@tablet, .gr-9\@tablet, .gr-10\@tablet, .gr-11\@tablet, .gr-12\@tablet, .gr-13\@tablet, .gr-14\@tablet, .gr-15\@tablet, .gr-16\@tablet, [class*="gr-"] {
+  .gr-0\@tablet, .gr-1\@tablet, .gr-2\@tablet, .gr-3\@tablet, .gr-4\@tablet, .gr-5\@tablet, .gr-6\@tablet, .gr-7\@tablet, .gr-8\@tablet, .gr-9\@tablet, .gr-10\@tablet, .gr-11\@tablet, .gr-12\@tablet, .gr-13\@tablet, .gr-14\@tablet, .gr-15\@tablet, .gr-16\@tablet, .gr-third\@tablet, [class*="gr-"] {
     display: inline-block;
     min-height: 1px;
     float: left;
@@ -3698,7 +3698,7 @@ th {
   .row\@laptop, .row-reverse\@laptop {
     zoom: 1; } }
 @media screen and (min-width: 769px) and (max-width: 992px) {
-  .gr-0\@laptop, .gr-1\@laptop, .gr-2\@laptop, .gr-3\@laptop, .gr-4\@laptop, .gr-5\@laptop, .gr-6\@laptop, .gr-7\@laptop, .gr-8\@laptop, .gr-9\@laptop, .gr-10\@laptop, .gr-11\@laptop, .gr-12\@laptop, .gr-13\@laptop, .gr-14\@laptop, .gr-15\@laptop, .gr-16\@laptop {
+  .gr-0\@laptop, .gr-1\@laptop, .gr-2\@laptop, .gr-3\@laptop, .gr-4\@laptop, .gr-5\@laptop, .gr-6\@laptop, .gr-7\@laptop, .gr-8\@laptop, .gr-9\@laptop, .gr-10\@laptop, .gr-11\@laptop, .gr-12\@laptop, .gr-13\@laptop, .gr-14\@laptop, .gr-15\@laptop, .gr-16\@laptop, .gr-third\@laptop {
     display: inline-block;
     min-height: 1px;
     float: left;
@@ -3762,7 +3762,7 @@ th {
   .row\@desktop, .row-reverse\@desktop {
     zoom: 1; } }
 @media screen and (min-width: 993px) {
-  .gr-0\@desktop, .gr-1\@desktop, .gr-2\@desktop, .gr-3\@desktop, .gr-4\@desktop, .gr-5\@desktop, .gr-6\@desktop, .gr-7\@desktop, .gr-8\@desktop, .gr-9\@desktop, .gr-10\@desktop, .gr-11\@desktop, .gr-12\@desktop, .gr-13\@desktop, .gr-14\@desktop, .gr-15\@desktop, .gr-16\@desktop {
+  .gr-0\@desktop, .gr-1\@desktop, .gr-2\@desktop, .gr-3\@desktop, .gr-4\@desktop, .gr-5\@desktop, .gr-6\@desktop, .gr-7\@desktop, .gr-8\@desktop, .gr-9\@desktop, .gr-10\@desktop, .gr-11\@desktop, .gr-12\@desktop, .gr-13\@desktop, .gr-14\@desktop, .gr-15\@desktop, .gr-16\@desktop, .gr-third\@desktop {
     display: inline-block;
     min-height: 1px;
     float: left;
@@ -6343,6 +6343,26 @@ body {
   [class*="gr-"] > [class^="col"] {
     margin-left: -1rem;
     margin-right: -1rem; } }
+.gr-third {
+  width: 25%;
+  width: 33.33333%; }
+
+@media screen and (max-width: 400px) {
+  .gr-third\@mobile {
+    width: 25%;
+    width: 33.33333%; } }
+@media screen and (min-width: 401px) and (max-width: 768px) {
+  .gr-third\@tablet {
+    width: 25%;
+    width: 33.33333%; } }
+@media screen and (min-width: 769px) and (max-width: 992px) {
+  .gr-third\@laptop {
+    width: 25%;
+    width: 33.33333%; } }
+@media screen and (min-width: 993px) {
+  .gr-third\@desktop {
+    width: 25%;
+    width: 33.33333%; } }
 @media screen and (max-width: 400px) {
   [class*="gr-"] {
     width: 100%; } }
