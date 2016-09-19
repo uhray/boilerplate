@@ -26,7 +26,7 @@ function(Ractive, $, _, crud, template) {
         ractive.set('loading', false);
         if (e) ractive.set({
           error: true,
-          takenEmail: /E11000/.test(String(e))
+          takenEmail: /E11000/.test(String(e && e.message || e))
         });
         else ractive.set('success', true);
       });
