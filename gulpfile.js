@@ -140,7 +140,7 @@ gulp.task('join_css', function() {
             p = p.replace(path.basename(p), '');
 
             return stream.pipe(replace(
-              /url\((["'])?((\.\/)|(.)([a-zA-Z0-9]+\/))/g,
+              /url\((["'])?((\.\/)|([^\/])([a-zA-Z0-9]+\/))/g,
               'url($1' + p + '$4$5'
             ))
           }))
