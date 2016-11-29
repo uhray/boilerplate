@@ -2,10 +2,10 @@
          Site Overrides
 *******************************/
 
-@text-colors: blue, green, orange, pink, purple, red, teal, yellow, black, grey, white;
+@colors: blue, green, orange, pink, purple, red, teal, yellow, black, grey, white;
 .ui.text {
-    .-(@i: length(@text-colors)) when (@i > 0) {
-        @c: extract(@text-colors, @i);
+    .-(@i: length(@colors)) when (@i > 0) {
+        @c: extract(@colors, @i);
         &.@{c} { color: @@c }
         .-((@i - 1));
     }.-;
