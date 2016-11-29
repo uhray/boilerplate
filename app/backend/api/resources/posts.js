@@ -64,7 +64,6 @@ crud.entity('/posts/:_id').Update()
   .pipe(cm.parseData()
           .removes('dates.created', 'user')
           .overrides({ 'dates.updated': Date.now }))
-  .use(turnkey.updatePassword())
   .pipe(cm.updateOne(Model));
 
 crud.entity('/posts/:_id').Delete()
